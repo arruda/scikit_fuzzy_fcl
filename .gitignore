@@ -61,3 +61,6 @@ target/
 # pyenv python configuration file
 .python-version
 tools/antlr/*.jar
+tools/antlr/Fcl.tokens
+tools/antlr/FclLexer.tokens
+tools/antlr/py*_src/*

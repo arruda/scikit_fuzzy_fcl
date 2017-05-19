@@ -51,19 +51,31 @@ lint: ## check style with flake8
 	flake8 scikit_fuzzy_fcl tests
 
 test: ## run tests quickly with the default Python
-	
+
 		python setup.py test
 
 test-all: ## run tests on every Python version with tox
 	tox
 
 coverage: ## check code coverage quickly with the default Python
-	
+
 		coverage run --source scikit_fuzzy_fcl setup.py test
-	
+
 		coverage report -m
 		coverage html
 		$(BROWSER) htmlcov/index.html
+
+
+parser-py3:
+	java -Xmx500M -cp -Dfile.encoding=UTF-8 -Xmx500M -cp "tools/antlr/antlr-4.5.3-complete.jar:$CLASSPATH" org.antlr.v4.Tool -Dlanguage=Python3 tools/antlr/Fcl.g4
+	mv -f tools/antlr/*.py tools/antlr/py3_src
+
+parser-py2:
+	java -Xmx500M -cp -Dfile.encoding=UTF-8 -Xmx500M -cp "tools/antlr/antlr-4.5.3-complete.jar:$CLASSPATH" org.antlr.v4.Tool -Dlanguage=Python2 tools/antlr/Fcl.g4
+	mv -f tools/antlr/*.py tools/antlr/py2_src
+
+parsers: parser-py2 parser-py3
+
 
 docs: ## generate Sphinx HTML documentation, including API docs
 	rm -f docs/scikit_fuzzy_fcl.rst

@@ -110,6 +110,10 @@ class FclListenerTester(FclListener):
             'def': op_def.getChild(2).getText()
         }
 
+    def exitActivation_method(self, ctx):
+        activation = ctx.PROD() or ctx.MIN()
+        self.last_activation_method = activation.getText()
+
 
 class TestFclGrammar(unittest.TestCase):
 
@@ -554,3 +558,22 @@ class TestFclGrammar(unittest.TestCase):
         self.assertEqual('rule1', listener.last_rule_block.get('id'))
         self.assertEqual('AND', listener.last_op_def.get('type'))
         self.assertEqual('MIN', listener.last_op_def.get('def'))
+
+    def test_rule_block_rule_item_activation_method(self):
+        fcl_text = """
+        FUNCTION_BLOCK f_block
+            RULEBLOCK rule1
+                ACT : MIN;
+            END_RULEBLOCK
+        END_FUNCTION_BLOCK
+        """
+        lexer = FclLexer(InputStream(fcl_text))
+        stream = CommonTokenStream(lexer)
+        parser = FclParser(stream)
+        tree = parser.main()
+        listener = FclListenerTester()
+        walker = ParseTreeWalker()
+        walker.walk(listener, tree)
+
+        self.assertEqual('rule1', listener.last_rule_block.get('id'))
+        self.assertEqual('MIN', listener.last_activation_method)

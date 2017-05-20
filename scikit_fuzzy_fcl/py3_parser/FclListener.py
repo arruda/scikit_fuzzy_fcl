@@ -206,6 +206,33 @@ class FclListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by FclParser#operator_definition.
+    def enterOperator_definition(self, ctx:FclParser.Operator_definitionContext):
+        pass
+
+    # Exit a parse tree produced by FclParser#operator_definition.
+    def exitOperator_definition(self, ctx:FclParser.Operator_definitionContext):
+        pass
+
+
+    # Enter a parse tree produced by FclParser#operator_definition_or.
+    def enterOperator_definition_or(self, ctx:FclParser.Operator_definition_orContext):
+        pass
+
+    # Exit a parse tree produced by FclParser#operator_definition_or.
+    def exitOperator_definition_or(self, ctx:FclParser.Operator_definition_orContext):
+        pass
+
+
+    # Enter a parse tree produced by FclParser#operator_definition_and.
+    def enterOperator_definition_and(self, ctx:FclParser.Operator_definition_andContext):
+        pass
+
+    # Exit a parse tree produced by FclParser#operator_definition_and.
+    def exitOperator_definition_and(self, ctx:FclParser.Operator_definition_andContext):
+        pass
+
+
     # Enter a parse tree produced by FclParser#data_type.
     def enterData_type(self, ctx:FclParser.Data_typeContext):
         pass

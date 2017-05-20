@@ -90,6 +90,9 @@ class FclListenerTester(FclListener):
         value = ctx.REAL() or ctx.NC()
         self.last_default_value = value.getText()
 
+    def exitDefuzzification_method(self, ctx):
+        self.last_deffuz_method = ctx.getChild(2).getText()
+
 
 class TestFclGrammar(unittest.TestCase):
 
@@ -459,3 +462,21 @@ class TestFclGrammar(unittest.TestCase):
         self.assertEqual('term1', listener.last_linguistic_terms[0].get('id'))
         self.assertEqual([['1', '2']], listener.last_piece_wise_liner)
         self.assertEqual('term2', listener.last_linguistic_terms[1].get('id'))
+
+    def test_defuzzify_block_with_defuzzification_method(self):
+        fcl_text = """
+        FUNCTION_BLOCK f_block
+            DEFUZZIFY defuzz_id
+                METHOD : COG;
+            END_DEFUZZIFY
+        END_FUNCTION_BLOCK
+        """
+        lexer = FclLexer(InputStream(fcl_text))
+        stream = CommonTokenStream(lexer)
+        parser = FclParser(stream)
+        tree = parser.main()
+        listener = FclListenerTester()
+        walker = ParseTreeWalker()
+        walker.walk(listener, tree)
+
+        self.assertEqual('COG', listener.last_deffuz_method)

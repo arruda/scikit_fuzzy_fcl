@@ -201,7 +201,7 @@ fun_atom : atom | (EXP^|LN^|LOG^|SIN^|COS^|TAN^|ABS^)? LEFT_PARENTHESIS! fun_pm 
 //defuzzify_block : DEFUZZIFY^ ID (defuzzify_item)* END_DEFUZZIFY!;
 defuzzify_block : DEFUZZIFY ID (defuzzify_item)* END_DEFUZZIFY;
 //defuzzify_item : defuzzification_method | default_value | linguistic_term | range;
-defuzzify_item : default_value | linguistic_term |vrange;
+defuzzify_item : defuzzification_method | default_value | linguistic_term | vrange;
 
 /*
 */
@@ -210,8 +210,10 @@ vrange : RANGE ASSIGN_OPERATOR LEFT_PARENTHESIS REAL DOTS REAL RIGHT_PARENTHESIS
 //default_value : DEFAULT^ ASSIGN_OPERATOR! (REAL | NC) SEMICOLON!;
 default_value : DEFAULT ASSIGN_OPERATOR (REAL | NC) SEMICOLON;
 
+//defuzzification_method : METHOD^ COLON! (COG|COGS|COGF|COA|LM|RM|MM) SEMICOLON!;
+defuzzification_method : METHOD COLON (COG|COGS|COGF|COA|LM|RM|MM) SEMICOLON;
+
 /*
-defuzzification_method : METHOD^ COLON! (COG|COGS|COGF|COA|LM|RM|MM) SEMICOLON!;
 // Ruleblock
 rule_block : RULEBLOCK^ ID (rule_item)* END_RULEBLOCK!;
 rule_item : operator_definition | activation_method | accumulation_method | rule;

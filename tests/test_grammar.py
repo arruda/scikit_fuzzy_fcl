@@ -618,19 +618,53 @@ class TestFclGrammar(unittest.TestCase):
         self.assertEqual('first_rule', listener.rules[0].get('id'))
         self.assertEqual('2', listener.rules[1].get('id'))
 
-    def test_rule_if_clause_condition_simple_head(self):
+    def test_rule_if_clause_condition_simple_if_clause(self):
         fcl_text = """
         FUNCTION_BLOCK f_block
             RULEBLOCK rule1
-                RULE first_rule : IF something THEN finalthing IS conclusion;
+                RULE first_rule : IF something THEN conclusion;
             END_RULEBLOCK
         END_FUNCTION_BLOCK
         """
+
+        class FclListenerRules(FclListener):
+            def enterIf_clause(_self, ctx):
+                condition = ctx.condition().getText()
+                self.assertEqual(condition, 'something')
+
         lexer = FclLexer(InputStream(fcl_text))
         stream = CommonTokenStream(lexer)
         parser = FclParser(stream)
         tree = parser.main()
-        listener = FclListenerTester()
+
+        listener = FclListenerRules()
         walker = ParseTreeWalker()
         walker.walk(listener, tree)
-        self.assertEqual('something', listener.conditions[0].get('head'))
+
+    def test_rule_if_clause_condition_if_clause_with_and(self):
+        fcl_text = """
+        FUNCTION_BLOCK f_block
+            RULEBLOCK rule1
+                RULE first_rule : IF something AND otherthing THEN conclusion;
+            END_RULEBLOCK
+        END_FUNCTION_BLOCK
+        """
+
+        class FclListenerRules(FclListener):
+            def enterIf_clause(_self, ctx):
+                condition = ctx.condition()
+                something = condition.getChild(0).getText()
+                operator = condition.getChild(1).getText()
+                otherthing = condition.getChild(2).getText()
+                self.assertEqual(something, 'something')
+                self.assertEqual(operator, 'AND')
+                self.assertEqual(otherthing, 'otherthing')
+
+        lexer = FclLexer(InputStream(fcl_text))
+        stream = CommonTokenStream(lexer)
+        parser = FclParser(stream)
+        tree = parser.main()
+
+        listener = FclListenerRules()
+        walker = ParseTreeWalker()
+        walker.walk(listener, tree)

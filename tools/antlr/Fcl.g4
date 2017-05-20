@@ -162,10 +162,12 @@ var_output : VAR_OUTPUT (var_def)+ END_VAR;
 // Fuzzify
 //fuzzify_block : FUZZIFY^ ID (linguistic_term)* END_FUZZIFY!;
 fuzzify_block : FUZZIFY ID (linguistic_term)* END_FUZZIFY;
-linguistic_term : REAL;
+//linguistic_term: TERM^ ID ASSIGN_OPERATOR! membership_function SEMICOLON!;
+linguistic_term: TERM ID ASSIGN_OPERATOR membership_function SEMICOLON;
+//membership_function : function | singleton | singletons | piece_wise_linear | gauss | gauss2 | trian | trape | sigm | gbell | cosine | dsigm ;
+membership_function : ID;
+
 /*
-linguistic_term: TERM^ ID ASSIGN_OPERATOR! membership_function SEMICOLON!;
-membership_function : function | singleton | singletons | piece_wise_linear | gauss | gauss2 | trian | trape | sigm | gbell | cosine | dsigm ;
 cosine: COSINE^ atom atom;
 dsigm: DSIGM^ atom atom atom atom;
 gauss: GAUSS^ atom atom;

@@ -28,7 +28,7 @@ class FclListenerTester(FclListener):
         self.outputs = []
         self.fuzzyfy_blocks = []
         self.last_var_def = None
-        self.last_linguistic_term = None
+        self.last_linguistic_terms = []
 
     def enterFunction_block(self, ctx):
         f_id = ctx.ID()
@@ -38,10 +38,12 @@ class FclListenerTester(FclListener):
     def exitVar_input(self, ctx):
         if self.last_var_def:
             self.inputs.append(self.last_var_def)
+        self.last_var_def = None
 
     def exitVar_output(self, ctx):
         if self.last_var_def:
             self.outputs.append(self.last_var_def)
+        self.last_var_def = None
 
     def enterVar_def(self, ctx):
         self.last_var_def = [ctx.ID().getText(), ctx.data_type().getText()]
@@ -52,13 +54,16 @@ class FclListenerTester(FclListener):
     def exitFuzzify_block(self, ctx):
         fuzzyfy_block = {
             'id': ctx.ID().getText(),
-            'linguistic_term': list(map(lambda x: x.getText(), ctx.linguistic_term()))
+            'linguistic_term': self.last_linguistic_terms
         }
         self.fuzzyfy_blocks.append(fuzzyfy_block)
+        self.last_linguistic_terms = []
 
     def enterLinguistic_term(self, ctx):
-        # self.last_linguistic_term = ctx.REAL().getText()
-        pass
+        self.last_linguistic_terms.append({
+            'id': ctx.ID().getText(),
+            'mf': ctx.membership_function().getText(),
+        })
 
 
 class TestFclGrammar(unittest.TestCase):
@@ -212,8 +217,8 @@ class TestFclGrammar(unittest.TestCase):
         fcl_text = """
         FUNCTION_BLOCK f_block
             FUZZIFY fuzzyfy_id
-                12
-                34
+                TERM term1 := mf ;
+                TERM term2 := mf ;
             END_FUZZIFY
         END_FUNCTION_BLOCK
         """
@@ -226,4 +231,27 @@ class TestFclGrammar(unittest.TestCase):
         walker.walk(listener, tree)
 
         self.assertEqual('fuzzyfy_id', listener.fuzzyfy_blocks[0].get('id'))
-        self.assertEqual(['12', '34'], listener.fuzzyfy_blocks[0].get('linguistic_term'))
+
+        self.assertEqual(2, len(listener.fuzzyfy_blocks[0].get('linguistic_term')))
+
+    def test_linguistic_term(self):
+        fcl_text = """
+        FUNCTION_BLOCK f_block
+            FUZZIFY fuzzyfy_id
+                TERM term1 := mf ;
+            END_FUZZIFY
+        END_FUNCTION_BLOCK
+        """
+        lexer = FclLexer(InputStream(fcl_text))
+        stream = CommonTokenStream(lexer)
+        parser = FclParser(stream)
+        tree = parser.main()
+        listener = FclListenerTester()
+        walker = ParseTreeWalker()
+        walker.walk(listener, tree)
+        {'id': 'term1', 'mf': 'mf'}, {'id': 'term2', 'mf': 'mf'}
+
+        fb = listener.fuzzyfy_blocks[0]
+        ling_term = fb.get('linguistic_term')[0]
+
+        self.assertEqual('term1', ling_term.get('id'))

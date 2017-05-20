@@ -152,16 +152,18 @@ fcl :   (function_block)+;
 function_block : FUNCTION_BLOCK (ID)? (declaration)* END_FUNCTION_BLOCK;
 
 // declaration : var_input | var_output | fuzzify_block | defuzzify_block | rule_block;
-declaration : var_input | var_output;
+declaration : var_input | var_output | fuzzify_block;
 
 // Variables input and output
 var_input : VAR_INPUT (var_def)* END_VAR;
 var_def : ID COLON data_type SEMICOLON (vrange)?;
 var_output : VAR_OUTPUT (var_def)+ END_VAR;
 
-/*
 // Fuzzify
-fuzzify_block : FUZZIFY^ ID (linguistic_term)* END_FUZZIFY!;
+//fuzzify_block : FUZZIFY^ ID (linguistic_term)* END_FUZZIFY!;
+fuzzify_block : FUZZIFY ID (linguistic_term)* END_FUZZIFY;
+linguistic_term : REAL;
+/*
 linguistic_term: TERM^ ID ASSIGN_OPERATOR! membership_function SEMICOLON!;
 membership_function : function | singleton | singletons | piece_wise_linear | gauss | gauss2 | trian | trape | sigm | gbell | cosine | dsigm ;
 cosine: COSINE^ atom atom;

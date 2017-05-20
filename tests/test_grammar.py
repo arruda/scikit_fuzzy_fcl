@@ -26,7 +26,9 @@ class FclListenerTester(FclListener):
         self.function_blocks_ids = []
         self.inputs = []
         self.outputs = []
+        self.fuzzyfy_blocks = []
         self.last_var_def = None
+        self.last_linguistic_term = None
 
     def enterFunction_block(self, ctx):
         f_id = ctx.ID()
@@ -37,17 +39,26 @@ class FclListenerTester(FclListener):
         if self.last_var_def:
             self.inputs.append(self.last_var_def)
 
-    # Exit a parse tree produced by FclParser#var_output.
     def exitVar_output(self, ctx):
         if self.last_var_def:
             self.outputs.append(self.last_var_def)
-        pass
 
     def enterVar_def(self, ctx):
         self.last_var_def = [ctx.ID().getText(), ctx.data_type().getText()]
         vrange = ctx.vrange()
         if vrange:
             self.last_var_def.extend(real.getText() for real in vrange.REAL())
+
+    def exitFuzzify_block(self, ctx):
+        fuzzyfy_block = {
+            'id': ctx.ID().getText(),
+            'linguistic_term': list(map(lambda x: x.getText(), ctx.linguistic_term()))
+        }
+        self.fuzzyfy_blocks.append(fuzzyfy_block)
+
+    def enterLinguistic_term(self, ctx):
+        # self.last_linguistic_term = ctx.REAL().getText()
+        pass
 
 
 class TestFclGrammar(unittest.TestCase):
@@ -196,3 +207,23 @@ class TestFclGrammar(unittest.TestCase):
         self.assertEqual(['output_id1', 'REAL'], listener.outputs[0])
         self.assertEqual(['input_id1', 'REAL'], listener.inputs[0])
         self.assertEqual(['input_id2', 'REAL'], listener.inputs[1])
+
+    def test_fuzzify_block(self):
+        fcl_text = """
+        FUNCTION_BLOCK f_block
+            FUZZIFY fuzzyfy_id
+                12
+                34
+            END_FUZZIFY
+        END_FUNCTION_BLOCK
+        """
+        lexer = FclLexer(InputStream(fcl_text))
+        stream = CommonTokenStream(lexer)
+        parser = FclParser(stream)
+        tree = parser.main()
+        listener = FclListenerTester()
+        walker = ParseTreeWalker()
+        walker.walk(listener, tree)
+
+        self.assertEqual('fuzzyfy_id', listener.fuzzyfy_blocks[0].get('id'))
+        self.assertEqual(['12', '34'], listener.fuzzyfy_blocks[0].get('linguistic_term'))

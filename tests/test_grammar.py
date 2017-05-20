@@ -30,6 +30,7 @@ class FclListenerTester(FclListener):
         self.last_var_def = None
         self.last_linguistic_terms = []
         self.accumulation_methods = []
+        self.rules = []
 
     def enterFunction_block(self, ctx):
         f_id = ctx.ID()
@@ -118,6 +119,11 @@ class FclListenerTester(FclListener):
     def exitAccumulation_method(self, ctx):
         accumulation = ctx.MAX() or ctx.BSUM() or ctx.NSUM() or ctx.PROBOR() or ctx.SUM()
         self.accumulation_methods.append(accumulation.getText())
+
+    def exitRule_def(self, ctx):
+        self.rules.append({
+            'id': ctx.rule_name().getText()
+        })
 
 
 class TestFclGrammar(unittest.TestCase):
@@ -583,15 +589,12 @@ class TestFclGrammar(unittest.TestCase):
         self.assertEqual('rule1', listener.last_rule_block.get('id'))
         self.assertEqual('MIN', listener.last_activation_method)
 
-    def test_rule_block_rule_item_accumulation_method(self):
+    def test_rule(self):
         fcl_text = """
         FUNCTION_BLOCK f_block
             RULEBLOCK rule1
-                ACCU : MAX;
-                ACCU : BSUM;
-                ACCU : NSUM;
-                ACCU : PROBOR;
-                ACCU : SUM;
+                RULE first_rule : IF something IS otherthing OR something2 IS otherthing2 THEN finalthing IS conclusion;
+                RULE 2 : IF something IS otherthing OR something2 IS otherthing2 THEN finalthing IS conclusion;
             END_RULEBLOCK
         END_FUNCTION_BLOCK
         """
@@ -602,6 +605,5 @@ class TestFclGrammar(unittest.TestCase):
         listener = FclListenerTester()
         walker = ParseTreeWalker()
         walker.walk(listener, tree)
-
-        self.assertEqual('rule1', listener.last_rule_block.get('id'))
-        self.assertEqual(['MAX', 'BSUM', 'NSUM', 'PROBOR', 'SUM'], listener.accumulation_methods)
+        self.assertEqual('first_rule', listener.rules[0].get('id'))
+        self.assertEqual('2', listener.rules[1].get('id'))

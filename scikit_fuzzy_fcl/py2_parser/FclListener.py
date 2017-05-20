@@ -94,12 +94,30 @@ class FclListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by FclParser#piece_wise_linear.
+    def enterPiece_wise_linear(self, ctx):
+        pass
+
+    # Exit a parse tree produced by FclParser#piece_wise_linear.
+    def exitPiece_wise_linear(self, ctx):
+        pass
+
+
     # Enter a parse tree produced by FclParser#singleton.
     def enterSingleton(self, ctx):
         pass
 
     # Exit a parse tree produced by FclParser#singleton.
     def exitSingleton(self, ctx):
+        pass
+
+
+    # Enter a parse tree produced by FclParser#points.
+    def enterPoints(self, ctx):
+        pass
+
+    # Exit a parse tree produced by FclParser#points.
+    def exitPoints(self, ctx):
         pass
 
 

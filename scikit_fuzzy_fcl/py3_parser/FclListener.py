@@ -71,6 +71,24 @@ class FclListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by FclParser#fuzzify_block.
+    def enterFuzzify_block(self, ctx:FclParser.Fuzzify_blockContext):
+        pass
+
+    # Exit a parse tree produced by FclParser#fuzzify_block.
+    def exitFuzzify_block(self, ctx:FclParser.Fuzzify_blockContext):
+        pass
+
+
+    # Enter a parse tree produced by FclParser#linguistic_term.
+    def enterLinguistic_term(self, ctx:FclParser.Linguistic_termContext):
+        pass
+
+    # Exit a parse tree produced by FclParser#linguistic_term.
+    def exitLinguistic_term(self, ctx:FclParser.Linguistic_termContext):
+        pass
+
+
     # Enter a parse tree produced by FclParser#vrange.
     def enterVrange(self, ctx:FclParser.VrangeContext):
         pass

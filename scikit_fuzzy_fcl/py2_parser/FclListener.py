@@ -166,6 +166,15 @@ class FclListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by FclParser#default_value.
+    def enterDefault_value(self, ctx):
+        pass
+
+    # Exit a parse tree produced by FclParser#default_value.
+    def exitDefault_value(self, ctx):
+        pass
+
+
     # Enter a parse tree produced by FclParser#data_type.
     def enterData_type(self, ctx):
         pass

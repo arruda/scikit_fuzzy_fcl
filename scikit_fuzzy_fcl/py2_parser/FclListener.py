@@ -175,6 +175,15 @@ class FclListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by FclParser#defuzzification_method.
+    def enterDefuzzification_method(self, ctx):
+        pass
+
+    # Exit a parse tree produced by FclParser#defuzzification_method.
+    def exitDefuzzification_method(self, ctx):
+        pass
+
+
     # Enter a parse tree produced by FclParser#data_type.
     def enterData_type(self, ctx):
         pass

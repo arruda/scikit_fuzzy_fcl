@@ -72,7 +72,12 @@ class FclListenerTester(FclListener):
         for point in ctx.points():
             points.append([point.atom()[0].getText(), point.atom()[1].getText()])
         self.last_piece_wise_liner = points
-        pass
+
+    def exitSingletons(self, ctx):
+        points = []
+        for point in ctx.points():
+            points.append([point.atom()[0].getText(), point.atom()[1].getText()])
+        self.last_singletons = points
 
 
 class TestFclGrammar(unittest.TestCase):
@@ -346,3 +351,21 @@ class TestFclGrammar(unittest.TestCase):
         walker.walk(listener, tree)
 
         self.assertEqual([['0', '1'], ['1', '2']], listener.last_piece_wise_liner)
+
+    def test_singletons(self):
+        fcl_text = """
+        FUNCTION_BLOCK f_block
+            FUZZIFY fuzzyfy_id
+                TERM ipdb := SINGLETONS (0, 1) (1, 2);
+            END_FUZZIFY
+        END_FUNCTION_BLOCK
+        """
+        lexer = FclLexer(InputStream(fcl_text))
+        stream = CommonTokenStream(lexer)
+        parser = FclParser(stream)
+        tree = parser.main()
+        listener = FclListenerTester()
+        walker = ParseTreeWalker()
+        walker.walk(listener, tree)
+
+        self.assertEqual([['0', '1'], ['1', '2']], listener.last_singletons)

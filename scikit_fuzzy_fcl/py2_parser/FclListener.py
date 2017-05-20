@@ -112,6 +112,15 @@ class FclListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by FclParser#singletons.
+    def enterSingletons(self, ctx):
+        pass
+
+    # Exit a parse tree produced by FclParser#singletons.
+    def exitSingletons(self, ctx):
+        pass
+
+
     # Enter a parse tree produced by FclParser#points.
     def enterPoints(self, ctx):
         pass

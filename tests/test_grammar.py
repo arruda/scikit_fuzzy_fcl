@@ -81,9 +81,14 @@ class FclListenerTester(FclListener):
 
     def exitDefuzzify_block(self, ctx):
         defuzz_items = ctx.defuzzify_item()
+        items = None
         if defuzz_items:
             items = [i.getText() for i in defuzz_items]
         self.last_defuzz = {'id': ctx.ID().getText(), 'items': items}
+
+    def exitDefault_value(self, ctx):
+        value = ctx.REAL() or ctx.NC()
+        self.last_default_value = value.getText()
 
 
 class TestFclGrammar(unittest.TestCase):
@@ -394,3 +399,41 @@ class TestFclGrammar(unittest.TestCase):
 
         self.assertEqual('defuzz_id', listener.last_defuzz.get('id'))
         self.assertEqual(['RANGE:=(12..34);'], listener.last_defuzz.get('items'))
+
+    def test_defuzzify_block_with_default_value_real(self):
+        fcl_text = """
+        FUNCTION_BLOCK f_block
+            DEFUZZIFY defuzz_id
+                DEFAULT := 123;
+            END_DEFUZZIFY
+        END_FUNCTION_BLOCK
+        """
+        lexer = FclLexer(InputStream(fcl_text))
+        stream = CommonTokenStream(lexer)
+        parser = FclParser(stream)
+        tree = parser.main()
+        listener = FclListenerTester()
+        walker = ParseTreeWalker()
+        walker.walk(listener, tree)
+
+        self.assertEqual('defuzz_id', listener.last_defuzz.get('id'))
+        self.assertEqual('123', listener.last_default_value)
+
+    def test_defuzzify_block_with_default_value_nc(self):
+        fcl_text = """
+        FUNCTION_BLOCK f_block
+            DEFUZZIFY defuzz_id
+                DEFAULT := NC;
+            END_DEFUZZIFY
+        END_FUNCTION_BLOCK
+        """
+        lexer = FclLexer(InputStream(fcl_text))
+        stream = CommonTokenStream(lexer)
+        parser = FclParser(stream)
+        tree = parser.main()
+        listener = FclListenerTester()
+        walker = ParseTreeWalker()
+        walker.walk(listener, tree)
+
+        self.assertEqual('defuzz_id', listener.last_defuzz.get('id'))
+        self.assertEqual('NC', listener.last_default_value)

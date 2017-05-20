@@ -184,6 +184,24 @@ class FclListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by FclParser#rule_block.
+    def enterRule_block(self, ctx):
+        pass
+
+    # Exit a parse tree produced by FclParser#rule_block.
+    def exitRule_block(self, ctx):
+        pass
+
+
+    # Enter a parse tree produced by FclParser#rule_item.
+    def enterRule_item(self, ctx):
+        pass
+
+    # Exit a parse tree produced by FclParser#rule_item.
+    def exitRule_item(self, ctx):
+        pass
+
+
     # Enter a parse tree produced by FclParser#data_type.
     def enterData_type(self, ctx):
         pass

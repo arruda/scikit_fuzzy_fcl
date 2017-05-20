@@ -60,10 +60,19 @@ class FclListenerTester(FclListener):
         self.last_linguistic_terms = []
 
     def enterLinguistic_term(self, ctx):
+        mf = ctx.membership_function()
+
         self.last_linguistic_terms.append({
             'id': ctx.ID().getText(),
-            'mf': ctx.membership_function().getText(),
+            'mf': mf.getText(),
         })
+
+    def exitPiece_wise_linear(self, ctx):
+        points = []
+        for point in ctx.points():
+            points.append([point.atom()[0].getText(), point.atom()[1].getText()])
+        self.last_piece_wise_liner = points
+        pass
 
 
 class TestFclGrammar(unittest.TestCase):
@@ -301,3 +310,39 @@ class TestFclGrammar(unittest.TestCase):
 
         self.assertEqual('123', ling_term.get('mf'))
         self.assertEqual('321', ling_term2.get('mf'))
+
+    def test_piece_wise_linear(self):
+        fcl_text = """
+        FUNCTION_BLOCK f_block
+            FUZZIFY fuzzyfy_id
+                TERM term1 := (0, 1);
+            END_FUZZIFY
+        END_FUNCTION_BLOCK
+        """
+        lexer = FclLexer(InputStream(fcl_text))
+        stream = CommonTokenStream(lexer)
+        parser = FclParser(stream)
+        tree = parser.main()
+        listener = FclListenerTester()
+        walker = ParseTreeWalker()
+        walker.walk(listener, tree)
+
+        self.assertEqual([['0', '1']], listener.last_piece_wise_liner)
+
+    def test_piece_wise_linear_more_points(self):
+        fcl_text = """
+        FUNCTION_BLOCK f_block
+            FUZZIFY fuzzyfy_id
+                TERM term1 := (0, 1) (1, 2);
+            END_FUZZIFY
+        END_FUNCTION_BLOCK
+        """
+        lexer = FclLexer(InputStream(fcl_text))
+        stream = CommonTokenStream(lexer)
+        parser = FclParser(stream)
+        tree = parser.main()
+        listener = FclListenerTester()
+        walker = ParseTreeWalker()
+        walker.walk(listener, tree)
+
+        self.assertEqual([['0', '1'], ['1', '2']], listener.last_piece_wise_liner)

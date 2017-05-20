@@ -98,6 +98,24 @@ class FclListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by FclParser#singleton.
+    def enterSingleton(self, ctx:FclParser.SingletonContext):
+        pass
+
+    # Exit a parse tree produced by FclParser#singleton.
+    def exitSingleton(self, ctx:FclParser.SingletonContext):
+        pass
+
+
+    # Enter a parse tree produced by FclParser#atom.
+    def enterAtom(self, ctx:FclParser.AtomContext):
+        pass
+
+    # Exit a parse tree produced by FclParser#atom.
+    def exitAtom(self, ctx:FclParser.AtomContext):
+        pass
+
+
     # Enter a parse tree produced by FclParser#vrange.
     def enterVrange(self, ctx:FclParser.VrangeContext):
         pass

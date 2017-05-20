@@ -149,15 +149,17 @@ main : fcl* EOF;
 fcl :   (function_block)+;
 
 // Function block
-function_block : FUNCTION_BLOCK (ID)? (ALPHANUM)* END_FUNCTION_BLOCK;
+function_block : FUNCTION_BLOCK (ID)? (declaration)* END_FUNCTION_BLOCK;
+
+// declaration : var_input | var_output | fuzzify_block | defuzzify_block | rule_block;
+declaration : var_input | var_output;
+
+// Variables input and output
+var_input : VAR_INPUT (var_def)* END_VAR;
+var_def : ID COLON data_type SEMICOLON (vrange)?;
+var_output : VAR_OUTPUT (var_def)+ END_VAR;
 
 /*
-declaration : var_input | var_output | fuzzify_block | defuzzify_block | rule_block;
-// declaration : var_input | var_output | fuzzify_block | defuzzify_block | rule_block;
-// Variables input and output
-var_input : VAR_INPUT^ (var_def)* END_VAR!;
-var_output : VAR_OUTPUT^ (var_def)+ END_VAR!;
-var_def : ID^ COLON! data_type SEMICOLON! (range)? ;
 // Fuzzify
 fuzzify_block : FUZZIFY^ ID (linguistic_term)* END_FUZZIFY!;
 linguistic_term: TERM^ ID ASSIGN_OPERATOR! membership_function SEMICOLON!;
@@ -186,7 +188,10 @@ fun_atom : atom | (EXP^|LN^|LOG^|SIN^|COS^|TAN^|ABS^)? LEFT_PARENTHESIS! fun_pm 
 // Defuzzify
 defuzzify_block : DEFUZZIFY^ ID (defuzzify_item)* END_DEFUZZIFY!;
 defuzzify_item : defuzzification_method | default_value | linguistic_term | range;
-range : RANGE^ ASSIGN_OPERATOR! LEFT_PARENTHESIS! REAL DOTS! REAL RIGHT_PARENTHESIS! SEMICOLON!;
+*/
+//range : RANGE^ ASSIGN_OPERATOR! LEFT_PARENTHESIS! REAL DOTS! REAL RIGHT_PARENTHESIS! SEMICOLON!;
+vrange : RANGE ASSIGN_OPERATOR LEFT_PARENTHESIS REAL DOTS REAL RIGHT_PARENTHESIS SEMICOLON;
+/*
 defuzzification_method : METHOD^ COLON! (COG|COGS|COGF|COA|LM|RM|MM) SEMICOLON!;
 default_value : DEFAULT^ ASSIGN_OPERATOR! (REAL | NC) SEMICOLON!;
 // Ruleblock
@@ -209,6 +214,6 @@ conclusion : sub_conclusion (COMMA! sub_conclusion)*;
 sub_conclusion : ID^ IS! ID;
 with_x: WITH^ REAL;
 // Data type
-data_type : TYPE_REAL;
 
 */
+data_type : TYPE_REAL;

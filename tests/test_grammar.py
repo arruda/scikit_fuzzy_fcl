@@ -31,6 +31,7 @@ class FclListenerTester(FclListener):
         self.last_linguistic_terms = []
         self.accumulation_methods = []
         self.rules = []
+        self.conditions = []
 
     def enterFunction_block(self, ctx):
         f_id = ctx.ID()
@@ -124,6 +125,14 @@ class FclListenerTester(FclListener):
         self.rules.append({
             'id': ctx.rule_name().getText()
         })
+
+    def exitCondition(self, ctx):
+        condition = {
+            'head': ctx.getChild(0).getText()
+        }
+        self.conditions.append(
+            condition
+        )
 
 
 class TestFclGrammar(unittest.TestCase):
@@ -402,7 +411,7 @@ class TestFclGrammar(unittest.TestCase):
         fcl_text = """
         FUNCTION_BLOCK f_block
             FUZZIFY fuzzyfy_id
-                TERM ipdb := SINGLETONS (0, 1) (1, 2);
+                TERM sing := SINGLETONS (0, 1) (1, 2);
             END_FUZZIFY
         END_FUNCTION_BLOCK
         """
@@ -593,8 +602,27 @@ class TestFclGrammar(unittest.TestCase):
         fcl_text = """
         FUNCTION_BLOCK f_block
             RULEBLOCK rule1
-                RULE first_rule : IF something IS otherthing OR something2 IS otherthing2 THEN finalthing IS conclusion;
-                RULE 2 : IF something IS otherthing OR something2 IS otherthing2 THEN finalthing IS conclusion;
+                RULE first_rule : IF something THEN finalthing;
+                RULE 2 : IF something THEN finalthing;
+            END_RULEBLOCK
+        END_FUNCTION_BLOCK
+        """
+        # RULE first_rule : IF something IS otherthing OR something2 IS otherthing2 THEN finalthing IS conclusion;
+        lexer = FclLexer(InputStream(fcl_text))
+        stream = CommonTokenStream(lexer)
+        parser = FclParser(stream)
+        tree = parser.main()
+        listener = FclListenerTester()
+        walker = ParseTreeWalker()
+        walker.walk(listener, tree)
+        self.assertEqual('first_rule', listener.rules[0].get('id'))
+        self.assertEqual('2', listener.rules[1].get('id'))
+
+    def test_rule_if_clause_condition_simple_head(self):
+        fcl_text = """
+        FUNCTION_BLOCK f_block
+            RULEBLOCK rule1
+                RULE first_rule : IF something THEN finalthing IS conclusion;
             END_RULEBLOCK
         END_FUNCTION_BLOCK
         """
@@ -605,5 +633,4 @@ class TestFclGrammar(unittest.TestCase):
         listener = FclListenerTester()
         walker = ParseTreeWalker()
         walker.walk(listener, tree)
-        self.assertEqual('first_rule', listener.rules[0].get('id'))
-        self.assertEqual('2', listener.rules[1].get('id'))
+        self.assertEqual('something', listener.conditions[0].get('head'))

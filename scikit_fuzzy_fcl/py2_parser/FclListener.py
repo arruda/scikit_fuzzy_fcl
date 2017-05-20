@@ -85,6 +85,15 @@ class FclListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by FclParser#membership_function.
+    def enterMembership_function(self, ctx):
+        pass
+
+    # Exit a parse tree produced by FclParser#membership_function.
+    def exitMembership_function(self, ctx):
+        pass
+
+
     # Enter a parse tree produced by FclParser#vrange.
     def enterVrange(self, ctx):
         pass

@@ -139,6 +139,24 @@ class FclListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by FclParser#defuzzify_block.
+    def enterDefuzzify_block(self, ctx):
+        pass
+
+    # Exit a parse tree produced by FclParser#defuzzify_block.
+    def exitDefuzzify_block(self, ctx):
+        pass
+
+
+    # Enter a parse tree produced by FclParser#defuzzify_item.
+    def enterDefuzzify_item(self, ctx):
+        pass
+
+    # Exit a parse tree produced by FclParser#defuzzify_item.
+    def exitDefuzzify_item(self, ctx):
+        pass
+
+
     # Enter a parse tree produced by FclParser#vrange.
     def enterVrange(self, ctx):
         pass

@@ -152,7 +152,7 @@ fcl :   (function_block)+;
 function_block : FUNCTION_BLOCK (ID)? (declaration)* END_FUNCTION_BLOCK;
 
 // declaration : var_input | var_output | fuzzify_block | defuzzify_block | rule_block;
-declaration : var_input | var_output | fuzzify_block | defuzzify_block;
+declaration : var_input | var_output | fuzzify_block | defuzzify_block | rule_block;
 
 // Variables input and output
 var_input : VAR_INPUT (var_def)* END_VAR;
@@ -213,10 +213,14 @@ default_value : DEFAULT ASSIGN_OPERATOR (REAL | NC) SEMICOLON;
 //defuzzification_method : METHOD^ COLON! (COG|COGS|COGF|COA|LM|RM|MM) SEMICOLON!;
 defuzzification_method : METHOD COLON (COG|COGS|COGF|COA|LM|RM|MM) SEMICOLON;
 
-/*
 // Ruleblock
-rule_block : RULEBLOCK^ ID (rule_item)* END_RULEBLOCK!;
-rule_item : operator_definition | activation_method | accumulation_method | rule;
+//rule_block : RULEBLOCK^ ID (rule_item)* END_RULEBLOCK!;
+rule_block : RULEBLOCK ID (rule_item)* END_RULEBLOCK;
+//rule_item : operator_definition | activation_method | accumulation_method | rule;
+rule_item : ID;
+
+
+/*
 operator_definition : operator_definition_or | operator_definition_and;
 operator_definition_or : OR^ COLON! (MAX|ASUM|BSUM|DMAX|NIPMAX|EINSTEIN) SEMICOLON!;
 operator_definition_and : AND^ COLON! (MIN|PROD|BDIF|DMIN|NIPMIN|HAMACHER) SEMICOLON!;

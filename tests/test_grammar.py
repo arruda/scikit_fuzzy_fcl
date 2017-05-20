@@ -93,6 +93,16 @@ class FclListenerTester(FclListener):
     def exitDefuzzification_method(self, ctx):
         self.last_deffuz_method = ctx.getChild(2).getText()
 
+    def exitRule_block(self, ctx):
+        rule_items = ctx.rule_item()
+        if rule_items:
+            rule_items = [i.getText() for i in ctx.rule_item()]
+        rule_block = {
+            'id': ctx.ID().getText(),
+            'rule_items': rule_items
+        }
+        self.last_rule_block = rule_block
+
 
 class TestFclGrammar(unittest.TestCase):
 
@@ -480,3 +490,20 @@ class TestFclGrammar(unittest.TestCase):
         walker.walk(listener, tree)
 
         self.assertEqual('COG', listener.last_deffuz_method)
+
+    def test_rule_block(self):
+        fcl_text = """
+        FUNCTION_BLOCK f_block
+            RULEBLOCK rule1
+            END_RULEBLOCK
+        END_FUNCTION_BLOCK
+        """
+        lexer = FclLexer(InputStream(fcl_text))
+        stream = CommonTokenStream(lexer)
+        parser = FclParser(stream)
+        tree = parser.main()
+        listener = FclListenerTester()
+        walker = ParseTreeWalker()
+        walker.walk(listener, tree)
+
+        self.assertEqual('rule1', listener.last_rule_block.get('id'))

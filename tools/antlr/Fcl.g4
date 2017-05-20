@@ -165,7 +165,7 @@ fuzzify_block : FUZZIFY ID (linguistic_term)* END_FUZZIFY;
 //linguistic_term: TERM^ ID ASSIGN_OPERATOR! membership_function SEMICOLON!;
 linguistic_term: TERM ID ASSIGN_OPERATOR membership_function SEMICOLON;
 //membership_function : function | singleton | singletons | piece_wise_linear | gauss | gauss2 | trian | trape | sigm | gbell | cosine | dsigm ;
-membership_function : ID;
+membership_function : singleton;
 
 /*
 cosine: COSINE^ atom atom;
@@ -175,12 +175,17 @@ gauss2: GAUSS2^ atom atom atom atom;
 gbell: GBELL^ atom atom atom;
 piece_wise_linear: (points)+;
 sigm: SIGM^ atom atom;
+*/
 singleton : atom;
+/*
 singletons: SINGLETONS^ (points)+ ;
 trape: TRAPE^ atom atom atom atom;
 trian: TRIAN^ atom atom atom;
 points : LEFT_PARENTHESIS x=atom COMMA y=atom RIGHT_PARENTHESIS -> ^(POINT $x $y);
-atom :  real | id;
+*/
+//atom :  real | id;
+atom :  REAL | ID;
+/*
 id  :   x=ID        ->  ^(VALUE_ID $x);
 real :   x=REAL     ->  ^(VALUE_REAL $x);
 // Functions (for singletons)

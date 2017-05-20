@@ -249,9 +249,55 @@ class TestFclGrammar(unittest.TestCase):
         listener = FclListenerTester()
         walker = ParseTreeWalker()
         walker.walk(listener, tree)
-        {'id': 'term1', 'mf': 'mf'}, {'id': 'term2', 'mf': 'mf'}
-
         fb = listener.fuzzyfy_blocks[0]
         ling_term = fb.get('linguistic_term')[0]
 
         self.assertEqual('term1', ling_term.get('id'))
+
+    def test_mf_singleton_id(self):
+        fcl_text = """
+        FUNCTION_BLOCK f_block
+            FUZZIFY fuzzyfy_id
+                TERM term1 := mf_id ;
+                TERM term2 := mf_id2 ;
+            END_FUZZIFY
+        END_FUNCTION_BLOCK
+        """
+        lexer = FclLexer(InputStream(fcl_text))
+        stream = CommonTokenStream(lexer)
+        parser = FclParser(stream)
+        tree = parser.main()
+        listener = FclListenerTester()
+        walker = ParseTreeWalker()
+        walker.walk(listener, tree)
+
+        fb = listener.fuzzyfy_blocks[0]
+        ling_term = fb.get('linguistic_term')[0]
+        ling_term2 = fb.get('linguistic_term')[1]
+
+        self.assertEqual('mf_id', ling_term.get('mf'))
+        self.assertEqual('mf_id2', ling_term2.get('mf'))
+
+    def test_mf_singleton_real(self):
+        fcl_text = """
+        FUNCTION_BLOCK f_block
+            FUZZIFY fuzzyfy_id
+                TERM term1 := 123 ;
+                TERM term2 := 321 ;
+            END_FUZZIFY
+        END_FUNCTION_BLOCK
+        """
+        lexer = FclLexer(InputStream(fcl_text))
+        stream = CommonTokenStream(lexer)
+        parser = FclParser(stream)
+        tree = parser.main()
+        listener = FclListenerTester()
+        walker = ParseTreeWalker()
+        walker.walk(listener, tree)
+
+        fb = listener.fuzzyfy_blocks[0]
+        ling_term = fb.get('linguistic_term')[0]
+        ling_term2 = fb.get('linguistic_term')[1]
+
+        self.assertEqual('123', ling_term.get('mf'))
+        self.assertEqual('321', ling_term2.get('mf'))

@@ -437,3 +437,25 @@ class TestFclGrammar(unittest.TestCase):
 
         self.assertEqual('defuzz_id', listener.last_defuzz.get('id'))
         self.assertEqual('NC', listener.last_default_value)
+
+    def test_defuzzify_block_with_linguistic_term(self):
+        fcl_text = """
+        FUNCTION_BLOCK f_block
+            DEFUZZIFY defuzz_id
+                TERM term1 := (0,0) (5,1) (10,0);
+                TERM term2 := (1,2);
+            END_DEFUZZIFY
+        END_FUNCTION_BLOCK
+        """
+        lexer = FclLexer(InputStream(fcl_text))
+        stream = CommonTokenStream(lexer)
+        parser = FclParser(stream)
+        tree = parser.main()
+        listener = FclListenerTester()
+        walker = ParseTreeWalker()
+        walker.walk(listener, tree)
+
+        self.assertEqual('defuzz_id', listener.last_defuzz.get('id'))
+        self.assertEqual('term1', listener.last_linguistic_terms[0].get('id'))
+        self.assertEqual([['1', '2']], listener.last_piece_wise_liner)
+        self.assertEqual('term2', listener.last_linguistic_terms[1].get('id'))

@@ -201,7 +201,7 @@ fun_atom : atom | (EXP^|LN^|LOG^|SIN^|COS^|TAN^|ABS^)? LEFT_PARENTHESIS! fun_pm 
 //defuzzify_block : DEFUZZIFY^ ID (defuzzify_item)* END_DEFUZZIFY!;
 defuzzify_block : DEFUZZIFY ID (defuzzify_item)* END_DEFUZZIFY;
 //defuzzify_item : defuzzification_method | default_value | linguistic_term | range;
-defuzzify_item : default_value | vrange;
+defuzzify_item : default_value | linguistic_term |vrange;
 
 /*
 */

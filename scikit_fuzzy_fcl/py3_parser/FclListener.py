@@ -242,6 +242,15 @@ class FclListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by FclParser#accumulation_method.
+    def enterAccumulation_method(self, ctx:FclParser.Accumulation_methodContext):
+        pass
+
+    # Exit a parse tree produced by FclParser#accumulation_method.
+    def exitAccumulation_method(self, ctx:FclParser.Accumulation_methodContext):
+        pass
+
+
     # Enter a parse tree produced by FclParser#data_type.
     def enterData_type(self, ctx:FclParser.Data_typeContext):
         pass

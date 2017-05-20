@@ -145,14 +145,15 @@ ID  :   LETTER (ALPHANUM | '_')*;
 // Parser
 //-----------------------------------------------------------------------------
 // FCL file may contain several funcion blocks
-// main :  f=fcl -> ^(FCL $f);
+main : fcl* EOF;
 fcl :   (function_block)+;
 
 // Function block
-function_block : FUNCTION_BLOCK (ID)? (NUMBER)* END_FUNCTION_BLOCK;
+function_block : FUNCTION_BLOCK (ID)? (ALPHANUM)* END_FUNCTION_BLOCK;
 
 /*
 declaration : var_input | var_output | fuzzify_block | defuzzify_block | rule_block;
+// declaration : var_input | var_output | fuzzify_block | defuzzify_block | rule_block;
 // Variables input and output
 var_input : VAR_INPUT^ (var_def)* END_VAR!;
 var_output : VAR_OUTPUT^ (var_def)+ END_VAR!;

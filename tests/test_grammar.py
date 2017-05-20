@@ -29,6 +29,7 @@ class FclListenerTester(FclListener):
         self.fuzzyfy_blocks = []
         self.last_var_def = None
         self.last_linguistic_terms = []
+        self.accumulation_methods = []
 
     def enterFunction_block(self, ctx):
         f_id = ctx.ID()
@@ -113,6 +114,10 @@ class FclListenerTester(FclListener):
     def exitActivation_method(self, ctx):
         activation = ctx.PROD() or ctx.MIN()
         self.last_activation_method = activation.getText()
+
+    def exitAccumulation_method(self, ctx):
+        accumulation = ctx.MAX() or ctx.BSUM() or ctx.NSUM() or ctx.PROBOR() or ctx.SUM()
+        self.accumulation_methods.append(accumulation.getText())
 
 
 class TestFclGrammar(unittest.TestCase):
@@ -577,3 +582,26 @@ class TestFclGrammar(unittest.TestCase):
 
         self.assertEqual('rule1', listener.last_rule_block.get('id'))
         self.assertEqual('MIN', listener.last_activation_method)
+
+    def test_rule_block_rule_item_accumulation_method(self):
+        fcl_text = """
+        FUNCTION_BLOCK f_block
+            RULEBLOCK rule1
+                ACCU : MAX;
+                ACCU : BSUM;
+                ACCU : NSUM;
+                ACCU : PROBOR;
+                ACCU : SUM;
+            END_RULEBLOCK
+        END_FUNCTION_BLOCK
+        """
+        lexer = FclLexer(InputStream(fcl_text))
+        stream = CommonTokenStream(lexer)
+        parser = FclParser(stream)
+        tree = parser.main()
+        listener = FclListenerTester()
+        walker = ParseTreeWalker()
+        walker.walk(listener, tree)
+
+        self.assertEqual('rule1', listener.last_rule_block.get('id'))
+        self.assertEqual(['MAX', 'BSUM', 'NSUM', 'PROBOR', 'SUM'], listener.accumulation_methods)

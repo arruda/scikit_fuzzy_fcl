@@ -217,7 +217,7 @@ defuzzification_method : METHOD COLON (COG|COGS|COGF|COA|LM|RM|MM) SEMICOLON;
 //rule_block : RULEBLOCK^ ID (rule_item)* END_RULEBLOCK!;
 rule_block : RULEBLOCK ID (rule_item)* END_RULEBLOCK;
 //rule_item : operator_definition | activation_method | accumulation_method | rule;
-rule_item : operator_definition | activation_method;
+rule_item : operator_definition | activation_method | accumulation_method;
 //operator_definition : operator_definition_or | operator_definition_and;
 operator_definition : operator_definition_or | operator_definition_and;
 //operator_definition_or : OR^ COLON! (MAX|ASUM|BSUM|DMAX|NIPMAX|EINSTEIN) SEMICOLON!;
@@ -227,10 +227,12 @@ operator_definition_and : AND COLON (MIN|PROD|BDIF|DMIN|NIPMIN|HAMACHER) SEMICOL
 
 //activation_method : ACT^ COLON! (PROD|MIN) SEMICOLON!;
 activation_method : ACT COLON (PROD|MIN) SEMICOLON;
+//accumulation_method : ACCU^ COLON! (MAX|BSUM|NSUM|PROBOR|SUM) SEMICOLON!;
+accumulation_method : ACCU COLON (MAX|BSUM|NSUM|PROBOR|SUM) SEMICOLON;
+
 
 
 /*
-accumulation_method : ACCU^ COLON! (MAX|BSUM|NSUM|PROBOR|SUM) SEMICOLON!;
 rule : RULE^ rule_name COLON! if_clause then_clause (with_x)? SEMICOLON! ;
 rule_name : ID | REAL;
 if_clause : IF^ condition;

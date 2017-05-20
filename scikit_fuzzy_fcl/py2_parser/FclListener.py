@@ -31,3 +31,57 @@ class FclListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by FclParser#declaration.
+    def enterDeclaration(self, ctx):
+        pass
+
+    # Exit a parse tree produced by FclParser#declaration.
+    def exitDeclaration(self, ctx):
+        pass
+
+
+    # Enter a parse tree produced by FclParser#var_input.
+    def enterVar_input(self, ctx):
+        pass
+
+    # Exit a parse tree produced by FclParser#var_input.
+    def exitVar_input(self, ctx):
+        pass
+
+
+    # Enter a parse tree produced by FclParser#var_def.
+    def enterVar_def(self, ctx):
+        pass
+
+    # Exit a parse tree produced by FclParser#var_def.
+    def exitVar_def(self, ctx):
+        pass
+
+
+    # Enter a parse tree produced by FclParser#var_output.
+    def enterVar_output(self, ctx):
+        pass
+
+    # Exit a parse tree produced by FclParser#var_output.
+    def exitVar_output(self, ctx):
+        pass
+
+
+    # Enter a parse tree produced by FclParser#vrange.
+    def enterVrange(self, ctx):
+        pass
+
+    # Exit a parse tree produced by FclParser#vrange.
+    def exitVrange(self, ctx):
+        pass
+
+
+    # Enter a parse tree produced by FclParser#data_type.
+    def enterData_type(self, ctx):
+        pass
+
+    # Exit a parse tree produced by FclParser#data_type.
+    def exitData_type(self, ctx):
+        pass
+
+

@@ -35,3 +35,57 @@ class FclListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by FclParser#declaration.
+    def enterDeclaration(self, ctx:FclParser.DeclarationContext):
+        pass
+
+    # Exit a parse tree produced by FclParser#declaration.
+    def exitDeclaration(self, ctx:FclParser.DeclarationContext):
+        pass
+
+
+    # Enter a parse tree produced by FclParser#var_input.
+    def enterVar_input(self, ctx:FclParser.Var_inputContext):
+        pass
+
+    # Exit a parse tree produced by FclParser#var_input.
+    def exitVar_input(self, ctx:FclParser.Var_inputContext):
+        pass
+
+
+    # Enter a parse tree produced by FclParser#var_def.
+    def enterVar_def(self, ctx:FclParser.Var_defContext):
+        pass
+
+    # Exit a parse tree produced by FclParser#var_def.
+    def exitVar_def(self, ctx:FclParser.Var_defContext):
+        pass
+
+
+    # Enter a parse tree produced by FclParser#var_output.
+    def enterVar_output(self, ctx:FclParser.Var_outputContext):
+        pass
+
+    # Exit a parse tree produced by FclParser#var_output.
+    def exitVar_output(self, ctx:FclParser.Var_outputContext):
+        pass
+
+
+    # Enter a parse tree produced by FclParser#vrange.
+    def enterVrange(self, ctx:FclParser.VrangeContext):
+        pass
+
+    # Exit a parse tree produced by FclParser#vrange.
+    def exitVrange(self, ctx:FclParser.VrangeContext):
+        pass
+
+
+    # Enter a parse tree produced by FclParser#data_type.
+    def enterData_type(self, ctx:FclParser.Data_typeContext):
+        pass
+
+    # Exit a parse tree produced by FclParser#data_type.
+    def exitData_type(self, ctx:FclParser.Data_typeContext):
+        pass
+
+

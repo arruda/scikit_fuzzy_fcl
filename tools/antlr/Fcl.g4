@@ -152,7 +152,7 @@ fcl :   (function_block)+;
 function_block : FUNCTION_BLOCK (ID)? (declaration)* END_FUNCTION_BLOCK;
 
 // declaration : var_input | var_output | fuzzify_block | defuzzify_block | rule_block;
-declaration : var_input | var_output | fuzzify_block;
+declaration : var_input | var_output | fuzzify_block | defuzzify_block;
 
 // Variables input and output
 var_input : VAR_INPUT (var_def)* END_VAR;
@@ -196,9 +196,14 @@ fun_pm: fun_md ((PLUS^ | MINUS^ ) fun_md)*;                 // Function plus or 
 fun_md: fun_mp ((STAR^ | SLASH^) fun_mp)*;                  // Function multiply or divide
 fun_mp : fun_atom ((HAT^ | PERCENT^) fun_atom)*;                    // Function modulus or power
 fun_atom : atom | (EXP^|LN^|LOG^|SIN^|COS^|TAN^|ABS^)? LEFT_PARENTHESIS! fun_pm RIGHT_PARENTHESIS!; // Atom and parenthesis
+*/
 // Defuzzify
-defuzzify_block : DEFUZZIFY^ ID (defuzzify_item)* END_DEFUZZIFY!;
-defuzzify_item : defuzzification_method | default_value | linguistic_term | range;
+//defuzzify_block : DEFUZZIFY^ ID (defuzzify_item)* END_DEFUZZIFY!;
+defuzzify_block : DEFUZZIFY ID (defuzzify_item)* END_DEFUZZIFY;
+//defuzzify_item : defuzzification_method | default_value | linguistic_term | range;
+defuzzify_item : vrange;
+
+/*
 */
 //range : RANGE^ ASSIGN_OPERATOR! LEFT_PARENTHESIS! REAL DOTS! REAL RIGHT_PARENTHESIS! SEMICOLON!;
 vrange : RANGE ASSIGN_OPERATOR LEFT_PARENTHESIS REAL DOTS REAL RIGHT_PARENTHESIS SEMICOLON;
@@ -224,7 +229,7 @@ subcondition_paren : LEFT_PARENTHESIS^ condition RIGHT_PARENTHESIS!;
 conclusion : sub_conclusion (COMMA! sub_conclusion)*;
 sub_conclusion : ID^ IS! ID;
 with_x: WITH^ REAL;
-// Data type
 
 */
+// Data type
 data_type : TYPE_REAL;

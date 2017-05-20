@@ -79,6 +79,12 @@ class FclListenerTester(FclListener):
             points.append([point.atom()[0].getText(), point.atom()[1].getText()])
         self.last_singletons = points
 
+    def exitDefuzzify_block(self, ctx):
+        defuzz_items = ctx.defuzzify_item()
+        if defuzz_items:
+            items = [i.getText() for i in defuzz_items]
+        self.last_defuzz = {'id': ctx.ID().getText(), 'items': items}
+
 
 class TestFclGrammar(unittest.TestCase):
 
@@ -369,3 +375,22 @@ class TestFclGrammar(unittest.TestCase):
         walker.walk(listener, tree)
 
         self.assertEqual([['0', '1'], ['1', '2']], listener.last_singletons)
+
+    def test_defuzzify_block_with_range(self):
+        fcl_text = """
+        FUNCTION_BLOCK f_block
+            DEFUZZIFY defuzz_id
+                RANGE := ( 12 .. 34 );
+            END_DEFUZZIFY
+        END_FUNCTION_BLOCK
+        """
+        lexer = FclLexer(InputStream(fcl_text))
+        stream = CommonTokenStream(lexer)
+        parser = FclParser(stream)
+        tree = parser.main()
+        listener = FclListenerTester()
+        walker = ParseTreeWalker()
+        walker.walk(listener, tree)
+
+        self.assertEqual('defuzz_id', listener.last_defuzz.get('id'))
+        self.assertEqual(['RANGE:=(12..34);'], listener.last_defuzz.get('items'))

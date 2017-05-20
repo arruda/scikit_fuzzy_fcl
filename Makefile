@@ -72,12 +72,12 @@ get-antlr:
 parser-py3:
 	java -Xmx500M -cp -Dfile.encoding=UTF-8 -Xmx500M -cp "tools/antlr/antlr-4.5.3-complete.jar:$CLASSPATH" org.antlr.v4.Tool -Dlanguage=Python3 tools/antlr/Fcl.g4
 	mv -f tools/antlr/*.py tools/antlr/py3_src
-	cp -rf tools/antlr/py3_src scikit_fuzzy_fcl/py3_parser
+	cp -rf tools/antlr/py3_src/*.py scikit_fuzzy_fcl/py3_parser/
 
 parser-py2:
 	java -Xmx500M -cp -Dfile.encoding=UTF-8 -Xmx500M -cp "tools/antlr/antlr-4.5.3-complete.jar:$CLASSPATH" org.antlr.v4.Tool -Dlanguage=Python2 tools/antlr/Fcl.g4
 	mv -f tools/antlr/*.py tools/antlr/py2_src
-	cp -rf tools/antlr/py2_src scikit_fuzzy_fcl/py2_parser
+	cp -f tools/antlr/py2_src/*.py scikit_fuzzy_fcl/py2_parser/
 
 parsers: parser-py2 parser-py3
 

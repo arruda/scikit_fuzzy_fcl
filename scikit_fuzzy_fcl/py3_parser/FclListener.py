@@ -98,6 +98,60 @@ class FclListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by FclParser#cosine.
+    def enterCosine(self, ctx:FclParser.CosineContext):
+        pass
+
+    # Exit a parse tree produced by FclParser#cosine.
+    def exitCosine(self, ctx:FclParser.CosineContext):
+        pass
+
+
+    # Enter a parse tree produced by FclParser#dsigm.
+    def enterDsigm(self, ctx:FclParser.DsigmContext):
+        pass
+
+    # Exit a parse tree produced by FclParser#dsigm.
+    def exitDsigm(self, ctx:FclParser.DsigmContext):
+        pass
+
+
+    # Enter a parse tree produced by FclParser#gauss.
+    def enterGauss(self, ctx:FclParser.GaussContext):
+        pass
+
+    # Exit a parse tree produced by FclParser#gauss.
+    def exitGauss(self, ctx:FclParser.GaussContext):
+        pass
+
+
+    # Enter a parse tree produced by FclParser#gauss2.
+    def enterGauss2(self, ctx:FclParser.Gauss2Context):
+        pass
+
+    # Exit a parse tree produced by FclParser#gauss2.
+    def exitGauss2(self, ctx:FclParser.Gauss2Context):
+        pass
+
+
+    # Enter a parse tree produced by FclParser#gbell.
+    def enterGbell(self, ctx:FclParser.GbellContext):
+        pass
+
+    # Exit a parse tree produced by FclParser#gbell.
+    def exitGbell(self, ctx:FclParser.GbellContext):
+        pass
+
+
+    # Enter a parse tree produced by FclParser#sigm.
+    def enterSigm(self, ctx:FclParser.SigmContext):
+        pass
+
+    # Exit a parse tree produced by FclParser#sigm.
+    def exitSigm(self, ctx:FclParser.SigmContext):
+        pass
+
+
     # Enter a parse tree produced by FclParser#piece_wise_linear.
     def enterPiece_wise_linear(self, ctx:FclParser.Piece_wise_linearContext):
         pass
@@ -122,6 +176,24 @@ class FclListener(ParseTreeListener):
 
     # Exit a parse tree produced by FclParser#singletons.
     def exitSingletons(self, ctx:FclParser.SingletonsContext):
+        pass
+
+
+    # Enter a parse tree produced by FclParser#trape.
+    def enterTrape(self, ctx:FclParser.TrapeContext):
+        pass
+
+    # Exit a parse tree produced by FclParser#trape.
+    def exitTrape(self, ctx:FclParser.TrapeContext):
+        pass
+
+
+    # Enter a parse tree produced by FclParser#trian.
+    def enterTrian(self, ctx:FclParser.TrianContext):
+        pass
+
+    # Exit a parse tree produced by FclParser#trian.
+    def exitTrian(self, ctx:FclParser.TrianContext):
         pass
 
 
@@ -287,6 +359,33 @@ class FclListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by FclParser#subcondition.
+    def enterSubcondition(self, ctx:FclParser.SubconditionContext):
+        pass
+
+    # Exit a parse tree produced by FclParser#subcondition.
+    def exitSubcondition(self, ctx:FclParser.SubconditionContext):
+        pass
+
+
+    # Enter a parse tree produced by FclParser#subcondition_bare.
+    def enterSubcondition_bare(self, ctx:FclParser.Subcondition_bareContext):
+        pass
+
+    # Exit a parse tree produced by FclParser#subcondition_bare.
+    def exitSubcondition_bare(self, ctx:FclParser.Subcondition_bareContext):
+        pass
+
+
+    # Enter a parse tree produced by FclParser#subcondition_paren.
+    def enterSubcondition_paren(self, ctx:FclParser.Subcondition_parenContext):
+        pass
+
+    # Exit a parse tree produced by FclParser#subcondition_paren.
+    def exitSubcondition_paren(self, ctx:FclParser.Subcondition_parenContext):
+        pass
+
+
     # Enter a parse tree produced by FclParser#then_clause.
     def enterThen_clause(self, ctx:FclParser.Then_clauseContext):
         pass
@@ -320,33 +419,6 @@ class FclListener(ParseTreeListener):
 
     # Exit a parse tree produced by FclParser#with_x.
     def exitWith_x(self, ctx:FclParser.With_xContext):
-        pass
-
-
-    # Enter a parse tree produced by FclParser#subcondition.
-    def enterSubcondition(self, ctx:FclParser.SubconditionContext):
-        pass
-
-    # Exit a parse tree produced by FclParser#subcondition.
-    def exitSubcondition(self, ctx:FclParser.SubconditionContext):
-        pass
-
-
-    # Enter a parse tree produced by FclParser#subcondition_bare.
-    def enterSubcondition_bare(self, ctx:FclParser.Subcondition_bareContext):
-        pass
-
-    # Exit a parse tree produced by FclParser#subcondition_bare.
-    def exitSubcondition_bare(self, ctx:FclParser.Subcondition_bareContext):
-        pass
-
-
-    # Enter a parse tree produced by FclParser#subcondition_paren.
-    def enterSubcondition_paren(self, ctx:FclParser.Subcondition_parenContext):
-        pass
-
-    # Exit a parse tree produced by FclParser#subcondition_paren.
-    def exitSubcondition_paren(self, ctx:FclParser.Subcondition_parenContext):
         pass
 
 

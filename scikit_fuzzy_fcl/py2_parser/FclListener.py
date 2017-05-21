@@ -94,6 +94,60 @@ class FclListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by FclParser#cosine.
+    def enterCosine(self, ctx):
+        pass
+
+    # Exit a parse tree produced by FclParser#cosine.
+    def exitCosine(self, ctx):
+        pass
+
+
+    # Enter a parse tree produced by FclParser#dsigm.
+    def enterDsigm(self, ctx):
+        pass
+
+    # Exit a parse tree produced by FclParser#dsigm.
+    def exitDsigm(self, ctx):
+        pass
+
+
+    # Enter a parse tree produced by FclParser#gauss.
+    def enterGauss(self, ctx):
+        pass
+
+    # Exit a parse tree produced by FclParser#gauss.
+    def exitGauss(self, ctx):
+        pass
+
+
+    # Enter a parse tree produced by FclParser#gauss2.
+    def enterGauss2(self, ctx):
+        pass
+
+    # Exit a parse tree produced by FclParser#gauss2.
+    def exitGauss2(self, ctx):
+        pass
+
+
+    # Enter a parse tree produced by FclParser#gbell.
+    def enterGbell(self, ctx):
+        pass
+
+    # Exit a parse tree produced by FclParser#gbell.
+    def exitGbell(self, ctx):
+        pass
+
+
+    # Enter a parse tree produced by FclParser#sigm.
+    def enterSigm(self, ctx):
+        pass
+
+    # Exit a parse tree produced by FclParser#sigm.
+    def exitSigm(self, ctx):
+        pass
+
+
     # Enter a parse tree produced by FclParser#piece_wise_linear.
     def enterPiece_wise_linear(self, ctx):
         pass
@@ -118,6 +172,24 @@ class FclListener(ParseTreeListener):
 
     # Exit a parse tree produced by FclParser#singletons.
     def exitSingletons(self, ctx):
+        pass
+
+
+    # Enter a parse tree produced by FclParser#trape.
+    def enterTrape(self, ctx):
+        pass
+
+    # Exit a parse tree produced by FclParser#trape.
+    def exitTrape(self, ctx):
+        pass
+
+
+    # Enter a parse tree produced by FclParser#trian.
+    def enterTrian(self, ctx):
+        pass
+
+    # Exit a parse tree produced by FclParser#trian.
+    def exitTrian(self, ctx):
         pass
 
 
@@ -283,6 +355,33 @@ class FclListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by FclParser#subcondition.
+    def enterSubcondition(self, ctx):
+        pass
+
+    # Exit a parse tree produced by FclParser#subcondition.
+    def exitSubcondition(self, ctx):
+        pass
+
+
+    # Enter a parse tree produced by FclParser#subcondition_bare.
+    def enterSubcondition_bare(self, ctx):
+        pass
+
+    # Exit a parse tree produced by FclParser#subcondition_bare.
+    def exitSubcondition_bare(self, ctx):
+        pass
+
+
+    # Enter a parse tree produced by FclParser#subcondition_paren.
+    def enterSubcondition_paren(self, ctx):
+        pass
+
+    # Exit a parse tree produced by FclParser#subcondition_paren.
+    def exitSubcondition_paren(self, ctx):
+        pass
+
+
     # Enter a parse tree produced by FclParser#then_clause.
     def enterThen_clause(self, ctx):
         pass
@@ -316,33 +415,6 @@ class FclListener(ParseTreeListener):
 
     # Exit a parse tree produced by FclParser#with_x.
     def exitWith_x(self, ctx):
-        pass
-
-
-    # Enter a parse tree produced by FclParser#subcondition.
-    def enterSubcondition(self, ctx):
-        pass
-
-    # Exit a parse tree produced by FclParser#subcondition.
-    def exitSubcondition(self, ctx):
-        pass
-
-
-    # Enter a parse tree produced by FclParser#subcondition_bare.
-    def enterSubcondition_bare(self, ctx):
-        pass
-
-    # Exit a parse tree produced by FclParser#subcondition_bare.
-    def exitSubcondition_bare(self, ctx):
-        pass
-
-
-    # Enter a parse tree produced by FclParser#subcondition_paren.
-    def enterSubcondition_paren(self, ctx):
-        pass
-
-    # Exit a parse tree produced by FclParser#subcondition_paren.
-    def exitSubcondition_paren(self, ctx):
         pass
 
 

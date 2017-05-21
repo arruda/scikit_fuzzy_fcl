@@ -240,7 +240,7 @@ rule_name : ID | REAL;
 if_clause : IF condition;
 
 //condition : subcondition ((AND^|OR^) subcondition)*;
-condition : ID ((AND|OR) ID)*;
+condition : subcondition ((AND|OR) subcondition)*;
 
 //then_clause : THEN^ conclusion;
 then_clause : THEN conclusion;
@@ -253,9 +253,13 @@ sub_conclusion : ID IS ID;
 with_x: WITH REAL;
 
 
+//subcondition : (NOT^)? (subcondition_bare | subcondition_paren);
+subcondition : (NOT)? subcondition_bare;
+//subcondition_bare : ID^ (IS! (NOT)? ID)? ;
+subcondition_bare : ID (IS (NOT)? ID)? ;
+
+
 /*
-subcondition : (NOT^)? (subcondition_bare | subcondition_paren);
-subcondition_bare : ID^ (IS! (NOT)? ID)? ;
 subcondition_paren : LEFT_PARENTHESIS^ condition RIGHT_PARENTHESIS!;
 
 */

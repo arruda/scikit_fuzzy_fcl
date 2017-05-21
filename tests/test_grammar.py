@@ -602,8 +602,8 @@ class TestFclGrammar(unittest.TestCase):
         fcl_text = """
         FUNCTION_BLOCK f_block
             RULEBLOCK rule1
-                RULE first_rule : IF something THEN finalthing;
-                RULE 2 : IF something THEN finalthing;
+                RULE first_rule : IF something THEN finalthing IS conclusion;
+                RULE 2 : IF something THEN finalthing IS conclusion;
             END_RULEBLOCK
         END_FUNCTION_BLOCK
         """
@@ -622,7 +622,7 @@ class TestFclGrammar(unittest.TestCase):
         fcl_text = """
         FUNCTION_BLOCK f_block
             RULEBLOCK rule1
-                RULE first_rule : IF something THEN conclusion;
+                RULE first_rule : IF something THEN conclusion IS final;
             END_RULEBLOCK
         END_FUNCTION_BLOCK
         """
@@ -645,7 +645,7 @@ class TestFclGrammar(unittest.TestCase):
         fcl_text = """
         FUNCTION_BLOCK f_block
             RULEBLOCK rule1
-                RULE first_rule : IF something AND otherthing THEN conclusion;
+                RULE first_rule : IF something AND otherthing THEN conclusion IS final;
             END_RULEBLOCK
         END_FUNCTION_BLOCK
         """
@@ -749,6 +749,81 @@ class TestFclGrammar(unittest.TestCase):
                 real = ctx.REAL().getText()
 
                 self.assertEqual(real, '123')
+
+        lexer = FclLexer(InputStream(fcl_text))
+        stream = CommonTokenStream(lexer)
+        parser = FclParser(stream)
+        tree = parser.main()
+
+        listener = FclListenerRules()
+        walker = ParseTreeWalker()
+        walker.walk(listener, tree)
+
+    def test_sub_condition_not(self):
+        fcl_text = """
+        FUNCTION_BLOCK f_block
+            RULEBLOCK rule1
+                RULE first_rule : IF NOT something THEN final IS final2;
+            END_RULEBLOCK
+        END_FUNCTION_BLOCK
+        """
+
+        class FclListenerRules(FclListener):
+            def enterSubcondition(_self, ctx):
+                has_not = ctx.NOT() is not None
+                sub_bare = ctx.subcondition_bare().getText()
+                self.assertEqual(has_not, True)
+                self.assertEqual(sub_bare, 'something')
+
+        lexer = FclLexer(InputStream(fcl_text))
+        stream = CommonTokenStream(lexer)
+        parser = FclParser(stream)
+        tree = parser.main()
+
+        listener = FclListenerRules()
+        walker = ParseTreeWalker()
+        walker.walk(listener, tree)
+
+    def test_subcondition_bare_is(self):
+        fcl_text = """
+        FUNCTION_BLOCK f_block
+            RULEBLOCK rule1
+                RULE first_rule : IF something IS otherthing THEN final IS final2;
+            END_RULEBLOCK
+        END_FUNCTION_BLOCK
+        """
+
+        class FclListenerRules(FclListener):
+            def enterSubcondition_bare(_self, ctx):
+                ids = [i.getText() for i in ctx.ID()]
+                is_negated = ctx.NOT() is not None
+                self.assertEqual(ids, ['something', 'otherthing'])
+                self.assertEqual(is_negated, False)
+
+        lexer = FclLexer(InputStream(fcl_text))
+        stream = CommonTokenStream(lexer)
+        parser = FclParser(stream)
+        tree = parser.main()
+
+        listener = FclListenerRules()
+        walker = ParseTreeWalker()
+        walker.walk(listener, tree)
+
+    def test_subcondition_bare_is_negated(self):
+        fcl_text = """
+        FUNCTION_BLOCK f_block
+            RULEBLOCK rule1
+                RULE first_rule : IF something IS NOT otherthing THEN final IS final2;
+            END_RULEBLOCK
+        END_FUNCTION_BLOCK
+        """
+
+        class FclListenerRules(FclListener):
+            def enterSubcondition_bare(_self, ctx):
+                ids = [i.getText() for i in ctx.ID()]
+                is_negated = ctx.NOT() is not None
+                self.assertEqual(ids, ['something', 'otherthing'])
+                self.assertEqual(is_negated, True)
 
         lexer = FclLexer(InputStream(fcl_text))
         stream = CommonTokenStream(lexer)

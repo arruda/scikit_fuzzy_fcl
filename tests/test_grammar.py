@@ -902,3 +902,49 @@ class TestFclGrammar(unittest.TestCase):
         listener = FclListenerRules()
         walker = ParseTreeWalker()
         walker.walk(listener, tree)
+
+    def test_mf_cosine(self):
+        fcl_text = """
+        FUNCTION_BLOCK f_block
+            FUZZIFY service
+                TERM mf := COSINE 123 345;
+            END_FUZZIFY
+        END_FUNCTION_BLOCK
+        """
+
+        class FclListenerRules(FclListener):
+            def enterCosine(_self, ctx):
+                cosine_args = [arg.getText() for arg in ctx.atom()]
+                self.assertEqual(cosine_args, ['123', '345'])
+
+        lexer = FclLexer(InputStream(fcl_text))
+        stream = CommonTokenStream(lexer)
+        parser = FclParser(stream)
+        tree = parser.main()
+
+        listener = FclListenerRules()
+        walker = ParseTreeWalker()
+        walker.walk(listener, tree)
+
+    def test_mf_dsigm(self):
+        fcl_text = """
+        FUNCTION_BLOCK f_block
+            FUZZIFY service
+                TERM mf := DSIGM a b c d;
+            END_FUZZIFY
+        END_FUNCTION_BLOCK
+        """
+
+        class FclListenerRules(FclListener):
+            def enterCosine(_self, ctx):
+                args = [arg.getText() for arg in ctx.atom()]
+                self.assertEqual(args, ['a', 'b', 'c', 'd'])
+
+        lexer = FclLexer(InputStream(fcl_text))
+        stream = CommonTokenStream(lexer)
+        parser = FclParser(stream)
+        tree = parser.main()
+
+        listener = FclListenerRules()
+        walker = ParseTreeWalker()
+        walker.walk(listener, tree)

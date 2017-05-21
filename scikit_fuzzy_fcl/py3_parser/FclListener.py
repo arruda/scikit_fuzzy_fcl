@@ -251,6 +251,78 @@ class FclListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by FclParser#rule_def.
+    def enterRule_def(self, ctx:FclParser.Rule_defContext):
+        pass
+
+    # Exit a parse tree produced by FclParser#rule_def.
+    def exitRule_def(self, ctx:FclParser.Rule_defContext):
+        pass
+
+
+    # Enter a parse tree produced by FclParser#rule_name.
+    def enterRule_name(self, ctx:FclParser.Rule_nameContext):
+        pass
+
+    # Exit a parse tree produced by FclParser#rule_name.
+    def exitRule_name(self, ctx:FclParser.Rule_nameContext):
+        pass
+
+
+    # Enter a parse tree produced by FclParser#if_clause.
+    def enterIf_clause(self, ctx:FclParser.If_clauseContext):
+        pass
+
+    # Exit a parse tree produced by FclParser#if_clause.
+    def exitIf_clause(self, ctx:FclParser.If_clauseContext):
+        pass
+
+
+    # Enter a parse tree produced by FclParser#condition.
+    def enterCondition(self, ctx:FclParser.ConditionContext):
+        pass
+
+    # Exit a parse tree produced by FclParser#condition.
+    def exitCondition(self, ctx:FclParser.ConditionContext):
+        pass
+
+
+    # Enter a parse tree produced by FclParser#then_clause.
+    def enterThen_clause(self, ctx:FclParser.Then_clauseContext):
+        pass
+
+    # Exit a parse tree produced by FclParser#then_clause.
+    def exitThen_clause(self, ctx:FclParser.Then_clauseContext):
+        pass
+
+
+    # Enter a parse tree produced by FclParser#conclusion.
+    def enterConclusion(self, ctx:FclParser.ConclusionContext):
+        pass
+
+    # Exit a parse tree produced by FclParser#conclusion.
+    def exitConclusion(self, ctx:FclParser.ConclusionContext):
+        pass
+
+
+    # Enter a parse tree produced by FclParser#sub_conclusion.
+    def enterSub_conclusion(self, ctx:FclParser.Sub_conclusionContext):
+        pass
+
+    # Exit a parse tree produced by FclParser#sub_conclusion.
+    def exitSub_conclusion(self, ctx:FclParser.Sub_conclusionContext):
+        pass
+
+
+    # Enter a parse tree produced by FclParser#with_x.
+    def enterWith_x(self, ctx:FclParser.With_xContext):
+        pass
+
+    # Exit a parse tree produced by FclParser#with_x.
+    def exitWith_x(self, ctx:FclParser.With_xContext):
+        pass
+
+
     # Enter a parse tree produced by FclParser#data_type.
     def enterData_type(self, ctx:FclParser.Data_typeContext):
         pass

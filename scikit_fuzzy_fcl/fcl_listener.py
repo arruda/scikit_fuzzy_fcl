@@ -4,9 +4,9 @@ import sys
 from .fcl_parser import FclParserException
 
 if sys.version_info >= (3, 0):  # pragma: no cover
-    from .py3_parser.FclListener import *
+    from .py3_parser.FclListener import FclListener  # noqa: F403,F401
 else:  # pragma: no cover
-    from .py2_parser.FclListener import *
+    from .py2_parser.FclListener import FclListener  # noqa: F403,F401
 
 
 class ScikitFuzzyFclListener(FclListener):

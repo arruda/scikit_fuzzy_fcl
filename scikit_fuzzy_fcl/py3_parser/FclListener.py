@@ -323,6 +323,24 @@ class FclListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by FclParser#subcondition.
+    def enterSubcondition(self, ctx:FclParser.SubconditionContext):
+        pass
+
+    # Exit a parse tree produced by FclParser#subcondition.
+    def exitSubcondition(self, ctx:FclParser.SubconditionContext):
+        pass
+
+
+    # Enter a parse tree produced by FclParser#subcondition_bare.
+    def enterSubcondition_bare(self, ctx:FclParser.Subcondition_bareContext):
+        pass
+
+    # Exit a parse tree produced by FclParser#subcondition_bare.
+    def exitSubcondition_bare(self, ctx:FclParser.Subcondition_bareContext):
+        pass
+
+
     # Enter a parse tree produced by FclParser#data_type.
     def enterData_type(self, ctx:FclParser.Data_typeContext):
         pass

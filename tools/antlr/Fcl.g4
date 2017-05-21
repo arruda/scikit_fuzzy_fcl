@@ -232,7 +232,7 @@ accumulation_method : ACCU COLON (MAX|BSUM|NSUM|PROBOR|SUM) SEMICOLON;
 
 
 //rule : RULE^ rule_name COLON! if_clause then_clause (with_x)? SEMICOLON! ;
-rule_def : RULE rule_name COLON if_clause then_clause SEMICOLON;
+rule_def : RULE rule_name COLON if_clause then_clause (with_x)? SEMICOLON;
 
 rule_name : ID | REAL;
 
@@ -249,13 +249,14 @@ conclusion : sub_conclusion (COMMA sub_conclusion)*;
 
 //sub_conclusion : ID^ IS! ID;
 sub_conclusion : ID IS ID;
+//with_x: WITH^ REAL;
+with_x: WITH REAL;
 
 
 /*
 subcondition : (NOT^)? (subcondition_bare | subcondition_paren);
 subcondition_bare : ID^ (IS! (NOT)? ID)? ;
 subcondition_paren : LEFT_PARENTHESIS^ condition RIGHT_PARENTHESIS!;
-with_x: WITH^ REAL;
 
 */
 // Data type

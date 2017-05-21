@@ -668,3 +668,30 @@ class TestFclGrammar(unittest.TestCase):
         listener = FclListenerRules()
         walker = ParseTreeWalker()
         walker.walk(listener, tree)
+
+    def test_rule_if_clause_condition_then_clause(self):
+        fcl_text = """
+        FUNCTION_BLOCK f_block
+            RULEBLOCK rule1
+                RULE first_rule : IF something AND otherthing THEN final IS final2;
+            END_RULEBLOCK
+        END_FUNCTION_BLOCK
+        """
+
+        class FclListenerRules(FclListener):
+            def enterThen_clause(_self, ctx):
+                conclusion = ctx.conclusion()
+                subconclusion = conclusion.sub_conclusion()[0]
+                final = subconclusion.ID()[0].getText()
+                final2 = subconclusion.ID()[1].getText()
+                self.assertEqual(final, 'final')
+                self.assertEqual(final2, 'final2')
+
+        lexer = FclLexer(InputStream(fcl_text))
+        stream = CommonTokenStream(lexer)
+        parser = FclParser(stream)
+        tree = parser.main()
+
+        listener = FclListenerRules()
+        walker = ParseTreeWalker()
+        walker.walk(listener, tree)

@@ -244,13 +244,17 @@ condition : ID ((AND|OR) ID)*;
 
 //then_clause : THEN^ conclusion;
 then_clause : THEN conclusion;
-conclusion : ID (COMMA ID)*;
+//conclusion : sub_conclusion (COMMA sub_conclusion)*;
+conclusion : sub_conclusion (COMMA sub_conclusion)*;
+
+//sub_conclusion : ID^ IS! ID;
+sub_conclusion : ID IS ID;
+
 
 /*
 subcondition : (NOT^)? (subcondition_bare | subcondition_paren);
 subcondition_bare : ID^ (IS! (NOT)? ID)? ;
 subcondition_paren : LEFT_PARENTHESIS^ condition RIGHT_PARENTHESIS!;
-sub_conclusion : ID^ IS! ID;
 with_x: WITH^ REAL;
 
 */

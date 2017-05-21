@@ -44,6 +44,9 @@ class FclLoader(object):
         walker.walk(self.listener, tree)
 
     def load(self):
+        """
+        Load the ControlSystem from the FCL file and returns it.
+        """
         self.load_lexer()
         self.load_listener()
         self.load_stream()

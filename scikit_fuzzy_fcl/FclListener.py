@@ -3,9 +3,9 @@ from __future__ import absolute_import
 import sys
 from .FclParser import FclParserException
 
-if sys.version_info >= (3, 0):
+if sys.version_info >= (3, 0):  # pragma: no cover
     from .py3_parser.FclListener import *
-else:
+else:  # pragma: no cover
     from .py2_parser.FclListener import *
 
 

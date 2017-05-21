@@ -5,3 +5,20 @@ if sys.version_info >= (3, 0):
     from .py3_parser.FclParser import *
 else:
     from .py2_parser.FclParser import *
+
+
+class FclParseException(RuntimeError):
+    """
+    Exception raised by any error during the parse of the FCL file
+    """
+    def __init__(self, node):
+        payload = node.getPayload()
+        symbol = node.getText()
+        message = "Error parsing FCL. '{}' is not valid in the line {}:{}.".format(
+            symbol,
+            payload.line,
+            payload.column
+        )
+        self.message = message
+        self.node = node
+        super(FclParseException, self).__init__(message)

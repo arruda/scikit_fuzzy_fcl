@@ -4,7 +4,6 @@
 
 import unittest
 from unipath import Path
-from mock import Mock, MagicMock, patch
 
 from antlr4 import InputStream, ParseTreeWalker
 from antlr4.CommonTokenStream import CommonTokenStream
@@ -12,7 +11,7 @@ from antlr4.CommonTokenStream import CommonTokenStream
 
 from scikit_fuzzy_fcl.FclLexer import FclLexer
 from scikit_fuzzy_fcl.FclListener import FclListener
-from scikit_fuzzy_fcl.FclParser import FclParser
+from scikit_fuzzy_fcl.FclParser import FclParser, FclParseException
 
 
 TESTS_DIR = Path(__file__).ancestor(1)
@@ -1038,5 +1037,25 @@ class TestFclGrammar(unittest.TestCase):
         tree = parser.main()
 
         listener = FclListenerRules()
+        walker = ParseTreeWalker()
+        walker.walk(listener, tree)
+
+    def test_tipper_fcl_file(self):
+        fcl_text = ""
+        fcl_file_path = FIXTURES_DIR.child('tipper.fcl')
+        with open(fcl_file_path, 'r') as fcl_file:
+            fcl_text = fcl_file.read()
+
+        class FclListenerNoError(FclListener):
+
+            def visitErrorNode(self, node):
+                raise FclParseException(node)
+
+        lexer = FclLexer(InputStream(fcl_text))
+        stream = CommonTokenStream(lexer)
+        parser = FclParser(stream)
+        tree = parser.main()
+
+        listener = FclListenerNoError()
         walker = ParseTreeWalker()
         walker.walk(listener, tree)

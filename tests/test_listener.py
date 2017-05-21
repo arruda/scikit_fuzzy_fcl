@@ -126,3 +126,24 @@ class TestScikitFuzzyFclListener(TestCase):
         self.assertIn('antecedent1', antecedents)
         self.assertEqual('antecedent1', antecedents.get('antecedent1').label)
         np.testing.assert_array_equal(expected_universe, antecedents.get('antecedent1').universe)
+
+    def test_antecedents_term_defined_if_present(self):
+        fcl_text = """
+        FUNCTION_BLOCK my_system
+            FUZZIFY antecedent1
+                TERM mf1 := (0, 1) (1, 1);
+            END_FUZZIFY
+        END_FUNCTION_BLOCK
+        """
+        lexer = FclLexer(InputStream(fcl_text))
+        stream = CommonTokenStream(lexer)
+        parser = FclParser(stream)
+        tree = parser.main()
+
+        listener = ScikitFuzzyFclListener()
+        walker = ParseTreeWalker()
+        walker.walk(listener, tree)
+        antecedents = listener.antecedents
+        self.assertIn('antecedent1', antecedents)
+        self.assertEqual('antecedent1', antecedents.get('antecedent1').label)
+        self.assertIn('mf1', antecedents.get('antecedent1').terms)

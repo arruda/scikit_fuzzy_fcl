@@ -48,3 +48,14 @@ class ScikitFuzzyFclListener(FclListener):
         # if variable already defined a range then use this to instantiate the antecedent
         universe_range = self.vars.get(label, {}).get('range', None)
         self.antecedents[label] = Antecedent(universe_range, label=label)
+
+    def enterLinguistic_term(self, ctx):
+        var = None
+        if hasattr(ctx.parentCtx, 'ID'):
+            var_id = ctx.parentCtx.ID().getText()
+            var = self.antecedents.get(var_id)
+        else:
+            var_id = ctx.parentCtx.parentCtx.ID().getText()
+            # var = self.consequents.get(var_id)
+        mf_id = ctx.ID().getText()
+        var[mf_id] = [0.1]

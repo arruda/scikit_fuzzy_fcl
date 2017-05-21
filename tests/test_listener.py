@@ -46,7 +46,7 @@ class TestScikitFuzzyFclListener(TestCase):
         control_system = listener.control_system
         self.assertIsNot(control_system, None)
 
-    def test_add_antecedents_if_var_input_empty(self):
+    def test_var_inputs_if_var_input_empty(self):
         fcl_text = """
         FUNCTION_BLOCK my_system
             VAR_INPUT
@@ -61,5 +61,24 @@ class TestScikitFuzzyFclListener(TestCase):
         listener = ScikitFuzzyFclListener()
         walker = ParseTreeWalker()
         walker.walk(listener, tree)
-        antecedents = listener.antecedents
-        self.assertIs(antecedents, None)
+        loaded_vars = listener.vars
+        self.assertEqual(loaded_vars, {})
+
+    def test_add_vars_if_var_input_simple(self):
+        fcl_text = """
+        FUNCTION_BLOCK my_system
+            VAR_INPUT
+                var1 : REAL;
+            END_VAR
+        END_FUNCTION_BLOCK
+        """
+        lexer = FclLexer(InputStream(fcl_text))
+        stream = CommonTokenStream(lexer)
+        parser = FclParser(stream)
+        tree = parser.main()
+
+        listener = ScikitFuzzyFclListener()
+        walker = ParseTreeWalker()
+        walker.walk(listener, tree)
+        loaded_vars = listener.vars
+        self.assertEqual(loaded_vars, {'var1': {'type': 'REAL', 'range': None}})

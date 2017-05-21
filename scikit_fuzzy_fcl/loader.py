@@ -10,20 +10,7 @@ from antlr4.CommonTokenStream import CommonTokenStream
 
 from .FclLexer import FclLexer
 from .FclParser import FclParser
-from .FclListener import FclListener
-
-
-class ScikitFuzzyFclListener(FclListener):
-    """
-    FclListener responsable of transforming the parsed Fcl file
-    into corresponding scikit-fuzzy objects
-    """
-    def __init__(self):
-        super(ScikitFuzzyFclListener, self).__init__()
-        self.control_system = None
-
-    # def visitErrorNode(self, node):
-    #     raise Exception()
+from .FclListener import ScikitFuzzyFclListener
 
 
 class FclLoader(object):

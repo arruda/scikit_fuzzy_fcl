@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import
 import sys
+from .FclParser import FclParserException
+
 if sys.version_info >= (3, 0):
     from .py3_parser.FclListener import *
 else:
@@ -17,4 +19,4 @@ class ScikitFuzzyFclListener(FclListener):
         self.control_system = None
 
     def visitErrorNode(self, node):
-        raise FclParseException(node)
+        raise FclParserException(node)

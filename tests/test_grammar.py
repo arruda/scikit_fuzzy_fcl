@@ -11,7 +11,7 @@ from antlr4.CommonTokenStream import CommonTokenStream
 
 from scikit_fuzzy_fcl.FclLexer import FclLexer
 from scikit_fuzzy_fcl.FclListener import FclListener
-from scikit_fuzzy_fcl.FclParser import FclParser, FclParseException
+from scikit_fuzzy_fcl.FclParser import FclParser, FclParserException
 
 
 TESTS_DIR = Path(__file__).ancestor(1)

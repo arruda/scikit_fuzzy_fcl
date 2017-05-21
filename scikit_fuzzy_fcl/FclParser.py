@@ -7,7 +7,7 @@ else:
     from .py2_parser.FclParser import *
 
 
-class FclParseException(RuntimeError):
+class FclParserException(RuntimeError):
     """
     Exception raised by any error during the parse of the FCL file
     """
@@ -21,4 +21,4 @@ class FclParseException(RuntimeError):
         )
         self.message = message
         self.node = node
-        super(FclParseException, self).__init__(message)
+        super(FclParserException, self).__init__(message)

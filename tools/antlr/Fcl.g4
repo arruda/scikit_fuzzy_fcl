@@ -165,7 +165,7 @@ fuzzify_block : FUZZIFY ID (linguistic_term)* END_FUZZIFY;
 //linguistic_term: TERM^ ID ASSIGN_OPERATOR! membership_function SEMICOLON!;
 linguistic_term: TERM ID ASSIGN_OPERATOR membership_function SEMICOLON;
 //membership_function : function | singleton | singletons | piece_wise_linear | gauss | gauss2 | trian | trape | sigm | gbell | cosine | dsigm ;
-membership_function : singleton | singletons |  piece_wise_linear | cosine;
+membership_function :              singleton | singletons | piece_wise_linear | gauss | gauss2 | trian | trape | sigm | gbell | cosine | dsigm ;
 
 //cosine: COSINE^ atom atom;
 cosine: COSINE atom atom;
@@ -173,24 +173,33 @@ cosine: COSINE atom atom;
 //dsigm: DSIGM^ atom atom atom atom;
 dsigm: DSIGM atom atom atom atom;
 
+//gauss: GAUSS^ atom atom;
+gauss: GAUSS atom atom;
 
-/*
-dsigm: DSIGM^ atom atom atom atom;
-gauss: GAUSS^ atom atom;
-gauss2: GAUSS2^ atom atom atom atom;
-gbell: GBELL^ atom atom atom;
-sigm: SIGM^ atom atom;
-*/
+//gauss2: GAUSS2^ atom atom atom atom;
+gauss2: GAUSS2 atom atom atom atom;
+
+//gbell: GBELL^ atom atom atom;
+gbell: GBELL atom atom atom;
+
+//sigm: SIGM^ atom atom;
+sigm: SIGM atom atom;
+
 piece_wise_linear: (points)+;
+
 singleton : atom;
 //singletons: SINGLETONS^ (points)+ ;
 singletons: SINGLETONS (points)+ ;
-/*
-trape: TRAPE^ atom atom atom atom;
-trian: TRIAN^ atom atom atom;
-*/
+
+//trape: TRAPE^ atom atom atom atom;
+trape: TRAPE atom atom atom atom;
+
+//trian: TRIAN^ atom atom atom;
+trian: TRIAN atom atom atom;
+
 //points : LEFT_PARENTHESIS x=atom COMMA y=atom RIGHT_PARENTHESIS -> ^(POINT $x $y);
 points : LEFT_PARENTHESIS atom COMMA atom RIGHT_PARENTHESIS;
+
 //atom :  real | id;
 atom :  REAL | ID;
 /*

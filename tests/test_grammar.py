@@ -936,9 +936,101 @@ class TestFclGrammar(unittest.TestCase):
         """
 
         class FclListenerRules(FclListener):
-            def enterCosine(_self, ctx):
+            def enterDsigm(_self, ctx):
                 args = [arg.getText() for arg in ctx.atom()]
                 self.assertEqual(args, ['a', 'b', 'c', 'd'])
+
+        lexer = FclLexer(InputStream(fcl_text))
+        stream = CommonTokenStream(lexer)
+        parser = FclParser(stream)
+        tree = parser.main()
+
+        listener = FclListenerRules()
+        walker = ParseTreeWalker()
+        walker.walk(listener, tree)
+
+    def test_mf_gauss(self):
+        fcl_text = """
+        FUNCTION_BLOCK f_block
+            FUZZIFY service
+                TERM mf := GAUSS a b;
+            END_FUZZIFY
+        END_FUNCTION_BLOCK
+        """
+
+        class FclListenerRules(FclListener):
+            def enterGauss(_self, ctx):
+                args = [arg.getText() for arg in ctx.atom()]
+                self.assertEqual(args, ['a', 'b'])
+
+        lexer = FclLexer(InputStream(fcl_text))
+        stream = CommonTokenStream(lexer)
+        parser = FclParser(stream)
+        tree = parser.main()
+
+        listener = FclListenerRules()
+        walker = ParseTreeWalker()
+        walker.walk(listener, tree)
+
+    def test_mf_gauss2(self):
+        fcl_text = """
+        FUNCTION_BLOCK f_block
+            FUZZIFY service
+                TERM mf := GAUSS2 a b c d;
+            END_FUZZIFY
+        END_FUNCTION_BLOCK
+        """
+
+        class FclListenerRules(FclListener):
+            def enterGauss2(_self, ctx):
+                args = [arg.getText() for arg in ctx.atom()]
+                self.assertEqual(args, ['a', 'b', 'c', 'd'])
+
+        lexer = FclLexer(InputStream(fcl_text))
+        stream = CommonTokenStream(lexer)
+        parser = FclParser(stream)
+        tree = parser.main()
+
+        listener = FclListenerRules()
+        walker = ParseTreeWalker()
+        walker.walk(listener, tree)
+
+    def test_mf_gbell(self):
+        fcl_text = """
+        FUNCTION_BLOCK f_block
+            FUZZIFY service
+                TERM mf := GBELL a b c;
+            END_FUZZIFY
+        END_FUNCTION_BLOCK
+        """
+
+        class FclListenerRules(FclListener):
+            def enterGbell(_self, ctx):
+                args = [arg.getText() for arg in ctx.atom()]
+                self.assertEqual(args, ['a', 'b', 'c'])
+
+        lexer = FclLexer(InputStream(fcl_text))
+        stream = CommonTokenStream(lexer)
+        parser = FclParser(stream)
+        tree = parser.main()
+
+        listener = FclListenerRules()
+        walker = ParseTreeWalker()
+        walker.walk(listener, tree)
+
+    def test_mf_sigm(self):
+        fcl_text = """
+        FUNCTION_BLOCK f_block
+            FUZZIFY service
+                TERM mf := SIGM a b;
+            END_FUZZIFY
+        END_FUNCTION_BLOCK
+        """
+
+        class FclListenerRules(FclListener):
+            def enterSigm(_self, ctx):
+                args = [arg.getText() for arg in ctx.atom()]
+                self.assertEqual(args, ['a', 'b'])
 
         lexer = FclLexer(InputStream(fcl_text))
         stream = CommonTokenStream(lexer)

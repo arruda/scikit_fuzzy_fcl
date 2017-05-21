@@ -82,3 +82,22 @@ class TestScikitFuzzyFclListener(TestCase):
         walker.walk(listener, tree)
         loaded_vars = listener.vars
         self.assertEqual(loaded_vars, {'var1': {'type': 'REAL', 'range': None}})
+
+    def test_antecedents_created_when_fuzzify_block_described(self):
+        fcl_text = """
+        FUNCTION_BLOCK my_system
+            FUZZIFY antecedent1
+            END_FUZZIFY
+        END_FUNCTION_BLOCK
+        """
+        lexer = FclLexer(InputStream(fcl_text))
+        stream = CommonTokenStream(lexer)
+        parser = FclParser(stream)
+        tree = parser.main()
+
+        listener = ScikitFuzzyFclListener()
+        walker = ParseTreeWalker()
+        walker.walk(listener, tree)
+        antecedents = listener.antecedents
+        self.assertIn('antecedent1', antecedents)
+        self.assertEqual('antecedent1', antecedents.get('antecedent1').label)

@@ -24,7 +24,7 @@ class ScikitFuzzyFclListener(FclListener):
         super(ScikitFuzzyFclListener, self).__init__()
         self.control_system = None
         self.vars = {}
-        self.antecedents = []
+        self.antecedents = {}
 
     def visitErrorNode(self, node):
         raise FclParserException(node)
@@ -42,3 +42,7 @@ class ScikitFuzzyFclListener(FclListener):
         if var_range:
             var['range'] = [float(r.getText()) for r in var_range.REAL()]
         self.vars[var_id] = var
+
+    def enterFuzzify_block(self, ctx):
+        label = ctx.ID().getText()
+        self.antecedents[label] = Antecedent(None, label=label)

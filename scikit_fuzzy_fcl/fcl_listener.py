@@ -22,6 +22,7 @@ class ScikitFuzzyFclListener(FclListener):
     def __init__(self):
         super(ScikitFuzzyFclListener, self).__init__()
         self.control_system = None
+        self.antecedents = None
 
     def visitErrorNode(self, node):
         raise FclParserException(node)

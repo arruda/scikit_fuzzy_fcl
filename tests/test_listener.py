@@ -45,3 +45,21 @@ class TestScikitFuzzyFclListener(TestCase):
         walker.walk(listener, tree)
         control_system = listener.control_system
         self.assertIsNot(control_system, None)
+
+    def test_add_antecedents_if_var_input_empty(self):
+        fcl_text = """
+        FUNCTION_BLOCK my_system
+            VAR_INPUT
+            END_VAR
+        END_FUNCTION_BLOCK
+        """
+        lexer = FclLexer(InputStream(fcl_text))
+        stream = CommonTokenStream(lexer)
+        parser = FclParser(stream)
+        tree = parser.main()
+
+        listener = ScikitFuzzyFclListener()
+        walker = ParseTreeWalker()
+        walker.walk(listener, tree)
+        antecedents = listener.antecedents
+        self.assertIs(antecedents, None)

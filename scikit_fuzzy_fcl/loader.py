@@ -8,9 +8,9 @@ from __future__ import absolute_import
 from antlr4 import InputStream, ParseTreeWalker  # ,FileStream
 from antlr4.CommonTokenStream import CommonTokenStream
 
-from .FclLexer import FclLexer
-from .FclParser import FclParser
-from .FclListener import ScikitFuzzyFclListener
+from .fcl_lexer import FclLexer
+from .fcl_parser import FclParser
+from .fcl_listener import ScikitFuzzyFclListener
 
 
 class FclLoader(object):

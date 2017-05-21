@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import
 import sys
-from .FclParser import FclParserException
+from .fcl_parser import FclParserException
 
 if sys.version_info >= (3, 0):  # pragma: no cover
     from .py3_parser.FclListener import *

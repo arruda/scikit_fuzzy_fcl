@@ -9,9 +9,9 @@ from antlr4 import InputStream, ParseTreeWalker
 from antlr4.CommonTokenStream import CommonTokenStream
 
 
-from scikit_fuzzy_fcl.FclLexer import FclLexer
-from scikit_fuzzy_fcl.FclListener import FclListener
-from scikit_fuzzy_fcl.FclParser import FclParser, FclParserException
+from scikit_fuzzy_fcl.fcl_lexer import FclLexer
+from scikit_fuzzy_fcl.fcl_listener import FclListener
+from scikit_fuzzy_fcl.fcl_parser import FclParser, FclParserException
 
 
 TESTS_DIR = Path(__file__).ancestor(1)
@@ -1049,7 +1049,7 @@ class TestFclGrammar(unittest.TestCase):
         class FclListenerNoError(FclListener):
 
             def visitErrorNode(self, node):
-                raise FclParseException(node)
+                raise FclParserException(node)
 
         lexer = FclLexer(InputStream(fcl_text))
         stream = CommonTokenStream(lexer)

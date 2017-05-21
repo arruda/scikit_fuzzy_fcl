@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from unittest import TestCase
+import numpy as np
 
 from unipath import Path
 from mock import patch
@@ -101,3 +102,27 @@ class TestScikitFuzzyFclListener(TestCase):
         antecedents = listener.antecedents
         self.assertIn('antecedent1', antecedents)
         self.assertEqual('antecedent1', antecedents.get('antecedent1').label)
+
+    def test_antecedents_define_universe_if_range_defined_in_var(self):
+        fcl_text = """
+        FUNCTION_BLOCK my_system
+            VAR_INPUT
+                antecedent1 : REAL; RANGE := (1 .. 9);
+            END_VAR
+            FUZZIFY antecedent1
+            END_FUZZIFY
+        END_FUNCTION_BLOCK
+        """
+        lexer = FclLexer(InputStream(fcl_text))
+        stream = CommonTokenStream(lexer)
+        parser = FclParser(stream)
+        tree = parser.main()
+
+        listener = ScikitFuzzyFclListener()
+        walker = ParseTreeWalker()
+        walker.walk(listener, tree)
+        antecedents = listener.antecedents
+        expected_universe = np.asarray([1., 9.])
+        self.assertIn('antecedent1', antecedents)
+        self.assertEqual('antecedent1', antecedents.get('antecedent1').label)
+        np.testing.assert_array_equal(expected_universe, antecedents.get('antecedent1').universe)

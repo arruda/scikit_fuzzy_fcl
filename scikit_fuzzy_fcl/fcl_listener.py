@@ -45,4 +45,6 @@ class ScikitFuzzyFclListener(FclListener):
 
     def enterFuzzify_block(self, ctx):
         label = ctx.ID().getText()
-        self.antecedents[label] = Antecedent(None, label=label)
+        # if variable already defined a range then use this to instantiate the antecedent
+        universe_range = self.vars.get(label, {}).get('range', None)
+        self.antecedents[label] = Antecedent(universe_range, label=label)

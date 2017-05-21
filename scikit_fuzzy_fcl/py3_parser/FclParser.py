@@ -6,133 +6,136 @@ from io import StringIO
 def serializedATN():
     with StringIO() as buf:
         buf.write("\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3_")
-        buf.write("\u0134\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7")
+        buf.write("\u013c\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7")
         buf.write("\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t\13\4\f\t\f\4\r\t\r\4\16")
         buf.write("\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22\4\23\t\23")
         buf.write("\4\24\t\24\4\25\t\25\4\26\t\26\4\27\t\27\4\30\t\30\4\31")
         buf.write("\t\31\4\32\t\32\4\33\t\33\4\34\t\34\4\35\t\35\4\36\t\36")
         buf.write("\4\37\t\37\4 \t \4!\t!\4\"\t\"\4#\t#\4$\t$\4%\t%\4&\t")
-        buf.write("&\4\'\t\'\3\2\7\2P\n\2\f\2\16\2S\13\2\3\2\3\2\3\3\6\3")
-        buf.write("X\n\3\r\3\16\3Y\3\4\3\4\5\4^\n\4\3\4\7\4a\n\4\f\4\16\4")
-        buf.write("d\13\4\3\4\3\4\3\5\3\5\3\5\3\5\3\5\5\5m\n\5\3\6\3\6\7")
-        buf.write("\6q\n\6\f\6\16\6t\13\6\3\6\3\6\3\7\3\7\3\7\3\7\3\7\5\7")
-        buf.write("}\n\7\3\b\3\b\6\b\u0081\n\b\r\b\16\b\u0082\3\b\3\b\3\t")
-        buf.write("\3\t\3\t\7\t\u008a\n\t\f\t\16\t\u008d\13\t\3\t\3\t\3\n")
-        buf.write("\3\n\3\n\3\n\3\n\3\n\3\13\3\13\3\13\5\13\u009a\n\13\3")
-        buf.write("\f\6\f\u009d\n\f\r\f\16\f\u009e\3\r\3\r\3\16\3\16\6\16")
-        buf.write("\u00a5\n\16\r\16\16\16\u00a6\3\17\3\17\3\17\3\17\3\17")
-        buf.write("\3\17\3\20\3\20\3\21\3\21\3\21\7\21\u00b4\n\21\f\21\16")
-        buf.write("\21\u00b7\13\21\3\21\3\21\3\22\3\22\3\22\3\22\5\22\u00bf")
-        buf.write("\n\22\3\23\3\23\3\23\3\23\3\23\3\23\3\23\3\23\3\23\3\24")
-        buf.write("\3\24\3\24\3\24\3\24\3\25\3\25\3\25\3\25\3\25\3\26\3\26")
-        buf.write("\3\26\7\26\u00d7\n\26\f\26\16\26\u00da\13\26\3\26\3\26")
-        buf.write("\3\27\3\27\3\27\3\27\5\27\u00e2\n\27\3\30\3\30\5\30\u00e6")
-        buf.write("\n\30\3\31\3\31\3\31\3\31\3\31\3\32\3\32\3\32\3\32\3\32")
-        buf.write("\3\33\3\33\3\33\3\33\3\33\3\34\3\34\3\34\3\34\3\34\3\35")
-        buf.write("\3\35\3\35\3\35\3\35\3\35\5\35\u0102\n\35\3\35\3\35\3")
-        buf.write("\36\3\36\3\37\3\37\3\37\3 \3 \3 \7 \u010e\n \f \16 \u0111")
-        buf.write("\13 \3!\3!\3!\3\"\3\"\3\"\7\"\u0119\n\"\f\"\16\"\u011c")
-        buf.write("\13\"\3#\3#\3#\3#\3$\3$\3$\3%\5%\u0126\n%\3%\3%\3&\3&")
-        buf.write("\3&\5&\u012d\n&\3&\5&\u0130\n&\3\'\3\'\3\'\2\2(\2\4\6")
-        buf.write("\b\n\f\16\20\22\24\26\30\32\34\36 \"$&(*,.\60\62\64\66")
-        buf.write("8:<>@BDFHJL\2\n\4\2WW[[\4\2..WW\7\2\n\n\f\16%%--\65\65")
-        buf.write("\b\2\7\7\t\t\22\22\25\25((,,\7\2\b\b\23\23\34\34*+\63")
-        buf.write("\63\4\2**\63\63\7\2\t\t((\60\60\62\62;;\4\2\6\6\61\61")
-        buf.write("\u012c\2Q\3\2\2\2\4W\3\2\2\2\6[\3\2\2\2\bl\3\2\2\2\nn")
-        buf.write("\3\2\2\2\fw\3\2\2\2\16~\3\2\2\2\20\u0086\3\2\2\2\22\u0090")
-        buf.write("\3\2\2\2\24\u0099\3\2\2\2\26\u009c\3\2\2\2\30\u00a0\3")
-        buf.write("\2\2\2\32\u00a2\3\2\2\2\34\u00a8\3\2\2\2\36\u00ae\3\2")
-        buf.write("\2\2 \u00b0\3\2\2\2\"\u00be\3\2\2\2$\u00c0\3\2\2\2&\u00c9")
-        buf.write("\3\2\2\2(\u00ce\3\2\2\2*\u00d3\3\2\2\2,\u00e1\3\2\2\2")
-        buf.write(".\u00e5\3\2\2\2\60\u00e7\3\2\2\2\62\u00ec\3\2\2\2\64\u00f1")
-        buf.write("\3\2\2\2\66\u00f6\3\2\2\28\u00fb\3\2\2\2:\u0105\3\2\2")
-        buf.write("\2<\u0107\3\2\2\2>\u010a\3\2\2\2@\u0112\3\2\2\2B\u0115")
-        buf.write("\3\2\2\2D\u011d\3\2\2\2F\u0121\3\2\2\2H\u0125\3\2\2\2")
-        buf.write("J\u0129\3\2\2\2L\u0131\3\2\2\2NP\5\4\3\2ON\3\2\2\2PS\3")
-        buf.write("\2\2\2QO\3\2\2\2QR\3\2\2\2RT\3\2\2\2SQ\3\2\2\2TU\7\2\2")
-        buf.write("\3U\3\3\2\2\2VX\5\6\4\2WV\3\2\2\2XY\3\2\2\2YW\3\2\2\2")
-        buf.write("YZ\3\2\2\2Z\5\3\2\2\2[]\7!\2\2\\^\7[\2\2]\\\3\2\2\2]^")
-        buf.write("\3\2\2\2^b\3\2\2\2_a\5\b\5\2`_\3\2\2\2ad\3\2\2\2b`\3\2")
-        buf.write("\2\2bc\3\2\2\2ce\3\2\2\2db\3\2\2\2ef\7\27\2\2f\7\3\2\2")
-        buf.write("\2gm\5\n\6\2hm\5\16\b\2im\5\20\t\2jm\5 \21\2km\5*\26\2")
-        buf.write("lg\3\2\2\2lh\3\2\2\2li\3\2\2\2lj\3\2\2\2lk\3\2\2\2m\t")
-        buf.write("\3\2\2\2nr\7B\2\2oq\5\f\7\2po\3\2\2\2qt\3\2\2\2rp\3\2")
-        buf.write("\2\2rs\3\2\2\2su\3\2\2\2tr\3\2\2\2uv\7\32\2\2v\13\3\2")
-        buf.write("\2\2wx\7[\2\2xy\7H\2\2yz\5L\'\2z|\7T\2\2{}\5$\23\2|{\3")
-        buf.write("\2\2\2|}\3\2\2\2}\r\3\2\2\2~\u0080\7C\2\2\177\u0081\5")
-        buf.write("\f\7\2\u0080\177\3\2\2\2\u0081\u0082\3\2\2\2\u0082\u0080")
-        buf.write("\3\2\2\2\u0082\u0083\3\2\2\2\u0083\u0084\3\2\2\2\u0084")
-        buf.write("\u0085\7\32\2\2\u0085\17\3\2\2\2\u0086\u0087\7\"\2\2\u0087")
-        buf.write("\u008b\7[\2\2\u0088\u008a\5\22\n\2\u0089\u0088\3\2\2\2")
-        buf.write("\u008a\u008d\3\2\2\2\u008b\u0089\3\2\2\2\u008b\u008c\3")
-        buf.write("\2\2\2\u008c\u008e\3\2\2\2\u008d\u008b\3\2\2\2\u008e\u008f")
-        buf.write("\7\30\2\2\u008f\21\3\2\2\2\u0090\u0091\7=\2\2\u0091\u0092")
-        buf.write("\7[\2\2\u0092\u0093\7G\2\2\u0093\u0094\5\24\13\2\u0094")
-        buf.write("\u0095\7T\2\2\u0095\23\3\2\2\2\u0096\u009a\5\30\r\2\u0097")
-        buf.write("\u009a\5\32\16\2\u0098\u009a\5\26\f\2\u0099\u0096\3\2")
-        buf.write("\2\2\u0099\u0097\3\2\2\2\u0099\u0098\3\2\2\2\u009a\25")
-        buf.write("\3\2\2\2\u009b\u009d\5\34\17\2\u009c\u009b\3\2\2\2\u009d")
-        buf.write("\u009e\3\2\2\2\u009e\u009c\3\2\2\2\u009e\u009f\3\2\2\2")
-        buf.write("\u009f\27\3\2\2\2\u00a0\u00a1\5\36\20\2\u00a1\31\3\2\2")
-        buf.write("\2\u00a2\u00a4\7:\2\2\u00a3\u00a5\5\34\17\2\u00a4\u00a3")
-        buf.write("\3\2\2\2\u00a5\u00a6\3\2\2\2\u00a6\u00a4\3\2\2\2\u00a6")
-        buf.write("\u00a7\3\2\2\2\u00a7\33\3\2\2\2\u00a8\u00a9\7N\2\2\u00a9")
-        buf.write("\u00aa\5\36\20\2\u00aa\u00ab\7I\2\2\u00ab\u00ac\5\36\20")
-        buf.write("\2\u00ac\u00ad\7S\2\2\u00ad\35\3\2\2\2\u00ae\u00af\t\2")
-        buf.write("\2\2\u00af\37\3\2\2\2\u00b0\u00b1\7\21\2\2\u00b1\u00b5")
-        buf.write("\7[\2\2\u00b2\u00b4\5\"\22\2\u00b3\u00b2\3\2\2\2\u00b4")
-        buf.write("\u00b7\3\2\2\2\u00b5\u00b3\3\2\2\2\u00b5\u00b6\3\2\2\2")
-        buf.write("\u00b6\u00b8\3\2\2\2\u00b7\u00b5\3\2\2\2\u00b8\u00b9\7")
-        buf.write("\26\2\2\u00b9!\3\2\2\2\u00ba\u00bf\5(\25\2\u00bb\u00bf")
-        buf.write("\5&\24\2\u00bc\u00bf\5\22\n\2\u00bd\u00bf\5$\23\2\u00be")
-        buf.write("\u00ba\3\2\2\2\u00be\u00bb\3\2\2\2\u00be\u00bc\3\2\2\2")
-        buf.write("\u00be\u00bd\3\2\2\2\u00bf#\3\2\2\2\u00c0\u00c1\7\64\2")
-        buf.write("\2\u00c1\u00c2\7G\2\2\u00c2\u00c3\7N\2\2\u00c3\u00c4\7")
-        buf.write("W\2\2\u00c4\u00c5\7K\2\2\u00c5\u00c6\7W\2\2\u00c6\u00c7")
-        buf.write("\7S\2\2\u00c7\u00c8\7T\2\2\u00c8%\3\2\2\2\u00c9\u00ca")
-        buf.write("\7\20\2\2\u00ca\u00cb\7G\2\2\u00cb\u00cc\t\3\2\2\u00cc")
-        buf.write("\u00cd\7T\2\2\u00cd\'\3\2\2\2\u00ce\u00cf\7)\2\2\u00cf")
-        buf.write("\u00d0\7H\2\2\u00d0\u00d1\t\4\2\2\u00d1\u00d2\7T\2\2\u00d2")
-        buf.write(")\3\2\2\2\u00d3\u00d4\7\67\2\2\u00d4\u00d8\7[\2\2\u00d5")
-        buf.write("\u00d7\5,\27\2\u00d6\u00d5\3\2\2\2\u00d7\u00da\3\2\2\2")
-        buf.write("\u00d8\u00d6\3\2\2\2\u00d8\u00d9\3\2\2\2\u00d9\u00db\3")
-        buf.write("\2\2\2\u00da\u00d8\3\2\2\2\u00db\u00dc\7\31\2\2\u00dc")
-        buf.write("+\3\2\2\2\u00dd\u00e2\5.\30\2\u00de\u00e2\5\64\33\2\u00df")
-        buf.write("\u00e2\5\66\34\2\u00e0\u00e2\58\35\2\u00e1\u00dd\3\2\2")
-        buf.write("\2\u00e1\u00de\3\2\2\2\u00e1\u00df\3\2\2\2\u00e1\u00e0")
-        buf.write("\3\2\2\2\u00e2-\3\2\2\2\u00e3\u00e6\5\60\31\2\u00e4\u00e6")
-        buf.write("\5\62\32\2\u00e5\u00e3\3\2\2\2\u00e5\u00e4\3\2\2\2\u00e6")
-        buf.write("/\3\2\2\2\u00e7\u00e8\7\61\2\2\u00e8\u00e9\7H\2\2\u00e9")
-        buf.write("\u00ea\t\5\2\2\u00ea\u00eb\7T\2\2\u00eb\61\3\2\2\2\u00ec")
-        buf.write("\u00ed\7\6\2\2\u00ed\u00ee\7H\2\2\u00ee\u00ef\t\6\2\2")
-        buf.write("\u00ef\u00f0\7T\2\2\u00f0\63\3\2\2\2\u00f1\u00f2\7\5\2")
-        buf.write("\2\u00f2\u00f3\7H\2\2\u00f3\u00f4\t\7\2\2\u00f4\u00f5")
-        buf.write("\7T\2\2\u00f5\65\3\2\2\2\u00f6\u00f7\7\4\2\2\u00f7\u00f8")
-        buf.write("\7H\2\2\u00f8\u00f9\t\b\2\2\u00f9\u00fa\7T\2\2\u00fa\67")
-        buf.write("\3\2\2\2\u00fb\u00fc\7\66\2\2\u00fc\u00fd\5:\36\2\u00fd")
-        buf.write("\u00fe\7H\2\2\u00fe\u00ff\5<\37\2\u00ff\u0101\5@!\2\u0100")
-        buf.write("\u0102\5F$\2\u0101\u0100\3\2\2\2\u0101\u0102\3\2\2\2\u0102")
-        buf.write("\u0103\3\2\2\2\u0103\u0104\7T\2\2\u01049\3\2\2\2\u0105")
-        buf.write("\u0106\t\2\2\2\u0106;\3\2\2\2\u0107\u0108\7#\2\2\u0108")
-        buf.write("\u0109\5> \2\u0109=\3\2\2\2\u010a\u010f\5H%\2\u010b\u010c")
-        buf.write("\t\t\2\2\u010c\u010e\5H%\2\u010d\u010b\3\2\2\2\u010e\u0111")
-        buf.write("\3\2\2\2\u010f\u010d\3\2\2\2\u010f\u0110\3\2\2\2\u0110")
-        buf.write("?\3\2\2\2\u0111\u010f\3\2\2\2\u0112\u0113\7>\2\2\u0113")
-        buf.write("\u0114\5B\"\2\u0114A\3\2\2\2\u0115\u011a\5D#\2\u0116\u0117")
-        buf.write("\7I\2\2\u0117\u0119\5D#\2\u0118\u0116\3\2\2\2\u0119\u011c")
-        buf.write("\3\2\2\2\u011a\u0118\3\2\2\2\u011a\u011b\3\2\2\2\u011b")
-        buf.write("C\3\2\2\2\u011c\u011a\3\2\2\2\u011d\u011e\7[\2\2\u011e")
-        buf.write("\u011f\7$\2\2\u011f\u0120\7[\2\2\u0120E\3\2\2\2\u0121")
-        buf.write("\u0122\7D\2\2\u0122\u0123\7W\2\2\u0123G\3\2\2\2\u0124")
-        buf.write("\u0126\7/\2\2\u0125\u0124\3\2\2\2\u0125\u0126\3\2\2\2")
-        buf.write("\u0126\u0127\3\2\2\2\u0127\u0128\5J&\2\u0128I\3\2\2\2")
-        buf.write("\u0129\u012f\7[\2\2\u012a\u012c\7$\2\2\u012b\u012d\7/")
-        buf.write("\2\2\u012c\u012b\3\2\2\2\u012c\u012d\3\2\2\2\u012d\u012e")
-        buf.write("\3\2\2\2\u012e\u0130\7[\2\2\u012f\u012a\3\2\2\2\u012f")
-        buf.write("\u0130\3\2\2\2\u0130K\3\2\2\2\u0131\u0132\7A\2\2\u0132")
-        buf.write("M\3\2\2\2\31QY]blr|\u0082\u008b\u0099\u009e\u00a6\u00b5")
-        buf.write("\u00be\u00d8\u00e1\u00e5\u0101\u010f\u011a\u0125\u012c")
-        buf.write("\u012f")
+        buf.write("&\4\'\t\'\4(\t(\3\2\7\2R\n\2\f\2\16\2U\13\2\3\2\3\2\3")
+        buf.write("\3\6\3Z\n\3\r\3\16\3[\3\4\3\4\5\4`\n\4\3\4\7\4c\n\4\f")
+        buf.write("\4\16\4f\13\4\3\4\3\4\3\5\3\5\3\5\3\5\3\5\5\5o\n\5\3\6")
+        buf.write("\3\6\7\6s\n\6\f\6\16\6v\13\6\3\6\3\6\3\7\3\7\3\7\3\7\3")
+        buf.write("\7\5\7\177\n\7\3\b\3\b\6\b\u0083\n\b\r\b\16\b\u0084\3")
+        buf.write("\b\3\b\3\t\3\t\3\t\7\t\u008c\n\t\f\t\16\t\u008f\13\t\3")
+        buf.write("\t\3\t\3\n\3\n\3\n\3\n\3\n\3\n\3\13\3\13\3\13\5\13\u009c")
+        buf.write("\n\13\3\f\6\f\u009f\n\f\r\f\16\f\u00a0\3\r\3\r\3\16\3")
+        buf.write("\16\6\16\u00a7\n\16\r\16\16\16\u00a8\3\17\3\17\3\17\3")
+        buf.write("\17\3\17\3\17\3\20\3\20\3\21\3\21\3\21\7\21\u00b6\n\21")
+        buf.write("\f\21\16\21\u00b9\13\21\3\21\3\21\3\22\3\22\3\22\3\22")
+        buf.write("\5\22\u00c1\n\22\3\23\3\23\3\23\3\23\3\23\3\23\3\23\3")
+        buf.write("\23\3\23\3\24\3\24\3\24\3\24\3\24\3\25\3\25\3\25\3\25")
+        buf.write("\3\25\3\26\3\26\3\26\7\26\u00d9\n\26\f\26\16\26\u00dc")
+        buf.write("\13\26\3\26\3\26\3\27\3\27\3\27\3\27\5\27\u00e4\n\27\3")
+        buf.write("\30\3\30\5\30\u00e8\n\30\3\31\3\31\3\31\3\31\3\31\3\32")
+        buf.write("\3\32\3\32\3\32\3\32\3\33\3\33\3\33\3\33\3\33\3\34\3\34")
+        buf.write("\3\34\3\34\3\34\3\35\3\35\3\35\3\35\3\35\3\35\5\35\u0104")
+        buf.write("\n\35\3\35\3\35\3\36\3\36\3\37\3\37\3\37\3 \3 \3 \7 \u0110")
+        buf.write("\n \f \16 \u0113\13 \3!\3!\3!\3\"\3\"\3\"\7\"\u011b\n")
+        buf.write("\"\f\"\16\"\u011e\13\"\3#\3#\3#\3#\3$\3$\3$\3%\5%\u0128")
+        buf.write("\n%\3%\3%\5%\u012c\n%\3&\3&\3&\5&\u0131\n&\3&\5&\u0134")
+        buf.write("\n&\3\'\3\'\3\'\3\'\3(\3(\3(\2\2)\2\4\6\b\n\f\16\20\22")
+        buf.write("\24\26\30\32\34\36 \"$&(*,.\60\62\64\668:<>@BDFHJLN\2")
+        buf.write("\n\4\2WW[[\4\2..WW\7\2\n\n\f\16%%--\65\65\b\2\7\7\t\t")
+        buf.write("\22\22\25\25((,,\7\2\b\b\23\23\34\34*+\63\63\4\2**\63")
+        buf.write("\63\7\2\t\t((\60\60\62\62;;\4\2\6\6\61\61\u0134\2S\3\2")
+        buf.write("\2\2\4Y\3\2\2\2\6]\3\2\2\2\bn\3\2\2\2\np\3\2\2\2\fy\3")
+        buf.write("\2\2\2\16\u0080\3\2\2\2\20\u0088\3\2\2\2\22\u0092\3\2")
+        buf.write("\2\2\24\u009b\3\2\2\2\26\u009e\3\2\2\2\30\u00a2\3\2\2")
+        buf.write("\2\32\u00a4\3\2\2\2\34\u00aa\3\2\2\2\36\u00b0\3\2\2\2")
+        buf.write(" \u00b2\3\2\2\2\"\u00c0\3\2\2\2$\u00c2\3\2\2\2&\u00cb")
+        buf.write("\3\2\2\2(\u00d0\3\2\2\2*\u00d5\3\2\2\2,\u00e3\3\2\2\2")
+        buf.write(".\u00e7\3\2\2\2\60\u00e9\3\2\2\2\62\u00ee\3\2\2\2\64\u00f3")
+        buf.write("\3\2\2\2\66\u00f8\3\2\2\28\u00fd\3\2\2\2:\u0107\3\2\2")
+        buf.write("\2<\u0109\3\2\2\2>\u010c\3\2\2\2@\u0114\3\2\2\2B\u0117")
+        buf.write("\3\2\2\2D\u011f\3\2\2\2F\u0123\3\2\2\2H\u0127\3\2\2\2")
+        buf.write("J\u012d\3\2\2\2L\u0135\3\2\2\2N\u0139\3\2\2\2PR\5\4\3")
+        buf.write("\2QP\3\2\2\2RU\3\2\2\2SQ\3\2\2\2ST\3\2\2\2TV\3\2\2\2U")
+        buf.write("S\3\2\2\2VW\7\2\2\3W\3\3\2\2\2XZ\5\6\4\2YX\3\2\2\2Z[\3")
+        buf.write("\2\2\2[Y\3\2\2\2[\\\3\2\2\2\\\5\3\2\2\2]_\7!\2\2^`\7[")
+        buf.write("\2\2_^\3\2\2\2_`\3\2\2\2`d\3\2\2\2ac\5\b\5\2ba\3\2\2\2")
+        buf.write("cf\3\2\2\2db\3\2\2\2de\3\2\2\2eg\3\2\2\2fd\3\2\2\2gh\7")
+        buf.write("\27\2\2h\7\3\2\2\2io\5\n\6\2jo\5\16\b\2ko\5\20\t\2lo\5")
+        buf.write(" \21\2mo\5*\26\2ni\3\2\2\2nj\3\2\2\2nk\3\2\2\2nl\3\2\2")
+        buf.write("\2nm\3\2\2\2o\t\3\2\2\2pt\7B\2\2qs\5\f\7\2rq\3\2\2\2s")
+        buf.write("v\3\2\2\2tr\3\2\2\2tu\3\2\2\2uw\3\2\2\2vt\3\2\2\2wx\7")
+        buf.write("\32\2\2x\13\3\2\2\2yz\7[\2\2z{\7H\2\2{|\5N(\2|~\7T\2\2")
+        buf.write("}\177\5$\23\2~}\3\2\2\2~\177\3\2\2\2\177\r\3\2\2\2\u0080")
+        buf.write("\u0082\7C\2\2\u0081\u0083\5\f\7\2\u0082\u0081\3\2\2\2")
+        buf.write("\u0083\u0084\3\2\2\2\u0084\u0082\3\2\2\2\u0084\u0085\3")
+        buf.write("\2\2\2\u0085\u0086\3\2\2\2\u0086\u0087\7\32\2\2\u0087")
+        buf.write("\17\3\2\2\2\u0088\u0089\7\"\2\2\u0089\u008d\7[\2\2\u008a")
+        buf.write("\u008c\5\22\n\2\u008b\u008a\3\2\2\2\u008c\u008f\3\2\2")
+        buf.write("\2\u008d\u008b\3\2\2\2\u008d\u008e\3\2\2\2\u008e\u0090")
+        buf.write("\3\2\2\2\u008f\u008d\3\2\2\2\u0090\u0091\7\30\2\2\u0091")
+        buf.write("\21\3\2\2\2\u0092\u0093\7=\2\2\u0093\u0094\7[\2\2\u0094")
+        buf.write("\u0095\7G\2\2\u0095\u0096\5\24\13\2\u0096\u0097\7T\2\2")
+        buf.write("\u0097\23\3\2\2\2\u0098\u009c\5\30\r\2\u0099\u009c\5\32")
+        buf.write("\16\2\u009a\u009c\5\26\f\2\u009b\u0098\3\2\2\2\u009b\u0099")
+        buf.write("\3\2\2\2\u009b\u009a\3\2\2\2\u009c\25\3\2\2\2\u009d\u009f")
+        buf.write("\5\34\17\2\u009e\u009d\3\2\2\2\u009f\u00a0\3\2\2\2\u00a0")
+        buf.write("\u009e\3\2\2\2\u00a0\u00a1\3\2\2\2\u00a1\27\3\2\2\2\u00a2")
+        buf.write("\u00a3\5\36\20\2\u00a3\31\3\2\2\2\u00a4\u00a6\7:\2\2\u00a5")
+        buf.write("\u00a7\5\34\17\2\u00a6\u00a5\3\2\2\2\u00a7\u00a8\3\2\2")
+        buf.write("\2\u00a8\u00a6\3\2\2\2\u00a8\u00a9\3\2\2\2\u00a9\33\3")
+        buf.write("\2\2\2\u00aa\u00ab\7N\2\2\u00ab\u00ac\5\36\20\2\u00ac")
+        buf.write("\u00ad\7I\2\2\u00ad\u00ae\5\36\20\2\u00ae\u00af\7S\2\2")
+        buf.write("\u00af\35\3\2\2\2\u00b0\u00b1\t\2\2\2\u00b1\37\3\2\2\2")
+        buf.write("\u00b2\u00b3\7\21\2\2\u00b3\u00b7\7[\2\2\u00b4\u00b6\5")
+        buf.write("\"\22\2\u00b5\u00b4\3\2\2\2\u00b6\u00b9\3\2\2\2\u00b7")
+        buf.write("\u00b5\3\2\2\2\u00b7\u00b8\3\2\2\2\u00b8\u00ba\3\2\2\2")
+        buf.write("\u00b9\u00b7\3\2\2\2\u00ba\u00bb\7\26\2\2\u00bb!\3\2\2")
+        buf.write("\2\u00bc\u00c1\5(\25\2\u00bd\u00c1\5&\24\2\u00be\u00c1")
+        buf.write("\5\22\n\2\u00bf\u00c1\5$\23\2\u00c0\u00bc\3\2\2\2\u00c0")
+        buf.write("\u00bd\3\2\2\2\u00c0\u00be\3\2\2\2\u00c0\u00bf\3\2\2\2")
+        buf.write("\u00c1#\3\2\2\2\u00c2\u00c3\7\64\2\2\u00c3\u00c4\7G\2")
+        buf.write("\2\u00c4\u00c5\7N\2\2\u00c5\u00c6\7W\2\2\u00c6\u00c7\7")
+        buf.write("K\2\2\u00c7\u00c8\7W\2\2\u00c8\u00c9\7S\2\2\u00c9\u00ca")
+        buf.write("\7T\2\2\u00ca%\3\2\2\2\u00cb\u00cc\7\20\2\2\u00cc\u00cd")
+        buf.write("\7G\2\2\u00cd\u00ce\t\3\2\2\u00ce\u00cf\7T\2\2\u00cf\'")
+        buf.write("\3\2\2\2\u00d0\u00d1\7)\2\2\u00d1\u00d2\7H\2\2\u00d2\u00d3")
+        buf.write("\t\4\2\2\u00d3\u00d4\7T\2\2\u00d4)\3\2\2\2\u00d5\u00d6")
+        buf.write("\7\67\2\2\u00d6\u00da\7[\2\2\u00d7\u00d9\5,\27\2\u00d8")
+        buf.write("\u00d7\3\2\2\2\u00d9\u00dc\3\2\2\2\u00da\u00d8\3\2\2\2")
+        buf.write("\u00da\u00db\3\2\2\2\u00db\u00dd\3\2\2\2\u00dc\u00da\3")
+        buf.write("\2\2\2\u00dd\u00de\7\31\2\2\u00de+\3\2\2\2\u00df\u00e4")
+        buf.write("\5.\30\2\u00e0\u00e4\5\64\33\2\u00e1\u00e4\5\66\34\2\u00e2")
+        buf.write("\u00e4\58\35\2\u00e3\u00df\3\2\2\2\u00e3\u00e0\3\2\2\2")
+        buf.write("\u00e3\u00e1\3\2\2\2\u00e3\u00e2\3\2\2\2\u00e4-\3\2\2")
+        buf.write("\2\u00e5\u00e8\5\60\31\2\u00e6\u00e8\5\62\32\2\u00e7\u00e5")
+        buf.write("\3\2\2\2\u00e7\u00e6\3\2\2\2\u00e8/\3\2\2\2\u00e9\u00ea")
+        buf.write("\7\61\2\2\u00ea\u00eb\7H\2\2\u00eb\u00ec\t\5\2\2\u00ec")
+        buf.write("\u00ed\7T\2\2\u00ed\61\3\2\2\2\u00ee\u00ef\7\6\2\2\u00ef")
+        buf.write("\u00f0\7H\2\2\u00f0\u00f1\t\6\2\2\u00f1\u00f2\7T\2\2\u00f2")
+        buf.write("\63\3\2\2\2\u00f3\u00f4\7\5\2\2\u00f4\u00f5\7H\2\2\u00f5")
+        buf.write("\u00f6\t\7\2\2\u00f6\u00f7\7T\2\2\u00f7\65\3\2\2\2\u00f8")
+        buf.write("\u00f9\7\4\2\2\u00f9\u00fa\7H\2\2\u00fa\u00fb\t\b\2\2")
+        buf.write("\u00fb\u00fc\7T\2\2\u00fc\67\3\2\2\2\u00fd\u00fe\7\66")
+        buf.write("\2\2\u00fe\u00ff\5:\36\2\u00ff\u0100\7H\2\2\u0100\u0101")
+        buf.write("\5<\37\2\u0101\u0103\5@!\2\u0102\u0104\5F$\2\u0103\u0102")
+        buf.write("\3\2\2\2\u0103\u0104\3\2\2\2\u0104\u0105\3\2\2\2\u0105")
+        buf.write("\u0106\7T\2\2\u01069\3\2\2\2\u0107\u0108\t\2\2\2\u0108")
+        buf.write(";\3\2\2\2\u0109\u010a\7#\2\2\u010a\u010b\5> \2\u010b=")
+        buf.write("\3\2\2\2\u010c\u0111\5H%\2\u010d\u010e\t\t\2\2\u010e\u0110")
+        buf.write("\5H%\2\u010f\u010d\3\2\2\2\u0110\u0113\3\2\2\2\u0111\u010f")
+        buf.write("\3\2\2\2\u0111\u0112\3\2\2\2\u0112?\3\2\2\2\u0113\u0111")
+        buf.write("\3\2\2\2\u0114\u0115\7>\2\2\u0115\u0116\5B\"\2\u0116A")
+        buf.write("\3\2\2\2\u0117\u011c\5D#\2\u0118\u0119\7I\2\2\u0119\u011b")
+        buf.write("\5D#\2\u011a\u0118\3\2\2\2\u011b\u011e\3\2\2\2\u011c\u011a")
+        buf.write("\3\2\2\2\u011c\u011d\3\2\2\2\u011dC\3\2\2\2\u011e\u011c")
+        buf.write("\3\2\2\2\u011f\u0120\7[\2\2\u0120\u0121\7$\2\2\u0121\u0122")
+        buf.write("\7[\2\2\u0122E\3\2\2\2\u0123\u0124\7D\2\2\u0124\u0125")
+        buf.write("\7W\2\2\u0125G\3\2\2\2\u0126\u0128\7/\2\2\u0127\u0126")
+        buf.write("\3\2\2\2\u0127\u0128\3\2\2\2\u0128\u012b\3\2\2\2\u0129")
+        buf.write("\u012c\5J&\2\u012a\u012c\5L\'\2\u012b\u0129\3\2\2\2\u012b")
+        buf.write("\u012a\3\2\2\2\u012cI\3\2\2\2\u012d\u0133\7[\2\2\u012e")
+        buf.write("\u0130\7$\2\2\u012f\u0131\7/\2\2\u0130\u012f\3\2\2\2\u0130")
+        buf.write("\u0131\3\2\2\2\u0131\u0132\3\2\2\2\u0132\u0134\7[\2\2")
+        buf.write("\u0133\u012e\3\2\2\2\u0133\u0134\3\2\2\2\u0134K\3\2\2")
+        buf.write("\2\u0135\u0136\7N\2\2\u0136\u0137\5> \2\u0137\u0138\7")
+        buf.write("S\2\2\u0138M\3\2\2\2\u0139\u013a\7A\2\2\u013aO\3\2\2\2")
+        buf.write("\32S[_dnt~\u0084\u008d\u009b\u00a0\u00a8\u00b7\u00c0\u00da")
+        buf.write("\u00e3\u00e7\u0103\u0111\u011c\u0127\u012b\u0130\u0133")
         return buf.getvalue()
 
 
@@ -223,7 +226,8 @@ class FclParser ( Parser ):
     RULE_with_x = 34
     RULE_subcondition = 35
     RULE_subcondition_bare = 36
-    RULE_data_type = 37
+    RULE_subcondition_paren = 37
+    RULE_data_type = 38
 
     ruleNames =  [ "main", "fcl", "function_block", "declaration", "var_input", 
                    "var_def", "var_output", "fuzzify_block", "linguistic_term", 
@@ -234,7 +238,7 @@ class FclParser ( Parser ):
                    "operator_definition_and", "activation_method", "accumulation_method", 
                    "rule_def", "rule_name", "if_clause", "condition", "then_clause", 
                    "conclusion", "sub_conclusion", "with_x", "subcondition", 
-                   "subcondition_bare", "data_type" ]
+                   "subcondition_bare", "subcondition_paren", "data_type" ]
 
     EOF = Token.EOF
     ABS=1
@@ -376,17 +380,17 @@ class FclParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 79
+            self.state = 81
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while _la==FclParser.FUNCTION_BLOCK:
-                self.state = 76
+                self.state = 78
                 self.fcl()
-                self.state = 81
+                self.state = 83
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
-            self.state = 82
+            self.state = 84
             self.match(FclParser.EOF)
         except RecognitionException as re:
             localctx.exception = re
@@ -429,17 +433,17 @@ class FclParser ( Parser ):
         self.enterRule(localctx, 2, self.RULE_fcl)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 85 
+            self.state = 87 
             self._errHandler.sync(self)
             _alt = 1
             while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
                 if _alt == 1:
-                    self.state = 84
+                    self.state = 86
                     self.function_block()
 
                 else:
                     raise NoViableAltException(self)
-                self.state = 87 
+                self.state = 89 
                 self._errHandler.sync(self)
                 _alt = self._interp.adaptivePredict(self._input,1,self._ctx)
 
@@ -494,26 +498,26 @@ class FclParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 89
-            self.match(FclParser.FUNCTION_BLOCK)
             self.state = 91
+            self.match(FclParser.FUNCTION_BLOCK)
+            self.state = 93
             _la = self._input.LA(1)
             if _la==FclParser.ID:
-                self.state = 90
+                self.state = 92
                 self.match(FclParser.ID)
 
 
-            self.state = 96
+            self.state = 98
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while ((((_la - 15)) & ~0x3f) == 0 and ((1 << (_la - 15)) & ((1 << (FclParser.DEFUZZIFY - 15)) | (1 << (FclParser.FUZZIFY - 15)) | (1 << (FclParser.RULEBLOCK - 15)) | (1 << (FclParser.VAR_INPUT - 15)) | (1 << (FclParser.VAR_OUTPUT - 15)))) != 0):
-                self.state = 93
+                self.state = 95
                 self.declaration()
-                self.state = 98
+                self.state = 100
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
-            self.state = 99
+            self.state = 101
             self.match(FclParser.END_FUNCTION_BLOCK)
         except RecognitionException as re:
             localctx.exception = re
@@ -568,31 +572,31 @@ class FclParser ( Parser ):
         localctx = FclParser.DeclarationContext(self, self._ctx, self.state)
         self.enterRule(localctx, 6, self.RULE_declaration)
         try:
-            self.state = 106
+            self.state = 108
             token = self._input.LA(1)
             if token in [FclParser.VAR_INPUT]:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 101
+                self.state = 103
                 self.var_input()
 
             elif token in [FclParser.VAR_OUTPUT]:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 102
+                self.state = 104
                 self.var_output()
 
             elif token in [FclParser.FUZZIFY]:
                 self.enterOuterAlt(localctx, 3)
-                self.state = 103
+                self.state = 105
                 self.fuzzify_block()
 
             elif token in [FclParser.DEFUZZIFY]:
                 self.enterOuterAlt(localctx, 4)
-                self.state = 104
+                self.state = 106
                 self.defuzzify_block()
 
             elif token in [FclParser.RULEBLOCK]:
                 self.enterOuterAlt(localctx, 5)
-                self.state = 105
+                self.state = 107
                 self.rule_block()
 
             else:
@@ -646,19 +650,19 @@ class FclParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 108
+            self.state = 110
             self.match(FclParser.VAR_INPUT)
-            self.state = 112
+            self.state = 114
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while _la==FclParser.ID:
-                self.state = 109
+                self.state = 111
                 self.var_def()
-                self.state = 114
+                self.state = 116
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
-            self.state = 115
+            self.state = 117
             self.match(FclParser.END_VAR)
         except RecognitionException as re:
             localctx.exception = re
@@ -712,18 +716,18 @@ class FclParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 117
-            self.match(FclParser.ID)
-            self.state = 118
-            self.match(FclParser.COLON)
             self.state = 119
-            self.data_type()
+            self.match(FclParser.ID)
             self.state = 120
-            self.match(FclParser.SEMICOLON)
+            self.match(FclParser.COLON)
+            self.state = 121
+            self.data_type()
             self.state = 122
+            self.match(FclParser.SEMICOLON)
+            self.state = 124
             _la = self._input.LA(1)
             if _la==FclParser.RANGE:
-                self.state = 121
+                self.state = 123
                 self.vrange()
 
 
@@ -775,21 +779,21 @@ class FclParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 124
+            self.state = 126
             self.match(FclParser.VAR_OUTPUT)
-            self.state = 126 
+            self.state = 128 
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while True:
-                self.state = 125
+                self.state = 127
                 self.var_def()
-                self.state = 128 
+                self.state = 130 
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if not (_la==FclParser.ID):
                     break
 
-            self.state = 130
+            self.state = 132
             self.match(FclParser.END_VAR)
         except RecognitionException as re:
             localctx.exception = re
@@ -842,21 +846,21 @@ class FclParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 132
+            self.state = 134
             self.match(FclParser.FUZZIFY)
-            self.state = 133
+            self.state = 135
             self.match(FclParser.ID)
-            self.state = 137
+            self.state = 139
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while _la==FclParser.TERM:
-                self.state = 134
+                self.state = 136
                 self.linguistic_term()
-                self.state = 139
+                self.state = 141
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
-            self.state = 140
+            self.state = 142
             self.match(FclParser.END_FUZZIFY)
         except RecognitionException as re:
             localctx.exception = re
@@ -908,15 +912,15 @@ class FclParser ( Parser ):
         self.enterRule(localctx, 16, self.RULE_linguistic_term)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 142
-            self.match(FclParser.TERM)
-            self.state = 143
-            self.match(FclParser.ID)
             self.state = 144
-            self.match(FclParser.ASSIGN_OPERATOR)
+            self.match(FclParser.TERM)
             self.state = 145
-            self.membership_function()
+            self.match(FclParser.ID)
             self.state = 146
+            self.match(FclParser.ASSIGN_OPERATOR)
+            self.state = 147
+            self.membership_function()
+            self.state = 148
             self.match(FclParser.SEMICOLON)
         except RecognitionException as re:
             localctx.exception = re
@@ -963,21 +967,21 @@ class FclParser ( Parser ):
         localctx = FclParser.Membership_functionContext(self, self._ctx, self.state)
         self.enterRule(localctx, 18, self.RULE_membership_function)
         try:
-            self.state = 151
+            self.state = 153
             token = self._input.LA(1)
             if token in [FclParser.REAL, FclParser.ID]:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 148
+                self.state = 150
                 self.singleton()
 
             elif token in [FclParser.SINGLETONS]:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 149
+                self.state = 151
                 self.singletons()
 
             elif token in [FclParser.LEFT_PARENTHESIS]:
                 self.enterOuterAlt(localctx, 3)
-                self.state = 150
+                self.state = 152
                 self.piece_wise_linear()
 
             else:
@@ -1025,13 +1029,13 @@ class FclParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 154 
+            self.state = 156 
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while True:
-                self.state = 153
+                self.state = 155
                 self.points()
-                self.state = 156 
+                self.state = 158 
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if not (_la==FclParser.LEFT_PARENTHESIS):
@@ -1075,7 +1079,7 @@ class FclParser ( Parser ):
         self.enterRule(localctx, 22, self.RULE_singleton)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 158
+            self.state = 160
             self.atom()
         except RecognitionException as re:
             localctx.exception = re
@@ -1122,15 +1126,15 @@ class FclParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 160
+            self.state = 162
             self.match(FclParser.SINGLETONS)
-            self.state = 162 
+            self.state = 164 
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while True:
-                self.state = 161
+                self.state = 163
                 self.points()
-                self.state = 164 
+                self.state = 166 
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if not (_la==FclParser.LEFT_PARENTHESIS):
@@ -1186,15 +1190,15 @@ class FclParser ( Parser ):
         self.enterRule(localctx, 26, self.RULE_points)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 166
-            self.match(FclParser.LEFT_PARENTHESIS)
-            self.state = 167
-            self.atom()
             self.state = 168
-            self.match(FclParser.COMMA)
+            self.match(FclParser.LEFT_PARENTHESIS)
             self.state = 169
             self.atom()
             self.state = 170
+            self.match(FclParser.COMMA)
+            self.state = 171
+            self.atom()
+            self.state = 172
             self.match(FclParser.RIGHT_PARENTHESIS)
         except RecognitionException as re:
             localctx.exception = re
@@ -1237,7 +1241,7 @@ class FclParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 172
+            self.state = 174
             _la = self._input.LA(1)
             if not(_la==FclParser.REAL or _la==FclParser.ID):
                 self._errHandler.recoverInline(self)
@@ -1294,21 +1298,21 @@ class FclParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 174
+            self.state = 176
             self.match(FclParser.DEFUZZIFY)
-            self.state = 175
+            self.state = 177
             self.match(FclParser.ID)
-            self.state = 179
+            self.state = 181
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << FclParser.DEFAULT) | (1 << FclParser.METHOD) | (1 << FclParser.RANGE) | (1 << FclParser.TERM))) != 0):
-                self.state = 176
+                self.state = 178
                 self.defuzzify_item()
-                self.state = 181
+                self.state = 183
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
-            self.state = 182
+            self.state = 184
             self.match(FclParser.END_DEFUZZIFY)
         except RecognitionException as re:
             localctx.exception = re
@@ -1359,26 +1363,26 @@ class FclParser ( Parser ):
         localctx = FclParser.Defuzzify_itemContext(self, self._ctx, self.state)
         self.enterRule(localctx, 32, self.RULE_defuzzify_item)
         try:
-            self.state = 188
+            self.state = 190
             token = self._input.LA(1)
             if token in [FclParser.METHOD]:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 184
+                self.state = 186
                 self.defuzzification_method()
 
             elif token in [FclParser.DEFAULT]:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 185
+                self.state = 187
                 self.default_value()
 
             elif token in [FclParser.TERM]:
                 self.enterOuterAlt(localctx, 3)
-                self.state = 186
+                self.state = 188
                 self.linguistic_term()
 
             elif token in [FclParser.RANGE]:
                 self.enterOuterAlt(localctx, 4)
-                self.state = 187
+                self.state = 189
                 self.vrange()
 
             else:
@@ -1442,21 +1446,21 @@ class FclParser ( Parser ):
         self.enterRule(localctx, 34, self.RULE_vrange)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 190
-            self.match(FclParser.RANGE)
-            self.state = 191
-            self.match(FclParser.ASSIGN_OPERATOR)
             self.state = 192
-            self.match(FclParser.LEFT_PARENTHESIS)
+            self.match(FclParser.RANGE)
             self.state = 193
-            self.match(FclParser.REAL)
+            self.match(FclParser.ASSIGN_OPERATOR)
             self.state = 194
-            self.match(FclParser.DOTS)
+            self.match(FclParser.LEFT_PARENTHESIS)
             self.state = 195
             self.match(FclParser.REAL)
             self.state = 196
-            self.match(FclParser.RIGHT_PARENTHESIS)
+            self.match(FclParser.DOTS)
             self.state = 197
+            self.match(FclParser.REAL)
+            self.state = 198
+            self.match(FclParser.RIGHT_PARENTHESIS)
+            self.state = 199
             self.match(FclParser.SEMICOLON)
         except RecognitionException as re:
             localctx.exception = re
@@ -1508,17 +1512,17 @@ class FclParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 199
-            self.match(FclParser.DEFAULT)
-            self.state = 200
-            self.match(FclParser.ASSIGN_OPERATOR)
             self.state = 201
+            self.match(FclParser.DEFAULT)
+            self.state = 202
+            self.match(FclParser.ASSIGN_OPERATOR)
+            self.state = 203
             _la = self._input.LA(1)
             if not(_la==FclParser.NC or _la==FclParser.REAL):
                 self._errHandler.recoverInline(self)
             else:
                 self.consume()
-            self.state = 202
+            self.state = 204
             self.match(FclParser.SEMICOLON)
         except RecognitionException as re:
             localctx.exception = re
@@ -1585,17 +1589,17 @@ class FclParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 204
-            self.match(FclParser.METHOD)
-            self.state = 205
-            self.match(FclParser.COLON)
             self.state = 206
+            self.match(FclParser.METHOD)
+            self.state = 207
+            self.match(FclParser.COLON)
+            self.state = 208
             _la = self._input.LA(1)
             if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << FclParser.COA) | (1 << FclParser.COG) | (1 << FclParser.COGS) | (1 << FclParser.COGF) | (1 << FclParser.LM) | (1 << FclParser.MM) | (1 << FclParser.RM))) != 0)):
                 self._errHandler.recoverInline(self)
             else:
                 self.consume()
-            self.state = 207
+            self.state = 209
             self.match(FclParser.SEMICOLON)
         except RecognitionException as re:
             localctx.exception = re
@@ -1648,21 +1652,21 @@ class FclParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 209
+            self.state = 211
             self.match(FclParser.RULEBLOCK)
-            self.state = 210
+            self.state = 212
             self.match(FclParser.ID)
-            self.state = 214
+            self.state = 216
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << FclParser.ACCU) | (1 << FclParser.ACT) | (1 << FclParser.AND) | (1 << FclParser.OR) | (1 << FclParser.RULE))) != 0):
-                self.state = 211
+                self.state = 213
                 self.rule_item()
-                self.state = 216
+                self.state = 218
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
-            self.state = 217
+            self.state = 219
             self.match(FclParser.END_RULEBLOCK)
         except RecognitionException as re:
             localctx.exception = re
@@ -1713,26 +1717,26 @@ class FclParser ( Parser ):
         localctx = FclParser.Rule_itemContext(self, self._ctx, self.state)
         self.enterRule(localctx, 42, self.RULE_rule_item)
         try:
-            self.state = 223
+            self.state = 225
             token = self._input.LA(1)
             if token in [FclParser.AND, FclParser.OR]:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 219
+                self.state = 221
                 self.operator_definition()
 
             elif token in [FclParser.ACT]:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 220
+                self.state = 222
                 self.activation_method()
 
             elif token in [FclParser.ACCU]:
                 self.enterOuterAlt(localctx, 3)
-                self.state = 221
+                self.state = 223
                 self.accumulation_method()
 
             elif token in [FclParser.RULE]:
                 self.enterOuterAlt(localctx, 4)
-                self.state = 222
+                self.state = 224
                 self.rule_def()
 
             else:
@@ -1779,16 +1783,16 @@ class FclParser ( Parser ):
         localctx = FclParser.Operator_definitionContext(self, self._ctx, self.state)
         self.enterRule(localctx, 44, self.RULE_operator_definition)
         try:
-            self.state = 227
+            self.state = 229
             token = self._input.LA(1)
             if token in [FclParser.OR]:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 225
+                self.state = 227
                 self.operator_definition_or()
 
             elif token in [FclParser.AND]:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 226
+                self.state = 228
                 self.operator_definition_and()
 
             else:
@@ -1856,17 +1860,17 @@ class FclParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 229
-            self.match(FclParser.OR)
-            self.state = 230
-            self.match(FclParser.COLON)
             self.state = 231
+            self.match(FclParser.OR)
+            self.state = 232
+            self.match(FclParser.COLON)
+            self.state = 233
             _la = self._input.LA(1)
             if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << FclParser.ASUM) | (1 << FclParser.BSUM) | (1 << FclParser.DMAX) | (1 << FclParser.EINSTEIN) | (1 << FclParser.MAX) | (1 << FclParser.NIPMAX))) != 0)):
                 self._errHandler.recoverInline(self)
             else:
                 self.consume()
-            self.state = 232
+            self.state = 234
             self.match(FclParser.SEMICOLON)
         except RecognitionException as re:
             localctx.exception = re
@@ -1930,17 +1934,17 @@ class FclParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 234
-            self.match(FclParser.AND)
-            self.state = 235
-            self.match(FclParser.COLON)
             self.state = 236
+            self.match(FclParser.AND)
+            self.state = 237
+            self.match(FclParser.COLON)
+            self.state = 238
             _la = self._input.LA(1)
             if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << FclParser.BDIF) | (1 << FclParser.DMIN) | (1 << FclParser.HAMACHER) | (1 << FclParser.MIN) | (1 << FclParser.NIPMIN) | (1 << FclParser.PROD))) != 0)):
                 self._errHandler.recoverInline(self)
             else:
                 self.consume()
-            self.state = 237
+            self.state = 239
             self.match(FclParser.SEMICOLON)
         except RecognitionException as re:
             localctx.exception = re
@@ -1992,17 +1996,17 @@ class FclParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 239
-            self.match(FclParser.ACT)
-            self.state = 240
-            self.match(FclParser.COLON)
             self.state = 241
+            self.match(FclParser.ACT)
+            self.state = 242
+            self.match(FclParser.COLON)
+            self.state = 243
             _la = self._input.LA(1)
             if not(_la==FclParser.MIN or _la==FclParser.PROD):
                 self._errHandler.recoverInline(self)
             else:
                 self.consume()
-            self.state = 242
+            self.state = 244
             self.match(FclParser.SEMICOLON)
         except RecognitionException as re:
             localctx.exception = re
@@ -2063,17 +2067,17 @@ class FclParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 244
-            self.match(FclParser.ACCU)
-            self.state = 245
-            self.match(FclParser.COLON)
             self.state = 246
+            self.match(FclParser.ACCU)
+            self.state = 247
+            self.match(FclParser.COLON)
+            self.state = 248
             _la = self._input.LA(1)
             if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << FclParser.BSUM) | (1 << FclParser.MAX) | (1 << FclParser.NSUM) | (1 << FclParser.PROBOR) | (1 << FclParser.SUM))) != 0)):
                 self._errHandler.recoverInline(self)
             else:
                 self.consume()
-            self.state = 247
+            self.state = 249
             self.match(FclParser.SEMICOLON)
         except RecognitionException as re:
             localctx.exception = re
@@ -2135,24 +2139,24 @@ class FclParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 249
-            self.match(FclParser.RULE)
-            self.state = 250
-            self.rule_name()
             self.state = 251
-            self.match(FclParser.COLON)
+            self.match(FclParser.RULE)
             self.state = 252
-            self.if_clause()
+            self.rule_name()
             self.state = 253
-            self.then_clause()
+            self.match(FclParser.COLON)
+            self.state = 254
+            self.if_clause()
             self.state = 255
+            self.then_clause()
+            self.state = 257
             _la = self._input.LA(1)
             if _la==FclParser.WITH:
-                self.state = 254
+                self.state = 256
                 self.with_x()
 
 
-            self.state = 257
+            self.state = 259
             self.match(FclParser.SEMICOLON)
         except RecognitionException as re:
             localctx.exception = re
@@ -2195,7 +2199,7 @@ class FclParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 259
+            self.state = 261
             _la = self._input.LA(1)
             if not(_la==FclParser.REAL or _la==FclParser.ID):
                 self._errHandler.recoverInline(self)
@@ -2242,9 +2246,9 @@ class FclParser ( Parser ):
         self.enterRule(localctx, 58, self.RULE_if_clause)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 261
+            self.state = 263
             self.match(FclParser.IF)
-            self.state = 262
+            self.state = 264
             self.condition()
         except RecognitionException as re:
             localctx.exception = re
@@ -2300,21 +2304,21 @@ class FclParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 264
+            self.state = 266
             self.subcondition()
-            self.state = 269
+            self.state = 271
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while _la==FclParser.AND or _la==FclParser.OR:
-                self.state = 265
+                self.state = 267
                 _la = self._input.LA(1)
                 if not(_la==FclParser.AND or _la==FclParser.OR):
                     self._errHandler.recoverInline(self)
                 else:
                     self.consume()
-                self.state = 266
+                self.state = 268
                 self.subcondition()
-                self.state = 271
+                self.state = 273
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
@@ -2359,9 +2363,9 @@ class FclParser ( Parser ):
         self.enterRule(localctx, 62, self.RULE_then_clause)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 272
+            self.state = 274
             self.match(FclParser.THEN)
-            self.state = 273
+            self.state = 275
             self.conclusion()
         except RecognitionException as re:
             localctx.exception = re
@@ -2411,17 +2415,17 @@ class FclParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 275
+            self.state = 277
             self.sub_conclusion()
-            self.state = 280
+            self.state = 282
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while _la==FclParser.COMMA:
-                self.state = 276
+                self.state = 278
                 self.match(FclParser.COMMA)
-                self.state = 277
+                self.state = 279
                 self.sub_conclusion()
-                self.state = 282
+                self.state = 284
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
@@ -2468,11 +2472,11 @@ class FclParser ( Parser ):
         self.enterRule(localctx, 66, self.RULE_sub_conclusion)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 283
-            self.match(FclParser.ID)
-            self.state = 284
-            self.match(FclParser.IS)
             self.state = 285
+            self.match(FclParser.ID)
+            self.state = 286
+            self.match(FclParser.IS)
+            self.state = 287
             self.match(FclParser.ID)
         except RecognitionException as re:
             localctx.exception = re
@@ -2514,9 +2518,9 @@ class FclParser ( Parser ):
         self.enterRule(localctx, 68, self.RULE_with_x)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 287
+            self.state = 289
             self.match(FclParser.WITH)
-            self.state = 288
+            self.state = 290
             self.match(FclParser.REAL)
         except RecognitionException as re:
             localctx.exception = re
@@ -2534,6 +2538,10 @@ class FclParser ( Parser ):
 
         def subcondition_bare(self):
             return self.getTypedRuleContext(FclParser.Subcondition_bareContext,0)
+
+
+        def subcondition_paren(self):
+            return self.getTypedRuleContext(FclParser.Subcondition_parenContext,0)
 
 
         def NOT(self):
@@ -2560,15 +2568,26 @@ class FclParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 291
+            self.state = 293
             _la = self._input.LA(1)
             if _la==FclParser.NOT:
-                self.state = 290
+                self.state = 292
                 self.match(FclParser.NOT)
 
 
-            self.state = 293
-            self.subcondition_bare()
+            self.state = 297
+            token = self._input.LA(1)
+            if token in [FclParser.ID]:
+                self.state = 295
+                self.subcondition_bare()
+
+            elif token in [FclParser.LEFT_PARENTHESIS]:
+                self.state = 296
+                self.subcondition_paren()
+
+            else:
+                raise NoViableAltException(self)
+
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -2616,24 +2635,74 @@ class FclParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 295
+            self.state = 299
             self.match(FclParser.ID)
-            self.state = 301
+            self.state = 305
             _la = self._input.LA(1)
             if _la==FclParser.IS:
-                self.state = 296
+                self.state = 300
                 self.match(FclParser.IS)
-                self.state = 298
+                self.state = 302
                 _la = self._input.LA(1)
                 if _la==FclParser.NOT:
-                    self.state = 297
+                    self.state = 301
                     self.match(FclParser.NOT)
 
 
-                self.state = 300
+                self.state = 304
                 self.match(FclParser.ID)
 
 
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+    class Subcondition_parenContext(ParserRuleContext):
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def LEFT_PARENTHESIS(self):
+            return self.getToken(FclParser.LEFT_PARENTHESIS, 0)
+
+        def condition(self):
+            return self.getTypedRuleContext(FclParser.ConditionContext,0)
+
+
+        def RIGHT_PARENTHESIS(self):
+            return self.getToken(FclParser.RIGHT_PARENTHESIS, 0)
+
+        def getRuleIndex(self):
+            return FclParser.RULE_subcondition_paren
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterSubcondition_paren" ):
+                listener.enterSubcondition_paren(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitSubcondition_paren" ):
+                listener.exitSubcondition_paren(self)
+
+
+
+
+    def subcondition_paren(self):
+
+        localctx = FclParser.Subcondition_parenContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 74, self.RULE_subcondition_paren)
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 307
+            self.match(FclParser.LEFT_PARENTHESIS)
+            self.state = 308
+            self.condition()
+            self.state = 309
+            self.match(FclParser.RIGHT_PARENTHESIS)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -2668,10 +2737,10 @@ class FclParser ( Parser ):
     def data_type(self):
 
         localctx = FclParser.Data_typeContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 74, self.RULE_data_type)
+        self.enterRule(localctx, 76, self.RULE_data_type)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 303
+            self.state = 311
             self.match(FclParser.TYPE_REAL)
         except RecognitionException as re:
             localctx.exception = re

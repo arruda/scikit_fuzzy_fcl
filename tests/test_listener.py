@@ -30,18 +30,18 @@ class TestScikitFuzzyFclListener(TestCase):
         with self.assertRaises(FclParserException):
             walker.walk(listener, tree)
 
-    # def test_should_create_empyt_control_system_if_no_declaration(self):
-    #     fcl_text = """
-    #     FUNCTION_BLOCK my_system
-    #     END_FUNCTION_BLOCK
-    #     """
-    #     lexer = FclLexer(InputStream(fcl_text))
-    #     stream = CommonTokenStream(lexer)
-    #     parser = FclParser(stream)
-    #     tree = parser.main()
+    def test_should_create_empyt_control_system_if_no_declaration(self):
+        fcl_text = """
+        FUNCTION_BLOCK my_system
+        END_FUNCTION_BLOCK
+        """
+        lexer = FclLexer(InputStream(fcl_text))
+        stream = CommonTokenStream(lexer)
+        parser = FclParser(stream)
+        tree = parser.main()
 
-    #     listener = ScikitFuzzyFclListener()
-    #     walker = ParseTreeWalker()
-    #     walker.walk(listener, tree)
-    #     control_system = listener.control_system
-    #     self.assertIsNot(control_system, None)
+        listener = ScikitFuzzyFclListener()
+        walker = ParseTreeWalker()
+        walker.walk(listener, tree)
+        control_system = listener.control_system
+        self.assertIsNot(control_system, None)

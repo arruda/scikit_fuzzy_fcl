@@ -833,3 +833,72 @@ class TestFclGrammar(unittest.TestCase):
         listener = FclListenerRules()
         walker = ParseTreeWalker()
         walker.walk(listener, tree)
+
+    def test_subcondition_paren(self):
+        fcl_text = """
+        FUNCTION_BLOCK f_block
+            RULEBLOCK rule1
+                RULE first_rule : IF (something)  THEN final IS final2;
+            END_RULEBLOCK
+        END_FUNCTION_BLOCK
+        """
+
+        class FclListenerRules(FclListener):
+            def enterSubcondition_paren(_self, ctx):
+                condition = ctx.condition().getText()
+                self.assertEqual(condition, 'something')
+
+        lexer = FclLexer(InputStream(fcl_text))
+        stream = CommonTokenStream(lexer)
+        parser = FclParser(stream)
+        tree = parser.main()
+
+        listener = FclListenerRules()
+        walker = ParseTreeWalker()
+        walker.walk(listener, tree)
+
+    def test_subcondition_paren_complex(self):
+        fcl_text = """
+        FUNCTION_BLOCK f_block
+            RULEBLOCK rule1
+                RULE first_rule : IF (something IS NOT otherthing)  THEN final IS final2;
+            END_RULEBLOCK
+        END_FUNCTION_BLOCK
+        """
+
+        class FclListenerRules(FclListener):
+            def enterSubcondition_paren(_self, ctx):
+                condition = ctx.condition().getText()
+                self.assertEqual(condition, 'somethingISNOTotherthing')
+
+        lexer = FclLexer(InputStream(fcl_text))
+        stream = CommonTokenStream(lexer)
+        parser = FclParser(stream)
+        tree = parser.main()
+
+        listener = FclListenerRules()
+        walker = ParseTreeWalker()
+        walker.walk(listener, tree)
+
+    def test_if_clause_complex(self):
+        fcl_text = """
+        FUNCTION_BLOCK f_block
+            RULEBLOCK rule1
+                RULE first_rule : IF (something IS NOT otherthing) THEN final IS final2;
+            END_RULEBLOCK
+        END_FUNCTION_BLOCK
+        """
+
+        class FclListenerRules(FclListener):
+            def enterSubcondition_paren(_self, ctx):
+                condition = ctx.condition().getText()
+                self.assertEqual(condition, 'somethingISNOTotherthing')
+
+        lexer = FclLexer(InputStream(fcl_text))
+        stream = CommonTokenStream(lexer)
+        parser = FclParser(stream)
+        tree = parser.main()
+
+        listener = FclListenerRules()
+        walker = ParseTreeWalker()
+        walker.walk(listener, tree)

@@ -242,6 +242,16 @@ if_clause : IF condition;
 //condition : subcondition ((AND^|OR^) subcondition)*;
 condition : subcondition ((AND|OR) subcondition)*;
 
+//subcondition : (NOT^)? (subcondition_bare | subcondition_paren);
+subcondition : (NOT)? (subcondition_bare | subcondition_paren);
+
+//subcondition_bare : ID^ (IS! (NOT)? ID)? ;
+subcondition_bare : ID (IS (NOT)? ID)? ;
+
+//subcondition_paren : LEFT_PARENTHESIS^ condition RIGHT_PARENTHESIS!;
+subcondition_paren : LEFT_PARENTHESIS condition RIGHT_PARENTHESIS;
+
+
 //then_clause : THEN^ conclusion;
 then_clause : THEN conclusion;
 //conclusion : sub_conclusion (COMMA sub_conclusion)*;
@@ -252,16 +262,5 @@ sub_conclusion : ID IS ID;
 //with_x: WITH^ REAL;
 with_x: WITH REAL;
 
-
-//subcondition : (NOT^)? (subcondition_bare | subcondition_paren);
-subcondition : (NOT)? subcondition_bare;
-//subcondition_bare : ID^ (IS! (NOT)? ID)? ;
-subcondition_bare : ID (IS (NOT)? ID)? ;
-
-
-/*
-subcondition_paren : LEFT_PARENTHESIS^ condition RIGHT_PARENTHESIS!;
-
-*/
 // Data type
 data_type : TYPE_REAL;

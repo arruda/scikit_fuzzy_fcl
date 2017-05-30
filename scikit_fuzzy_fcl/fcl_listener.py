@@ -131,9 +131,8 @@ class ScikitFuzzyFclListener(FclListener):
             }
         })
 
-    def exitFuzzify_block(self, ctx):
-        label = ctx.ID().getText()
-        antecedent_dict = self.antecedents.get(label)
+    def update_universe_values(self, antecedent_label):
+        antecedent_dict = self.antecedents.get(antecedent_label)
         universe = antecedent_dict.get('value').universe
         if len(universe.shape) != 0:
             min_universe, max_universe = universe[0], universe[-1]
@@ -141,11 +140,9 @@ class ScikitFuzzyFclListener(FclListener):
             min_universe, max_universe = 0, 0
 
         x_values_set = set()
-        y_values_set = set()
         # considering only piece_wise_linear terms for now
         for term_id, term_dict in antecedent_dict.get('terms').items():
             x_values_set.update(set(term_dict.get('x_values', [])))
-            y_values_set.update(set(term_dict.get('y_values', [])))
             max_universe = max(max_universe, term_dict.get('max_universe', 0))
             min_universe = min(min_universe, term_dict.get('min_universe', 0))
 
@@ -156,6 +153,12 @@ class ScikitFuzzyFclListener(FclListener):
             # new_universe = np.arange(min_universe, max_universe, step_size)
             universe = np.asarray(x_values_sorted)
             antecedent_dict.get('value').universe = universe
+
+    def exitFuzzify_block(self, ctx):
+        label = ctx.ID().getText()
+        self.update_universe_values(label)
+        antecedent_dict = self.antecedents.get(label)
+        universe = antecedent_dict.get('value').universe
 
         for term_id, term_dict in antecedent_dict.get('terms').items():
             x_values = term_dict.get('x_values')

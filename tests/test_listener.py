@@ -101,7 +101,7 @@ class TestScikitFuzzyFclListener(TestCase):
         walker.walk(listener, tree)
         antecedents = listener.antecedents
         self.assertIn('antecedent1', antecedents)
-        self.assertEqual('antecedent1', antecedents.get('antecedent1').label)
+        self.assertEqual('antecedent1', antecedents.get('antecedent1').get('value').label)
 
     def test_antecedents_define_universe_if_range_defined_in_var(self):
         fcl_text = """
@@ -124,8 +124,8 @@ class TestScikitFuzzyFclListener(TestCase):
         antecedents = listener.antecedents
         expected_universe = np.asarray([1., 9.])
         self.assertIn('antecedent1', antecedents)
-        self.assertEqual('antecedent1', antecedents.get('antecedent1').label)
-        np.testing.assert_array_equal(expected_universe, antecedents.get('antecedent1').universe)
+        self.assertEqual('antecedent1', antecedents.get('antecedent1').get('value').label)
+        np.testing.assert_array_equal(expected_universe, antecedents.get('antecedent1').get('value').universe)
 
     def test_antecedents_term_defined_if_present(self):
         fcl_text = """
@@ -145,5 +145,99 @@ class TestScikitFuzzyFclListener(TestCase):
         walker.walk(listener, tree)
         antecedents = listener.antecedents
         self.assertIn('antecedent1', antecedents)
-        self.assertEqual('antecedent1', antecedents.get('antecedent1').label)
-        self.assertIn('mf1', antecedents.get('antecedent1').terms)
+        self.assertEqual('antecedent1', antecedents.get('antecedent1').get('value').label)
+        self.assertIn('mf1', antecedents.get('antecedent1').get('value').terms)
+        self.assertIn('mf1', antecedents.get('antecedent1').get('value').terms.get('mf1').label)
+
+    def test_antecedents_term_has_correct_mf_value(self):
+        fcl_text = """
+        FUNCTION_BLOCK my_system
+            FUZZIFY antecedent1
+                TERM mf1 := (0, 1) (0.5, 0);
+            END_FUZZIFY
+        END_FUNCTION_BLOCK
+        """
+        lexer = FclLexer(InputStream(fcl_text))
+        stream = CommonTokenStream(lexer)
+        parser = FclParser(stream)
+        tree = parser.main()
+
+        listener = ScikitFuzzyFclListener()
+        walker = ParseTreeWalker()
+        walker.walk(listener, tree)
+        antecedent = listener.antecedents.get('antecedent1').get('value')
+        term = antecedent['mf1']
+        expected_mf_value = np.asarray([1, 0])
+        np.testing.assert_array_equal(expected_mf_value, term.mf)
+
+    def test_antecedents_universe_has_correct_value_based_on_term(self):
+        fcl_text = """
+        FUNCTION_BLOCK my_system
+            FUZZIFY antecedent1
+                TERM mf1 := (0, 1) (0.5, 0);
+            END_FUZZIFY
+        END_FUNCTION_BLOCK
+        """
+        lexer = FclLexer(InputStream(fcl_text))
+        stream = CommonTokenStream(lexer)
+        parser = FclParser(stream)
+        tree = parser.main()
+
+        listener = ScikitFuzzyFclListener()
+        walker = ParseTreeWalker()
+        walker.walk(listener, tree)
+        antecedent = listener.antecedents.get('antecedent1').get('value')
+        expected_universe = np.asarray([0, 0.5])
+        np.testing.assert_array_equal(expected_universe, antecedent.universe)
+
+    def test_antecedents_universe_has_correct_value_based_on_more_then_one_term(self):
+        fcl_text = """
+        FUNCTION_BLOCK my_system
+            FUZZIFY antecedent1
+                TERM mf1 := (0, 1) (0.5, 0);
+                TERM mf2 := (1, 0.3) (2, 0) (3, 1);
+            END_FUZZIFY
+        END_FUNCTION_BLOCK
+        """
+        lexer = FclLexer(InputStream(fcl_text))
+        stream = CommonTokenStream(lexer)
+        parser = FclParser(stream)
+        tree = parser.main()
+
+        listener = ScikitFuzzyFclListener()
+        walker = ParseTreeWalker()
+        walker.walk(listener, tree)
+        antecedent = listener.antecedents.get('antecedent1').get('value')
+        expected_universe = np.asarray([0., 0.5, 1., 2., 3])
+        np.testing.assert_array_equal(expected_universe, antecedent.universe)
+
+    def test_antecedents_terms_have_correct_mf_values_with_more_then_one_term(self):
+        fcl_text = """
+        FUNCTION_BLOCK my_system
+            FUZZIFY antecedent1
+                TERM mf1 := (0, 1) (0.5, 0);
+                TERM mf2 := (1, 0.3) (2, 0) (3, 1);
+                TERM mf3 := (2, 0.4) (4, 1) (5, 1);
+            END_FUZZIFY
+        END_FUNCTION_BLOCK
+        """
+        lexer = FclLexer(InputStream(fcl_text))
+        stream = CommonTokenStream(lexer)
+        parser = FclParser(stream)
+        tree = parser.main()
+
+        listener = ScikitFuzzyFclListener()
+        walker = ParseTreeWalker()
+        walker.walk(listener, tree)
+        antecedent = listener.antecedents.get('antecedent1').get('value')
+        term = antecedent['mf1']
+        expected_mf_value = np.asarray([1, 0, 0, 0, 0, 0, 0])
+        np.testing.assert_array_equal(expected_mf_value, term.mf)
+
+        term2 = antecedent['mf2']
+        expected_mf_value = np.asarray([0, 0, 0.3, 0, 1, 0, 0])
+        np.testing.assert_array_equal(expected_mf_value, term2.mf)
+
+        term3 = antecedent['mf3']
+        expected_mf_value = np.asarray([0, 0, 0, 0.4, 0.7, 1, 1])
+        np.testing.assert_array_equal(expected_mf_value, term3.mf)

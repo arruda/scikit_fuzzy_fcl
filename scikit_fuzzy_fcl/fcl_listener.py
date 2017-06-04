@@ -62,8 +62,6 @@ class ScikitFuzzyFclListener(FclListener):
         self.vars = {}
         self.antecedents = {}
         self.num_steps = 100
-        # this is a orderect dict of the antecedents/consequents id's
-        # self.terms = OrderedDict()
 
     def visitErrorNode(self, node):
         raise FclParserException(node)
@@ -131,37 +129,6 @@ class ScikitFuzzyFclListener(FclListener):
                 'max_universe': max_universe,
                 'mf_function': handle_piecewise_function,
                 'mf_args_name': ['universe', 'x_values', 'fx_values']
-            }
-        })
-
-    def enterGauss(self, ctx):
-        min_universe = 0
-        max_universe = 0
-        x_values = []
-        y_values = []
-
-        gauss_args = [float(atom.getText()) for atom in ctx.atom()]
-        g_mean = gauss_args[0]
-        g_sigma = gauss_args[1]
-
-        # estimate universe
-        min_universe = g_mean - (4.0 * g_sigma)
-        max_universe = g_mean + (4.0 * g_sigma)
-
-        x_values = np.linspace(min_universe, max_universe, num=self.num_steps)
-
-        term_id = ctx.parentCtx.parentCtx.ID().getText()
-        var_dict = self.getLinguistic_term_var_dict(ctx.parentCtx.parentCtx)
-        # update this term information's dict
-        var_dict.get('terms').update({
-            term_id: {
-                'x_values': x_values,
-                'mean': g_mean,
-                'sigma': g_sigma,
-                'min_universe': min_universe,
-                'max_universe': max_universe,
-                'mf_function': gaussmf,
-                'mf_args_name': ['universe', 'mean', 'sigma']
             }
         })
 

@@ -241,26 +241,3 @@ class TestScikitFuzzyFclListener(TestCase):
         term3 = antecedent['mf3']
         expected_mf_value = np.asarray([0, 0, 0, 0.4, 0.7, 1, 1])
         np.testing.assert_array_equal(expected_mf_value, term3.mf)
-
-    def test_antecedents_terms_have_correct_mf_using_gauss(self):
-        fcl_text = """
-        FUNCTION_BLOCK my_system
-            FUZZIFY antecedent1
-                TERM mf1 := GAUSS 9 2;
-            END_FUZZIFY
-        END_FUNCTION_BLOCK
-        """
-        lexer = FclLexer(InputStream(fcl_text))
-        stream = CommonTokenStream(lexer)
-        parser = FclParser(stream)
-        tree = parser.main()
-
-        listener = ScikitFuzzyFclListener()
-        listener.num_steps = 10
-        walker = ParseTreeWalker()
-        walker.walk(listener, tree)
-        antecedent = listener.antecedents.get('antecedent1').get('value')
-        term = antecedent['mf1']
-        # expected_mf_value = np.linspace([])
-        expected_mf_value = np.asarray([0, 0, 0, 0.4, 0.7, 1, 1])
-        np.testing.assert_array_equal(expected_mf_value, term.mf)

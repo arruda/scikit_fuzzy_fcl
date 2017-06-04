@@ -31,10 +31,15 @@ def handle_piecewise_function(universe, x_values, fx_values):
     """
 
     new_fx_values = fx_values
-    universe_dimension = len(universe)
+    missing_x_in_universe = False
+    for x in universe:
+        if x not in x_values:
+            missing_x_in_universe = True
+            break
+
     # this term don't have mf(x) values for all x values
     # present in the universe
-    if len(x_values) != universe_dimension:
+    if missing_x_in_universe:
         # fill fx_values with 0 for the values that x can assume in the universe
         # and that are not present in the x_values, also
         # interpolate any values of fx that might be missing

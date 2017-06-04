@@ -6,6 +6,7 @@ import sys
 import numpy as np
 from skfuzzy.control.controlsystem import ControlSystem
 from skfuzzy.control.antecedent_consequent import Antecedent
+from skfuzzy.membership import gaussmf
 
 from .fcl_parser import FclParserException
 
@@ -60,6 +61,7 @@ class ScikitFuzzyFclListener(FclListener):
         self.control_system = None
         self.vars = {}
         self.antecedents = {}
+        self.num_steps = 100
         # this is a orderect dict of the antecedents/consequents id's
         # self.terms = OrderedDict()
 
@@ -108,13 +110,13 @@ class ScikitFuzzyFclListener(FclListener):
         min_universe = 0
         max_universe = 0
         x_values = []
-        y_values = []
+        fx_values = []
         for point in ctx.points():
-            # TODO: Add support to ATOM as a ID in this point? or raise exception here
-            # won't support a ID as X, Y for now... considering for now that atom is only a REAL in this case
+            # TODO: Add support to ATOM as a ID in this point? or raise exception here?
+            # won't support a ID as X, Y for now... considering that atom is only a REAL in this case
             x, y = [float(atom.getText()) for atom in point.atom()]
             x_values.append(x)
-            y_values.append(y)
+            fx_values.append(y)
             min_universe = min(x, min_universe)
             max_universe = max(x, max_universe)
 
@@ -124,10 +126,42 @@ class ScikitFuzzyFclListener(FclListener):
         var_dict.get('terms').update({
             term_id: {
                 'x_values': x_values,
-                'y_values': y_values,
+                'fx_values': fx_values,
                 'min_universe': min_universe,
                 'max_universe': max_universe,
-                'mf_function': handle_piecewise_function
+                'mf_function': handle_piecewise_function,
+                'mf_args_name': ['universe', 'x_values', 'fx_values']
+            }
+        })
+
+    def enterGauss(self, ctx):
+        min_universe = 0
+        max_universe = 0
+        x_values = []
+        y_values = []
+
+        gauss_args = [float(atom.getText()) for atom in ctx.atom()]
+        g_mean = gauss_args[0]
+        g_sigma = gauss_args[1]
+
+        # estimate universe
+        min_universe = g_mean - (4.0 * g_sigma)
+        max_universe = g_mean + (4.0 * g_sigma)
+
+        x_values = np.linspace(min_universe, max_universe, num=self.num_steps)
+
+        term_id = ctx.parentCtx.parentCtx.ID().getText()
+        var_dict = self.getLinguistic_term_var_dict(ctx.parentCtx.parentCtx)
+        # update this term information's dict
+        var_dict.get('terms').update({
+            term_id: {
+                'x_values': x_values,
+                'mean': g_mean,
+                'sigma': g_sigma,
+                'min_universe': min_universe,
+                'max_universe': max_universe,
+                'mf_function': gaussmf,
+                'mf_args_name': ['universe', 'mean', 'sigma']
             }
         })
 
@@ -161,11 +195,18 @@ class ScikitFuzzyFclListener(FclListener):
         universe = antecedent_dict.get('value').universe
 
         for term_id, term_dict in antecedent_dict.get('terms').items():
-            x_values = term_dict.get('x_values')
-            y_values = term_dict.get('y_values')
+            # x_values = term_dict.get('x_values')
+            # y_values = term_dict.get('y_values')
+
+            mf_args_name = term_dict.get('mf_args_name', [])
+
+            # prepare args for mf_function
+            term_dict.update({'universe': universe})
+            mf_args = [term_dict[k] for k in mf_args_name]
 
             mf_function = term_dict.get('mf_function')
-            new_y_values = mf_function(universe, x_values, y_values)
+
+            new_y_values = mf_function(*mf_args)
             y_values = new_y_values
 
             # sets the x_values to used as the mf for this term in the skfuzz object

@@ -6,7 +6,6 @@ import sys
 import numpy as np
 from skfuzzy.control.controlsystem import ControlSystem
 from skfuzzy.control.antecedent_consequent import Antecedent
-from skfuzzy.membership import gaussmf
 
 from .fcl_parser import FclParserException
 
@@ -36,18 +35,18 @@ def handle_piecewise_function(universe, x_values, fx_values):
     # this term don't have mf(x) values for all x values
     # present in the universe
     if len(x_values) != universe_dimension:
-        x_indexes_in_universe = [i for i, x in enumerate(universe) if x in x_values]
-        init_x = x_indexes_in_universe[0]
-        end_x = x_indexes_in_universe[-1]
-
-        # fill y_values with 0 for the values that x can assume in the universe
-        # and that are not present in the x_values
-        zeros_fill_init = [0 for i in range(init_x)]
-        zeros_fill_end = [0 for i in range((universe_dimension - 1) - end_x)]
-
-        # interpolate any values of x that might be missing
-        interp_y_values = np.interp(universe[init_x:end_x + 1], x_values, fx_values)
-        new_fx_values = np.append(np.append(zeros_fill_init, interp_y_values), zeros_fill_end)
+        # fill fx_values with 0 for the values that x can assume in the universe
+        # and that are not present in the x_values, also
+        # interpolate any values of fx that might be missing
+        left_right_fills = 0.
+        interp_fx_values = np.interp(
+            universe,
+            x_values,
+            fx_values,
+            left=left_right_fills,
+            right=left_right_fills
+        )
+        new_fx_values = interp_fx_values
     return new_fx_values
 
 
@@ -150,8 +149,6 @@ class ScikitFuzzyFclListener(FclListener):
         x_values_sorted = sorted(x_values_set)
         universe_dimension = len(x_values_sorted)
         if universe_dimension != 0:
-            # step_size = (max_universe - min_universe) / universe_dimension
-            # new_universe = np.arange(min_universe, max_universe, step_size)
             universe = np.asarray(x_values_sorted)
             antecedent_dict.get('value').universe = universe
 

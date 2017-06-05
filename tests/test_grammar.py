@@ -49,9 +49,9 @@ class FclListenerTester(FclListener):
 
     def enterVar_def(self, ctx):
         self.last_var_def = [ctx.ID().getText(), ctx.data_type().getText()]
-        vrange = ctx.vrange()
-        if vrange:
-            self.last_var_def.extend(real.getText() for real in vrange.REAL())
+        var_range = ctx.var_range()
+        if var_range:
+            self.last_var_def.extend(real.getText() for real in var_range.REAL())
 
     def exitFuzzify_block(self, ctx):
         fuzzyfy_block = {
@@ -205,7 +205,7 @@ class TestFclGrammar(unittest.TestCase):
         fcl_text = """
         FUNCTION_BLOCK f_block
             VAR_INPUT
-                input_id : REAL; RANGE := ( 12 .. 34 );
+                input_id : REAL ( 12 .. 34 );
             END_VAR
         END_FUNCTION_BLOCK
         """
@@ -241,7 +241,7 @@ class TestFclGrammar(unittest.TestCase):
         fcl_text = """
         FUNCTION_BLOCK f_block
             VAR_OUTPUT
-                output_id : REAL; RANGE := ( 12 .. 34 );
+                output_id : REAL ( 12 .. 34 );
             END_VAR
         END_FUNCTION_BLOCK
         """

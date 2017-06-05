@@ -79,7 +79,7 @@ class ScikitFuzzyFclListener(FclListener):
             'type': ctx.data_type().getText(),
             'range': None
         }
-        var_range = ctx.vrange()
+        var_range = ctx.var_range()
         if var_range:
             var['range'] = [float(r.getText()) for r in var_range.REAL()]
         self.vars[var_id] = var

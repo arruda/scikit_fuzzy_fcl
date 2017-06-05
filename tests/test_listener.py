@@ -107,7 +107,7 @@ class TestScikitFuzzyFclListener(TestCase):
         fcl_text = """
         FUNCTION_BLOCK my_system
             VAR_INPUT
-                antecedent1 : REAL; RANGE := (1 .. 9);
+                antecedent1 : REAL (1 .. 9);
             END_VAR
             FUZZIFY antecedent1
             END_FUZZIFY

@@ -192,9 +192,6 @@ class ScikitFuzzyFclListener(FclListener):
         universe = antecedent_dict.get('value').universe
 
         for term_id, term_dict in antecedent_dict.get('terms').items():
-            # x_values = term_dict.get('x_values')
-            # y_values = term_dict.get('y_values')
-
             mf_args_name = term_dict.get('mf_args_name', [])
 
             # prepare args for mf_function
@@ -203,8 +200,8 @@ class ScikitFuzzyFclListener(FclListener):
 
             mf_function = term_dict.get('mf_function')
 
-            new_y_values = mf_function(*mf_args)
-            y_values = new_y_values
+            new_fx_values = mf_function(*mf_args)
+            fx_values = new_fx_values
 
             # sets the x_values to used as the mf for this term in the skfuzz object
-            antecedent_dict.get('value')[term_id] = y_values
+            antecedent_dict.get('value')[term_id] = fx_values

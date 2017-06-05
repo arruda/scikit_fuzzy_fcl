@@ -110,7 +110,7 @@ class ScikitFuzzyFclListener(FclListener):
             var_dict = self.antecedents.get(var_id)
         else:
             var_id = linguistic_term_ctx.parentCtx.parentCtx.ID().getText()
-            # var_dict = self.consequents.get(var_id)
+            var_dict = self.consequents.get(var_id)
         return var_dict
 
     def enterLinguistic_term(self, ctx):
@@ -174,9 +174,10 @@ class ScikitFuzzyFclListener(FclListener):
             }
         })
 
-    def update_universe_values(self, antecedent_label):
-        antecedent_dict = self.antecedents.get(antecedent_label)
-        universe = antecedent_dict.get('value').universe
+    def update_universe_values(self, label, antecedent=True):
+        main_dict = self.antecedents if antecedent else self.consequents
+        object_dict = main_dict.get(label)
+        universe = object_dict.get('value').universe
         if len(universe.shape) != 0:
             min_universe, max_universe = universe[0], universe[-1]
         else:
@@ -184,7 +185,7 @@ class ScikitFuzzyFclListener(FclListener):
 
         x_values_set = set()
         # considering only piece_wise_linear terms for now
-        for term_id, term_dict in antecedent_dict.get('terms').items():
+        for term_id, term_dict in object_dict.get('terms').items():
             x_values_set.update(set(term_dict.get('x_values', [])))
             max_universe = max(max_universe, term_dict.get('max_universe', 0))
             min_universe = min(min_universe, term_dict.get('min_universe', 0))
@@ -193,7 +194,7 @@ class ScikitFuzzyFclListener(FclListener):
         universe_dimension = len(x_values_sorted)
         if universe_dimension != 0:
             universe = np.asarray(x_values_sorted)
-            antecedent_dict.get('value').universe = universe
+            object_dict.get('value').universe = universe
 
     def exitFuzzify_block(self, ctx):
         label = ctx.ID().getText()
@@ -215,3 +216,25 @@ class ScikitFuzzyFclListener(FclListener):
 
             # sets the x_values to used as the mf for this term in the skfuzz object
             antecedent_dict.get('value')[term_id] = fx_values
+
+    def exitDefuzzify_block(self, ctx):
+        label = ctx.ID().getText()
+
+        self.update_universe_values(label, antecedent=False)
+        consequent_dict = self.consequents.get(label)
+        universe = consequent_dict.get('value').universe
+
+        for term_id, term_dict in consequent_dict.get('terms').items():
+            mf_args_name = term_dict.get('mf_args_name', [])
+
+            # prepare args for mf_function
+            term_dict.update({'universe': universe})
+            mf_args = [term_dict[k] for k in mf_args_name]
+
+            mf_function = term_dict.get('mf_function')
+
+            new_fx_values = mf_function(*mf_args)
+            fx_values = new_fx_values
+
+            # sets the x_values to used as the mf for this term in the skfuzz object
+            consequent_dict.get('value')[term_id] = fx_values

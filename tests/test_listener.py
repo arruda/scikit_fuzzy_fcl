@@ -364,3 +364,52 @@ class TestScikitFuzzyFclListener(TestCase):
         consequents = listener.consequents
         self.assertIn('consequent1', consequents)
         self.assertEqual('consequent1', consequents.get('consequent1').get('value').label)
+
+    def test_consequent_define_universe_if_range_defined_in_var(self):
+        fcl_text = """
+        FUNCTION_BLOCK my_system
+            VAR_output
+                consequent1 : REAL (1 .. 9);
+            END_VAR
+            DEFUZZIFY consequent1
+            END_DEFUZZIFY
+        END_FUNCTION_BLOCK
+        """
+        lexer = FclLexer(InputStream(fcl_text))
+        stream = CommonTokenStream(lexer)
+        parser = FclParser(stream)
+        tree = parser.main()
+
+        listener = ScikitFuzzyFclListener()
+        walker = ParseTreeWalker()
+        walker.walk(listener, tree)
+        listener = ScikitFuzzyFclListener()
+        walker = ParseTreeWalker()
+        walker.walk(listener, tree)
+        consequents = listener.consequents
+        expected_universe = np.asarray([1., 9.])
+        self.assertIn('consequent1', consequents)
+        self.assertEqual('consequent1', consequents.get('consequent1').get('value').label)
+        np.testing.assert_array_equal(expected_universe, consequents.get('consequent1').get('value').universe)
+
+    def test_consequents_term_defined_if_present(self):
+        fcl_text = """
+        FUNCTION_BLOCK my_system
+            DEFUZZIFY consequent1
+                TERM mf1 := (0, 1) (1, 1);
+            END_DEFUZZIFY
+        END_FUNCTION_BLOCK
+        """
+        lexer = FclLexer(InputStream(fcl_text))
+        stream = CommonTokenStream(lexer)
+        parser = FclParser(stream)
+        tree = parser.main()
+
+        listener = ScikitFuzzyFclListener()
+        walker = ParseTreeWalker()
+        walker.walk(listener, tree)
+        consequents = listener.consequents
+        self.assertIn('consequent1', consequents)
+        self.assertEqual('consequent1', consequents.get('consequent1').get('value').label)
+        self.assertIn('mf1', consequents.get('consequent1').get('value').terms)
+        self.assertIn('mf1', consequents.get('consequent1').get('value').terms.get('mf1').label)

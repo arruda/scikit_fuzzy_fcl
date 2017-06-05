@@ -241,3 +241,107 @@ class TestScikitFuzzyFclListener(TestCase):
         term3 = antecedent['mf3']
         expected_mf_value = np.asarray([0, 0, 0, 0.4, 0.7, 1, 1])
         np.testing.assert_array_equal(expected_mf_value, term3.mf)
+
+    def test_antecedents_universe_have_correct_values_using_singleton(self):
+        fcl_text = """
+        FUNCTION_BLOCK my_system
+            FUZZIFY antecedent1
+                TERM mf1 := 1.0;
+                TERM mf2 := 3.0;
+            END_FUZZIFY
+        END_FUNCTION_BLOCK
+        """
+        lexer = FclLexer(InputStream(fcl_text))
+        stream = CommonTokenStream(lexer)
+        parser = FclParser(stream)
+        tree = parser.main()
+
+        listener = ScikitFuzzyFclListener()
+        walker = ParseTreeWalker()
+        walker.walk(listener, tree)
+        antecedent = listener.antecedents.get('antecedent1').get('value')
+        expected_universe_value = np.asarray([1., 3.])
+        np.testing.assert_array_equal(expected_universe_value, antecedent.universe)
+
+    def test_antecedents_terms_have_correct_mf_values_using_singleton(self):
+        fcl_text = """
+        FUNCTION_BLOCK my_system
+            FUZZIFY antecedent1
+                TERM mf1 := 1.0;
+            END_FUZZIFY
+        END_FUNCTION_BLOCK
+        """
+        lexer = FclLexer(InputStream(fcl_text))
+        stream = CommonTokenStream(lexer)
+        parser = FclParser(stream)
+        tree = parser.main()
+
+        listener = ScikitFuzzyFclListener()
+        walker = ParseTreeWalker()
+        walker.walk(listener, tree)
+        antecedent = listener.antecedents.get('antecedent1').get('value')
+        term = antecedent['mf1']
+        expected_mf_value = np.asarray([1])
+        np.testing.assert_array_equal(expected_mf_value, term.mf)
+
+    def test_antecedents_terms_have_correct_mf_values_using_many_singleton(self):
+        fcl_text = """
+        FUNCTION_BLOCK my_system
+            FUZZIFY antecedent1
+                TERM mf1 := 3.0;
+                TERM mf2 := 2.0;
+                TERM mf3 := 1.0;
+            END_FUZZIFY
+        END_FUNCTION_BLOCK
+        """
+        lexer = FclLexer(InputStream(fcl_text))
+        stream = CommonTokenStream(lexer)
+        parser = FclParser(stream)
+        tree = parser.main()
+
+        listener = ScikitFuzzyFclListener()
+        walker = ParseTreeWalker()
+        walker.walk(listener, tree)
+        antecedent = listener.antecedents.get('antecedent1').get('value')
+        term = antecedent['mf1']
+        expected_mf_value = np.asarray([0, 0, 1])
+        np.testing.assert_array_equal(expected_mf_value, term.mf)
+
+        term = antecedent['mf2']
+        expected_mf_value = np.asarray([0, 1, 0])
+        np.testing.assert_array_equal(expected_mf_value, term.mf)
+
+        term = antecedent['mf3']
+        expected_mf_value = np.asarray([1, 0, 0])
+        np.testing.assert_array_equal(expected_mf_value, term.mf)
+
+    def test_antecedents_terms_have_correct_mf_values_using_singleton_and_piecewise(self):
+        fcl_text = """
+        FUNCTION_BLOCK my_system
+            FUZZIFY antecedent1
+                TERM mf1 := 4.0;
+                TERM mf2 := (0, 0.2) (2, 0) (3, 1);
+                TERM mf3 := 1.0;
+            END_FUZZIFY
+        END_FUNCTION_BLOCK
+        """
+        lexer = FclLexer(InputStream(fcl_text))
+        stream = CommonTokenStream(lexer)
+        parser = FclParser(stream)
+        tree = parser.main()
+
+        listener = ScikitFuzzyFclListener()
+        walker = ParseTreeWalker()
+        walker.walk(listener, tree)
+        antecedent = listener.antecedents.get('antecedent1').get('value')
+        term = antecedent['mf1']
+        expected_mf_value = np.asarray([0, 0, 0, 0, 1])  # fx[0], fx[1], fx[2], fx[3], f[4]
+        np.testing.assert_array_equal(expected_mf_value, term.mf)
+
+        term = antecedent['mf2']
+        expected_mf_value = np.asarray([0.2, 0.1, 0, 1, 0])  # fx[0], fx[1], fx[2], fx[3], f[4]
+        np.testing.assert_array_equal(expected_mf_value, term.mf)
+
+        term = antecedent['mf3']
+        expected_mf_value = np.asarray([0, 1, 0, 0, 0])  # fx[0], fx[1], fx[2], fx[3], f[4]
+        np.testing.assert_array_equal(expected_mf_value, term.mf)

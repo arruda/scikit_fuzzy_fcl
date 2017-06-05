@@ -136,6 +136,34 @@ class ScikitFuzzyFclListener(FclListener):
             }
         })
 
+    def enterSingleton(self, ctx):
+        min_universe = 0
+        max_universe = 0
+        x_values = []
+        fx_values = []
+
+        x_value = float(ctx.atom().getText())
+        fx_value = 1
+
+        x_values.append(x_value)
+        fx_values.append(fx_value)
+        min_universe = x_value
+        max_universe = x_value
+
+        term_id = ctx.parentCtx.parentCtx.ID().getText()
+        var_dict = self.getLinguistic_term_var_dict(ctx.parentCtx.parentCtx)
+        # update this term information's dict
+        var_dict.get('terms').update({
+            term_id: {
+                'x_values': x_values,
+                'fx_values': fx_values,
+                'min_universe': min_universe,
+                'max_universe': max_universe,
+                'mf_function': handle_piecewise_function,
+                'mf_args_name': ['universe', 'x_values', 'fx_values']
+            }
+        })
+
     def update_universe_values(self, antecedent_label):
         antecedent_dict = self.antecedents.get(antecedent_label)
         universe = antecedent_dict.get('value').universe

@@ -5,7 +5,7 @@ import sys
 
 import numpy as np
 from skfuzzy.control.controlsystem import ControlSystem
-from skfuzzy.control.antecedent_consequent import Antecedent
+from skfuzzy.control.antecedent_consequent import Antecedent, Consequent
 
 from .fcl_parser import FclParserException
 
@@ -65,6 +65,7 @@ class ScikitFuzzyFclListener(FclListener):
         self.control_system = None
         self.vars = {}
         self.antecedents = {}
+        self.consequents = {}
         self.num_steps = 100
 
     def visitErrorNode(self, node):
@@ -90,6 +91,15 @@ class ScikitFuzzyFclListener(FclListener):
         universe_range = self.vars.get(label, {}).get('range', None)
         self.antecedents[label] = {
             'value': Antecedent(universe_range, label=label),
+            'terms': OrderedDict(),
+        }
+
+    def enterDefuzzify_block(self, ctx):
+        label = ctx.ID().getText()
+        # if variable already defined a range then use this to instantiate the consequent
+        universe_range = self.vars.get(label, {}).get('range', None)
+        self.consequents[label] = {
+            'value': Consequent(universe_range, label=label),
             'terms': OrderedDict(),
         }
 

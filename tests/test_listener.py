@@ -345,3 +345,22 @@ class TestScikitFuzzyFclListener(TestCase):
         term = antecedent['mf3']
         expected_mf_value = np.asarray([0, 1, 0, 0, 0])  # fx[0], fx[1], fx[2], fx[3], f[4]
         np.testing.assert_array_equal(expected_mf_value, term.mf)
+
+    def test_consequents_created_when_defuzzify_block_described(self):
+        fcl_text = """
+        FUNCTION_BLOCK my_system
+            DEFUZZIFY consequent1
+            END_DEFUZZIFY
+        END_FUNCTION_BLOCK
+        """
+        lexer = FclLexer(InputStream(fcl_text))
+        stream = CommonTokenStream(lexer)
+        parser = FclParser(stream)
+        tree = parser.main()
+
+        listener = ScikitFuzzyFclListener()
+        walker = ParseTreeWalker()
+        walker.walk(listener, tree)
+        consequents = listener.consequents
+        self.assertIn('consequent1', consequents)
+        self.assertEqual('consequent1', consequents.get('consequent1').get('value').label)

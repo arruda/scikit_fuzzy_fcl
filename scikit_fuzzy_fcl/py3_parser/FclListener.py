@@ -62,6 +62,15 @@ class FclListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by FclParser#var_range.
+    def enterVar_range(self, ctx:FclParser.Var_rangeContext):
+        pass
+
+    # Exit a parse tree produced by FclParser#var_range.
+    def exitVar_range(self, ctx:FclParser.Var_rangeContext):
+        pass
+
+
     # Enter a parse tree produced by FclParser#var_output.
     def enterVar_output(self, ctx:FclParser.Var_outputContext):
         pass
@@ -233,12 +242,12 @@ class FclListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by FclParser#vrange.
-    def enterVrange(self, ctx:FclParser.VrangeContext):
+    # Enter a parse tree produced by FclParser#defuzzify_range.
+    def enterDefuzzify_range(self, ctx:FclParser.Defuzzify_rangeContext):
         pass
 
-    # Exit a parse tree produced by FclParser#vrange.
-    def exitVrange(self, ctx:FclParser.VrangeContext):
+    # Exit a parse tree produced by FclParser#defuzzify_range.
+    def exitDefuzzify_range(self, ctx:FclParser.Defuzzify_rangeContext):
         pass
 
 

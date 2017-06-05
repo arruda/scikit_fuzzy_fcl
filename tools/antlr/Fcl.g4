@@ -156,7 +156,9 @@ declaration : var_input | var_output | fuzzify_block | defuzzify_block | rule_bl
 
 // Variables input and output
 var_input : VAR_INPUT (var_def)* END_VAR;
-var_def : ID COLON data_type SEMICOLON (vrange)?;
+var_def : ID COLON data_type (var_range)? SEMICOLON;
+var_range : LEFT_PARENTHESIS REAL DOTS REAL RIGHT_PARENTHESIS;
+
 var_output : VAR_OUTPUT (var_def)+ END_VAR;
 
 // Fuzzify
@@ -216,12 +218,12 @@ fun_atom : atom | (EXP^|LN^|LOG^|SIN^|COS^|TAN^|ABS^)? LEFT_PARENTHESIS! fun_pm 
 //defuzzify_block : DEFUZZIFY^ ID (defuzzify_item)* END_DEFUZZIFY!;
 defuzzify_block : DEFUZZIFY ID (defuzzify_item)* END_DEFUZZIFY;
 //defuzzify_item : defuzzification_method | default_value | linguistic_term | range;
-defuzzify_item : defuzzification_method | default_value | linguistic_term | vrange;
+defuzzify_item : defuzzification_method | default_value | linguistic_term | defuzzify_range;
 
 /*
 */
 //range : RANGE^ ASSIGN_OPERATOR! LEFT_PARENTHESIS! REAL DOTS! REAL RIGHT_PARENTHESIS! SEMICOLON!;
-vrange : RANGE ASSIGN_OPERATOR LEFT_PARENTHESIS REAL DOTS REAL RIGHT_PARENTHESIS SEMICOLON;
+defuzzify_range : RANGE ASSIGN_OPERATOR LEFT_PARENTHESIS REAL DOTS REAL RIGHT_PARENTHESIS SEMICOLON;
 //default_value : DEFAULT^ ASSIGN_OPERATOR! (REAL | NC) SEMICOLON!;
 default_value : DEFAULT ASSIGN_OPERATOR (REAL | NC) SEMICOLON;
 

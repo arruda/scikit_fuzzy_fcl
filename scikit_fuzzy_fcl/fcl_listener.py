@@ -96,20 +96,38 @@ class ScikitFuzzyFclListener(FclListener):
 
     def enterDefuzzify_block(self, ctx):
         label = ctx.ID().getText()
+        override_universe_range = None
+        for item in ctx.defuzzify_item():
+            if item.defuzzify_range():
+                override_universe_range = [float(r.getText()) for r in item.defuzzify_range().REAL()]
+
         # if variable already defined a range then use this to instantiate the consequent
         universe_range = self.vars.get(label, {}).get('range', None)
-
         # but if there's a RANGE defined in the defuzzify block, then it should be used instead
-        for item in ctx.defuzzify_item():
-            defuzzify_range = item.defuzzify_range()
-            if defuzzify_range:
-                universe_range = [float(r.getText()) for r in defuzzify_range.REAL()]
-                break
+        if override_universe_range:
+            universe_range = override_universe_range
+
+        new_consequent = Consequent(universe_range, label=label)
 
         self.consequents[label] = {
-            'value': Consequent(universe_range, label=label),
+            'value': new_consequent,
             'terms': OrderedDict(),
         }
+
+    def map_fcl_defuzz_method_to_skf(self, method):
+        defuzz_map = {
+            'COG': 'centroid'
+        }
+        return defuzz_map[method]
+
+    def enterDefuzzification_method(self, ctx):
+        consequent_label = ctx.parentCtx.parentCtx.ID().getText()
+        consequent = self.consequents[consequent_label].get('value')
+
+        fcl_method = ctx.getChild(2).getText()
+        defuzzify_method = self.map_fcl_defuzz_method_to_skf(fcl_method)
+
+        consequent.defuzzify_method = defuzzify_method
 
     def getLinguistic_term_var_dict(self, linguistic_term_ctx):
         var_dict = None

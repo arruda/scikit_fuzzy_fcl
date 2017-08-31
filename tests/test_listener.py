@@ -441,3 +441,24 @@ class TestScikitFuzzyFclListener(TestCase):
         self.assertEqual('consequent1', consequents.get('consequent1').get('value').label)
         self.assertIn('mf1', consequents.get('consequent1').get('value').terms)
         self.assertIn('mf1', consequents.get('consequent1').get('value').terms.get('mf1').label)
+
+    def test_consequents_defuzzify_method_cog_as_centroid(self):
+        fcl_text = """
+        FUNCTION_BLOCK my_system
+            DEFUZZIFY consequent1
+                METHOD : COG;
+            END_DEFUZZIFY
+        END_FUNCTION_BLOCK
+        """
+        lexer = FclLexer(InputStream(fcl_text))
+        stream = CommonTokenStream(lexer)
+        parser = FclParser(stream)
+        tree = parser.main()
+
+        listener = ScikitFuzzyFclListener()
+        walker = ParseTreeWalker()
+        walker.walk(listener, tree)
+        consequents = listener.consequents
+        self.assertIn('consequent1', consequents)
+        self.assertEqual('consequent1', consequents.get('consequent1').get('value').label)
+        self.assertEqual('centroid', consequents.get('consequent1').get('value').defuzzify_method)

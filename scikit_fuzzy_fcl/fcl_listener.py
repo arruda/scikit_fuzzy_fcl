@@ -98,6 +98,14 @@ class ScikitFuzzyFclListener(FclListener):
         label = ctx.ID().getText()
         # if variable already defined a range then use this to instantiate the consequent
         universe_range = self.vars.get(label, {}).get('range', None)
+
+        # but if there's a RANGE defined in the defuzzify block, then it should be used instead
+        for item in ctx.defuzzify_item():
+            defuzzify_range = item.defuzzify_range()
+            if defuzzify_range:
+                universe_range = [float(r.getText()) for r in defuzzify_range.REAL()]
+                break
+
         self.consequents[label] = {
             'value': Consequent(universe_range, label=label),
             'terms': OrderedDict(),

@@ -33,6 +33,7 @@ BSUM    :   ('b'|'B')('s'|'S')('u'|'U')('m'|'M');
 COA :   ('c'|'C')('o'|'O')('a'|'A');
 COSINE  :   ('c'|'C')('o'|'O')('s'|'S')('i'|'I')('n'|'N')('e'|'E');
 COG :   ('c'|'C')('o'|'O')('g'|'G');
+BOA :   ('b'|'B')('o'|'O')('a'|'A');
 COGS    :   ('c'|'C')('o'|'O')('g'|'G')('s'|'S');
 COGF    :   ('c'|'C')('o'|'O')('g'|'G')('f'|'F');
 COS :   ('c'|'C')('o'|'O')('s'|'S');
@@ -228,7 +229,9 @@ defuzzify_range : RANGE ASSIGN_OPERATOR LEFT_PARENTHESIS REAL DOTS REAL RIGHT_PA
 default_value : DEFAULT ASSIGN_OPERATOR (REAL | NC) SEMICOLON;
 
 //defuzzification_method : METHOD^ COLON! (COG|COGS|COGF|COA|LM|RM|MM) SEMICOLON!;
-defuzzification_method : METHOD COLON (COG|COGS|COGF|COA|LM|RM|MM) SEMICOLON;
+//defuzzification_method : METHOD COLON (COG|COGS|COGF|COA|LM|RM|MM) SEMICOLON;
+defuzzification_method : METHOD COLON (COG|BOA) SEMICOLON;
+
 
 // Ruleblock
 //rule_block : RULEBLOCK^ ID (rule_item)* END_RULEBLOCK!;

@@ -35,6 +35,8 @@ COSINE  :   ('c'|'C')('o'|'O')('s'|'S')('i'|'I')('n'|'N')('e'|'E');
 COG :   ('c'|'C')('o'|'O')('g'|'G');
 BOA :   ('b'|'B')('o'|'O')('a'|'A');
 MOM :   ('m'|'M')('o'|'O')('m'|'M');
+SOM :   ('l'|'L')('o'|'O')('m'|'M');
+LOM :   ('s'|'S')('o'|'O')('m'|'M');
 COGS    :   ('c'|'C')('o'|'O')('g'|'G')('s'|'S');
 COGF    :   ('c'|'C')('o'|'O')('g'|'G')('f'|'F');
 COS :   ('c'|'C')('o'|'O')('s'|'S');
@@ -231,7 +233,7 @@ default_value : DEFAULT ASSIGN_OPERATOR (REAL | NC) SEMICOLON;
 
 //defuzzification_method : METHOD^ COLON! (COG|COGS|COGF|COA|LM|RM|MM) SEMICOLON!;
 //defuzzification_method : METHOD COLON (COG|COGS|COGF|COA|LM|RM|MM) SEMICOLON;
-defuzzification_method : METHOD COLON (COG|BOA|MOM) SEMICOLON;
+defuzzification_method : METHOD COLON (COG|BOA|MOM|SOM|LOM) SEMICOLON;
 
 
 // Ruleblock

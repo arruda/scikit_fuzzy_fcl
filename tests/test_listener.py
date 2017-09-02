@@ -462,3 +462,24 @@ class TestScikitFuzzyFclListener(TestCase):
         self.assertIn('consequent1', consequents)
         self.assertEqual('consequent1', consequents.get('consequent1').get('value').label)
         self.assertEqual('centroid', consequents.get('consequent1').get('value').defuzzify_method)
+
+    def test_consequents_defuzzify_method_boa_as_bisector(self):
+        fcl_text = """
+        FUNCTION_BLOCK my_system
+            DEFUZZIFY consequent1
+                METHOD : BOA;
+            END_DEFUZZIFY
+        END_FUNCTION_BLOCK
+        """
+        lexer = FclLexer(InputStream(fcl_text))
+        stream = CommonTokenStream(lexer)
+        parser = FclParser(stream)
+        tree = parser.main()
+
+        listener = ScikitFuzzyFclListener()
+        walker = ParseTreeWalker()
+        walker.walk(listener, tree)
+        consequents = listener.consequents
+        self.assertIn('consequent1', consequents)
+        self.assertEqual('consequent1', consequents.get('consequent1').get('value').label)
+        self.assertEqual('bisector', consequents.get('consequent1').get('value').defuzzify_method)

@@ -116,7 +116,8 @@ class ScikitFuzzyFclListener(FclListener):
 
     def map_fcl_defuzz_method_to_skf(self, method):
         defuzz_map = {
-            'COG': 'centroid'
+            'COG': 'centroid',
+            'BOA': 'bisector'
         }
         return defuzz_map[method]
 

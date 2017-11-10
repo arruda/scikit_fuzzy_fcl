@@ -39,6 +39,8 @@ setup(
     license="MIT license",
     zip_safe=False,
     keywords='scikit_fuzzy_fcl',
+    test_suite='tests',
+    tests_require=test_requirements,
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
         'Intended Audience :: Developers',
@@ -52,6 +54,4 @@ setup(
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
     ],
-    test_suite='tests',
-    tests_require=test_requirements
 )
